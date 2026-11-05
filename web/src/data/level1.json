@@ -1,0 +1,2561 @@
+{
+  "level": 1,
+  "title": "Adjective–Noun Agreement",
+  "subtitle": "Gender & number in the nominative case",
+  "endings": {
+    "hard": {
+      "masculine": "‑ый / ‑ой",
+      "feminine": "‑ая",
+      "neuter": "‑ое",
+      "plural": "‑ые"
+    },
+    "soft": {
+      "masculine": "‑ий",
+      "feminine": "‑яя",
+      "neuter": "‑ее",
+      "plural": "‑ие"
+    }
+  },
+  "genderLabels": {
+    "masculine": {
+      "ru": "Мужской род",
+      "en": "Masculine",
+      "short": "m"
+    },
+    "feminine": {
+      "ru": "Женский род",
+      "en": "Feminine",
+      "short": "f"
+    },
+    "neuter": {
+      "ru": "Средний род",
+      "en": "Neuter",
+      "short": "n"
+    },
+    "plural": {
+      "ru": "Множественное число",
+      "en": "Plural",
+      "short": "pl"
+    }
+  },
+  "sets": [
+    {
+      "id": "colors_objects",
+      "title": "Colors & Objects",
+      "theme": "classroom",
+      "nominative": [
+        {
+          "lemma": "красный",
+          "english": "red",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "красная",
+              "noun": "тетрадь",
+              "ru": "красная тетрадь",
+              "en": "red notebook"
+            },
+            "masculine": {
+              "adjective": "красный",
+              "noun": "кошелёк",
+              "ru": "красный кошелёк",
+              "en": "red wallet"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "чёрный",
+          "english": "black",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "чёрная",
+              "noun": "сумка",
+              "ru": "чёрная сумка",
+              "en": "black purse"
+            },
+            "masculine": {
+              "adjective": "чёрный",
+              "noun": "планшет",
+              "ru": "чёрный планшет",
+              "en": "black tablet"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "чёрные",
+              "noun": "наушники",
+              "ru": "чёрные наушники",
+              "en": "black headphones"
+            }
+          }
+        },
+        {
+          "lemma": "белый",
+          "english": "white",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "белая",
+              "noun": "доска",
+              "ru": "белая доска",
+              "en": "white board"
+            },
+            "masculine": null,
+            "neuter": {
+              "adjective": "белое",
+              "noun": "окно",
+              "ru": "белое окно",
+              "en": "white window"
+            },
+            "plural": {
+              "adjective": "белые",
+              "noun": "окна",
+              "ru": "белые окна",
+              "en": "white shirts"
+            }
+          }
+        },
+        {
+          "lemma": "зелёный",
+          "english": "green",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "зелёная",
+              "noun": "тетрадь",
+              "ru": "зелёная тетрадь",
+              "en": "green notebook"
+            },
+            "masculine": {
+              "adjective": "зелёный",
+              "noun": "рюкзак",
+              "ru": "зелёный рюкзак",
+              "en": "green backpack"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "зелёные",
+              "noun": "карандаши",
+              "ru": "зелёные карандаши",
+              "en": "green pencils"
+            }
+          }
+        },
+        {
+          "lemma": "синий",
+          "english": "dark blue",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "синяя",
+              "noun": "ручка",
+              "ru": "синяя ручка",
+              "en": "dark blue pen"
+            },
+            "masculine": {
+              "adjective": "синий",
+              "noun": "карандаш",
+              "ru": "синий карандаш",
+              "en": "dark blue pencil"
+            },
+            "neuter": {
+              "adjective": "синее",
+              "noun": "окно",
+              "ru": "синее окно",
+              "en": "dark blue window"
+            },
+            "plural": {
+              "adjective": "синие",
+              "noun": "ручки",
+              "ru": "синие ручки",
+              "en": "dark blue pens"
+            }
+          }
+        },
+        {
+          "lemma": "голубой",
+          "english": "light blue",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "голубая",
+              "noun": "сумка",
+              "ru": "голубая сумка",
+              "en": "light blue purse"
+            },
+            "masculine": {
+              "adjective": "голубой",
+              "noun": "карандаш",
+              "ru": "голубой карандаш",
+              "en": "light blue pencil"
+            },
+            "neuter": {
+              "adjective": "голубое",
+              "noun": "небо",
+              "ru": "Голубое небо",
+              "en": "blue sky"
+            },
+            "plural": {
+              "adjective": "голубые",
+              "noun": "наушники",
+              "ru": "голубые наушники",
+              "en": "light blue headphones"
+            }
+          }
+        },
+        {
+          "lemma": "коричневый",
+          "english": "brown",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "коричневая",
+              "noun": "тетрадь",
+              "ru": "коричневая тетрадь",
+              "en": "brown notebook"
+            },
+            "masculine": {
+              "adjective": "коричневый",
+              "noun": "стол",
+              "ru": "коричневый стол",
+              "en": "brown desk/table"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "коричневые",
+              "noun": "рюкзаки",
+              "ru": "коричневые рюкзаки",
+              "en": "brown backpacks"
+            }
+          }
+        },
+        {
+          "lemma": "жёлтый",
+          "english": "yellow",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "жёлтая",
+              "noun": "сумка",
+              "ru": "жёлтая сумка",
+              "en": "yellow purse"
+            },
+            "masculine": {
+              "adjective": "жёлтый",
+              "noun": "карандаш",
+              "ru": "жёлтый карандаш",
+              "en": "yellow pencil"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "фиолетовый",
+          "english": "purple",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "фиолетовая",
+              "noun": "тетрадь",
+              "ru": "фиолетовая тетрадь",
+              "en": "purple notebook"
+            },
+            "masculine": {
+              "adjective": "фиолетовый",
+              "noun": "рюкзак",
+              "ru": "фиолетовый рюкзак",
+              "en": "purple backpack"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "фиолетовые",
+              "noun": "тетради",
+              "ru": "фиолетовые тетради",
+              "en": "purple notebooks"
+            }
+          }
+        },
+        {
+          "lemma": "серый",
+          "english": "gray",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "серая",
+              "noun": "сумка",
+              "ru": "серая сумка",
+              "en": "gray purse"
+            },
+            "masculine": {
+              "adjective": "серый",
+              "noun": "ноутбук",
+              "ru": "серый ноутбук",
+              "en": "gray pencil"
+            },
+            "neuter": {
+              "adjective": "серое",
+              "noun": "окно",
+              "ru": "серое окно",
+              "en": "gray window"
+            },
+            "plural": {
+              "adjective": "серые",
+              "noun": "компьютеры",
+              "ru": "серые компьютеры",
+              "en": "gray computers"
+            }
+          }
+        },
+        {
+          "lemma": "новый",
+          "english": "new",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "новая",
+              "noun": "зарядка",
+              "ru": "новая зарядка",
+              "en": "new charger"
+            },
+            "masculine": {
+              "adjective": "новый",
+              "noun": "телефон",
+              "ru": "новый телефон",
+              "en": "new phone"
+            },
+            "neuter": {
+              "adjective": "новое",
+              "noun": "окно",
+              "ru": "новое окно",
+              "en": "new window"
+            },
+            "plural": {
+              "adjective": "новые",
+              "noun": "наушники",
+              "ru": "новые наушники",
+              "en": "new headphones"
+            }
+          }
+        },
+        {
+          "lemma": "старый",
+          "english": "old",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "старая",
+              "noun": "тетрадь",
+              "ru": "старая тетрадь",
+              "en": "old notebook"
+            },
+            "masculine": {
+              "adjective": "старый",
+              "noun": "компьютер",
+              "ru": "старый компьютер",
+              "en": "old computer"
+            },
+            "neuter": {
+              "adjective": "старое",
+              "noun": "окно",
+              "ru": "старое окно",
+              "en": "old window"
+            },
+            "plural": {
+              "adjective": "старые",
+              "noun": "ключи",
+              "ru": "старые ключи",
+              "en": "old keys"
+            }
+          }
+        },
+        {
+          "lemma": "хороший",
+          "english": "good",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "хорошая",
+              "noun": "тетрадь",
+              "ru": "хорошая тетрадь",
+              "en": "good notebook"
+            },
+            "masculine": {
+              "adjective": "хороший",
+              "noun": "учебник",
+              "ru": "хороший учебник",
+              "en": "good textbook"
+            },
+            "neuter": {
+              "adjective": "хорошее",
+              "noun": "окно",
+              "ru": "хорошее окно",
+              "en": "good window"
+            },
+            "plural": {
+              "adjective": "хорошие",
+              "noun": "деньги",
+              "ru": "хорошие деньги",
+              "en": "good money"
+            }
+          }
+        },
+        {
+          "lemma": "плохой",
+          "english": "bad",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "плохая",
+              "noun": "зарядка",
+              "ru": "плохая зарядка",
+              "en": "bad charger"
+            },
+            "masculine": {
+              "adjective": "плохой",
+              "noun": "стул",
+              "ru": "плохой стул",
+              "en": "bad chair"
+            },
+            "neuter": {
+              "adjective": "плохое",
+              "noun": "окно",
+              "ru": "плохое окно",
+              "en": "bad window"
+            },
+            "plural": {
+              "adjective": "плохие",
+              "noun": "наушники",
+              "ru": "плохие наушники",
+              "en": "bad headphones"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "nationality_interests",
+      "title": "Nationality & Interests",
+      "theme": "culture",
+      "nominative": [
+        {
+          "lemma": "английский",
+          "english": "English",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "английская",
+              "noun": "поэзия",
+              "ru": "английская поэзия",
+              "en": "English poetry"
+            },
+            "masculine": {
+              "adjective": "английский",
+              "noun": "фильм",
+              "ru": "английский фильм",
+              "en": "English film"
+            },
+            "neuter": {
+              "adjective": "английское",
+              "noun": "кино",
+              "ru": "Английское кино",
+              "en": "English cinema"
+            },
+            "plural": {
+              "adjective": "английские",
+              "noun": "фильмы",
+              "ru": "английские фильмы",
+              "en": "English films"
+            }
+          }
+        },
+        {
+          "lemma": "арабский",
+          "english": "Arabic",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "арабская",
+              "noun": "каллиграфия",
+              "ru": "арабская каллиграфия",
+              "en": "Arabic calligraphy"
+            },
+            "masculine": {
+              "adjective": "арабский",
+              "noun": "певец",
+              "ru": "Арабский певец",
+              "en": "Arabic singer"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "арабские",
+              "noun": "фильмы",
+              "ru": "Арабские фильмы",
+              "en": "Arabic movies"
+            }
+          }
+        },
+        {
+          "lemma": "испанский",
+          "english": "Spanish",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "испанская",
+              "noun": "музыка",
+              "ru": "испанская музыка",
+              "en": "Spanish music"
+            },
+            "masculine": {
+              "adjective": "испанский",
+              "noun": "сериал",
+              "ru": "испанский сериал",
+              "en": "Spanish series"
+            },
+            "neuter": {
+              "adjective": "испанское",
+              "noun": "вино",
+              "ru": "Испанское вино",
+              "en": "Spanish wine"
+            },
+            "plural": {
+              "adjective": "испанские",
+              "noun": "сериалы",
+              "ru": "испанские сериалы",
+              "en": "Spanish shows"
+            }
+          }
+        },
+        {
+          "lemma": "итальянский",
+          "english": "Italian",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "итальянская",
+              "noun": "комедия",
+              "ru": "итальянская комедия",
+              "en": "Italian comedy"
+            },
+            "masculine": {
+              "adjective": "итальянский",
+              "noun": "композитор",
+              "ru": "Итальянский композитор",
+              "en": "Italian composer"
+            },
+            "neuter": {
+              "adjective": "итальянское",
+              "noun": "вино",
+              "ru": "Итальянское вино",
+              "en": "Italian wine"
+            },
+            "plural": {
+              "adjective": "итальянские",
+              "noun": "комедии",
+              "ru": "итальянские комедии",
+              "en": "Italian comedies"
+            }
+          }
+        },
+        {
+          "lemma": "китайский",
+          "english": "Chinese",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "китайская",
+              "noun": "литература",
+              "ru": "китайская литература",
+              "en": "Chinese literature"
+            },
+            "masculine": {
+              "adjective": "китайский",
+              "noun": "поэт",
+              "ru": "Китайский поэт",
+              "en": "Chinese poet"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "китайские",
+              "noun": "книги",
+              "ru": "китайские книги",
+              "en": "Chinese books"
+            }
+          }
+        },
+        {
+          "lemma": "корейский",
+          "english": "Korean",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "корейская",
+              "noun": "музыка",
+              "ru": "Корейская музыка",
+              "en": "Korean music"
+            },
+            "masculine": null,
+            "neuter": {
+              "adjective": "корейское",
+              "noun": "стихотворение",
+              "ru": "корейское стихотворение",
+              "en": "Korean poem"
+            },
+            "plural": {
+              "adjective": "корейские",
+              "noun": "стихи",
+              "ru": "корейские стихи",
+              "en": "Korean poems"
+            }
+          }
+        },
+        {
+          "lemma": "немецкий",
+          "english": "German",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "немецкая",
+              "noun": "актриса",
+              "ru": "Немецкая актриса",
+              "en": "German actress"
+            },
+            "masculine": {
+              "adjective": "немецкий",
+              "noun": "боевик",
+              "ru": "немецкий боевик",
+              "en": "a German action movie"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "немецкие",
+              "noun": "боевики",
+              "ru": "немецкие боевики",
+              "en": "German action movies"
+            }
+          }
+        },
+        {
+          "lemma": "португальский",
+          "english": "Portuguese",
+          "stem": "soft",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "португальский",
+              "noun": "сериал",
+              "ru": "португальский сериал",
+              "en": "Portuguese TV series"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "португальские",
+              "noun": "сериалы",
+              "ru": "португальские сериалы",
+              "en": "Portuguese TV series (plural)"
+            }
+          }
+        },
+        {
+          "lemma": "французский",
+          "english": "French",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "французская",
+              "noun": "картина",
+              "ru": "французская картина",
+              "en": "French painting"
+            },
+            "masculine": {
+              "adjective": "французский",
+              "noun": "художник",
+              "ru": "Французский художник",
+              "en": "French artist"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "французские",
+              "noun": "картины",
+              "ru": "французские картины",
+              "en": "French paintings"
+            }
+          }
+        },
+        {
+          "lemma": "японский",
+          "english": "Japanese",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "японская",
+              "noun": "литература",
+              "ru": "Японская литература",
+              "en": "Japanese literature"
+            },
+            "masculine": {
+              "adjective": "японский",
+              "noun": "мультфильм",
+              "ru": "японский мультфильм",
+              "en": "Japanese cartoon"
+            },
+            "neuter": {
+              "adjective": "японское",
+              "noun": "аниме",
+              "ru": "Японское аниме",
+              "en": "Japanese anime"
+            },
+            "plural": {
+              "adjective": "японские",
+              "noun": "мультфильмы",
+              "ru": "японские мультфильмы",
+              "en": "Japanese cartoons"
+            }
+          }
+        },
+        {
+          "lemma": "русский",
+          "english": "Russian",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "русская",
+              "noun": "литература",
+              "ru": "Русская литература",
+              "en": "Russian literature"
+            },
+            "masculine": {
+              "adjective": "русский",
+              "noun": "роман",
+              "ru": "русский роман",
+              "en": "Russian novel"
+            },
+            "neuter": {
+              "adjective": "русское",
+              "noun": "кино",
+              "ru": "Русское кино",
+              "en": "Russian cinema"
+            },
+            "plural": {
+              "adjective": "русские",
+              "noun": "романы",
+              "ru": "русские романы",
+              "en": "Russian novels"
+            }
+          }
+        },
+        {
+          "lemma": "классический",
+          "english": "classic",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "классическая",
+              "noun": "музыка",
+              "ru": "классическая музыка",
+              "en": "German classical music"
+            },
+            "masculine": {
+              "adjective": "классический",
+              "noun": "писатель",
+              "ru": "Классический писатель",
+              "en": "a classic writer"
+            },
+            "neuter": null,
+            "plural": {
+              "adjective": "классические",
+              "noun": "романы",
+              "ru": "Классические романы",
+              "en": "classic novels"
+            }
+          }
+        },
+        {
+          "lemma": "французский",
+          "english": "French",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "французская",
+              "noun": "литература",
+              "ru": "французская литература",
+              "en": "French literature"
+            },
+            "masculine": {
+              "adjective": "французский",
+              "noun": "поэт",
+              "ru": "Французский поэт",
+              "en": "French poet"
+            },
+            "neuter": {
+              "adjective": "французское",
+              "noun": "кино",
+              "ru": "Французское кино",
+              "en": "French cinema"
+            },
+            "plural": {
+              "adjective": "французские",
+              "noun": "романы",
+              "ru": "французские романы",
+              "en": "French novels"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "id": "colors_objects-красный-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "красный",
+      "lemmaEnglish": "red",
+      "gender": "feminine",
+      "adjective": "красная",
+      "noun": "тетрадь",
+      "phraseRu": "красная тетрадь",
+      "phraseEn": "red notebook",
+      "options": [
+        "красный",
+        "красная",
+        "красное",
+        "красные"
+      ],
+      "correct": "красная"
+    },
+    {
+      "id": "colors_objects-красный-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "красный",
+      "lemmaEnglish": "red",
+      "gender": "masculine",
+      "adjective": "красный",
+      "noun": "кошелёк",
+      "phraseRu": "красный кошелёк",
+      "phraseEn": "red wallet",
+      "options": [
+        "красный",
+        "красная",
+        "красное",
+        "красные"
+      ],
+      "correct": "красный"
+    },
+    {
+      "id": "colors_objects-чёрный-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "чёрный",
+      "lemmaEnglish": "black",
+      "gender": "feminine",
+      "adjective": "чёрная",
+      "noun": "сумка",
+      "phraseRu": "чёрная сумка",
+      "phraseEn": "black purse",
+      "options": [
+        "чёрный",
+        "чёрная",
+        "чёрное",
+        "чёрные"
+      ],
+      "correct": "чёрная"
+    },
+    {
+      "id": "colors_objects-чёрный-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "чёрный",
+      "lemmaEnglish": "black",
+      "gender": "masculine",
+      "adjective": "чёрный",
+      "noun": "планшет",
+      "phraseRu": "чёрный планшет",
+      "phraseEn": "black tablet",
+      "options": [
+        "чёрный",
+        "чёрная",
+        "чёрное",
+        "чёрные"
+      ],
+      "correct": "чёрный"
+    },
+    {
+      "id": "colors_objects-чёрный-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "чёрный",
+      "lemmaEnglish": "black",
+      "gender": "plural",
+      "adjective": "чёрные",
+      "noun": "наушники",
+      "phraseRu": "чёрные наушники",
+      "phraseEn": "black headphones",
+      "options": [
+        "чёрный",
+        "чёрная",
+        "чёрное",
+        "чёрные"
+      ],
+      "correct": "чёрные"
+    },
+    {
+      "id": "colors_objects-белый-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "белый",
+      "lemmaEnglish": "white",
+      "gender": "feminine",
+      "adjective": "белая",
+      "noun": "доска",
+      "phraseRu": "белая доска",
+      "phraseEn": "white board",
+      "options": [
+        "белый",
+        "белая",
+        "белое",
+        "белые"
+      ],
+      "correct": "белая"
+    },
+    {
+      "id": "colors_objects-белый-neuter",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "белый",
+      "lemmaEnglish": "white",
+      "gender": "neuter",
+      "adjective": "белое",
+      "noun": "окно",
+      "phraseRu": "белое окно",
+      "phraseEn": "white window",
+      "options": [
+        "белый",
+        "белая",
+        "белое",
+        "белые"
+      ],
+      "correct": "белое"
+    },
+    {
+      "id": "colors_objects-белый-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "белый",
+      "lemmaEnglish": "white",
+      "gender": "plural",
+      "adjective": "белые",
+      "noun": "окна",
+      "phraseRu": "белые окна",
+      "phraseEn": "white shirts",
+      "options": [
+        "белый",
+        "белая",
+        "белое",
+        "белые"
+      ],
+      "correct": "белые"
+    },
+    {
+      "id": "colors_objects-зелёный-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "зелёный",
+      "lemmaEnglish": "green",
+      "gender": "feminine",
+      "adjective": "зелёная",
+      "noun": "тетрадь",
+      "phraseRu": "зелёная тетрадь",
+      "phraseEn": "green notebook",
+      "options": [
+        "зелёный",
+        "зелёная",
+        "зелёное",
+        "зелёные"
+      ],
+      "correct": "зелёная"
+    },
+    {
+      "id": "colors_objects-зелёный-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "зелёный",
+      "lemmaEnglish": "green",
+      "gender": "masculine",
+      "adjective": "зелёный",
+      "noun": "рюкзак",
+      "phraseRu": "зелёный рюкзак",
+      "phraseEn": "green backpack",
+      "options": [
+        "зелёный",
+        "зелёная",
+        "зелёное",
+        "зелёные"
+      ],
+      "correct": "зелёный"
+    },
+    {
+      "id": "colors_objects-зелёный-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "зелёный",
+      "lemmaEnglish": "green",
+      "gender": "plural",
+      "adjective": "зелёные",
+      "noun": "карандаши",
+      "phraseRu": "зелёные карандаши",
+      "phraseEn": "green pencils",
+      "options": [
+        "зелёный",
+        "зелёная",
+        "зелёное",
+        "зелёные"
+      ],
+      "correct": "зелёные"
+    },
+    {
+      "id": "colors_objects-синий-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "синий",
+      "lemmaEnglish": "dark blue",
+      "gender": "feminine",
+      "adjective": "синяя",
+      "noun": "ручка",
+      "phraseRu": "синяя ручка",
+      "phraseEn": "dark blue pen",
+      "options": [
+        "синий",
+        "синяя",
+        "синее",
+        "синие"
+      ],
+      "correct": "синяя"
+    },
+    {
+      "id": "colors_objects-синий-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "синий",
+      "lemmaEnglish": "dark blue",
+      "gender": "masculine",
+      "adjective": "синий",
+      "noun": "карандаш",
+      "phraseRu": "синий карандаш",
+      "phraseEn": "dark blue pencil",
+      "options": [
+        "синий",
+        "синяя",
+        "синее",
+        "синие"
+      ],
+      "correct": "синий"
+    },
+    {
+      "id": "colors_objects-синий-neuter",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "синий",
+      "lemmaEnglish": "dark blue",
+      "gender": "neuter",
+      "adjective": "синее",
+      "noun": "окно",
+      "phraseRu": "синее окно",
+      "phraseEn": "dark blue window",
+      "options": [
+        "синий",
+        "синяя",
+        "синее",
+        "синие"
+      ],
+      "correct": "синее"
+    },
+    {
+      "id": "colors_objects-синий-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "синий",
+      "lemmaEnglish": "dark blue",
+      "gender": "plural",
+      "adjective": "синие",
+      "noun": "ручки",
+      "phraseRu": "синие ручки",
+      "phraseEn": "dark blue pens",
+      "options": [
+        "синий",
+        "синяя",
+        "синее",
+        "синие"
+      ],
+      "correct": "синие"
+    },
+    {
+      "id": "colors_objects-голубой-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "голубой",
+      "lemmaEnglish": "light blue",
+      "gender": "feminine",
+      "adjective": "голубая",
+      "noun": "сумка",
+      "phraseRu": "голубая сумка",
+      "phraseEn": "light blue purse",
+      "options": [
+        "голубой",
+        "голубая",
+        "голубое",
+        "голубые"
+      ],
+      "correct": "голубая"
+    },
+    {
+      "id": "colors_objects-голубой-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "голубой",
+      "lemmaEnglish": "light blue",
+      "gender": "masculine",
+      "adjective": "голубой",
+      "noun": "карандаш",
+      "phraseRu": "голубой карандаш",
+      "phraseEn": "light blue pencil",
+      "options": [
+        "голубой",
+        "голубая",
+        "голубое",
+        "голубые"
+      ],
+      "correct": "голубой"
+    },
+    {
+      "id": "colors_objects-голубой-neuter",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "голубой",
+      "lemmaEnglish": "light blue",
+      "gender": "neuter",
+      "adjective": "голубое",
+      "noun": "небо",
+      "phraseRu": "Голубое небо",
+      "phraseEn": "blue sky",
+      "options": [
+        "голубой",
+        "голубая",
+        "голубое",
+        "голубые"
+      ],
+      "correct": "голубое"
+    },
+    {
+      "id": "colors_objects-голубой-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "голубой",
+      "lemmaEnglish": "light blue",
+      "gender": "plural",
+      "adjective": "голубые",
+      "noun": "наушники",
+      "phraseRu": "голубые наушники",
+      "phraseEn": "light blue headphones",
+      "options": [
+        "голубой",
+        "голубая",
+        "голубое",
+        "голубые"
+      ],
+      "correct": "голубые"
+    },
+    {
+      "id": "colors_objects-коричневый-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "коричневый",
+      "lemmaEnglish": "brown",
+      "gender": "feminine",
+      "adjective": "коричневая",
+      "noun": "тетрадь",
+      "phraseRu": "коричневая тетрадь",
+      "phraseEn": "brown notebook",
+      "options": [
+        "коричневый",
+        "коричневая",
+        "коричневое",
+        "коричневые"
+      ],
+      "correct": "коричневая"
+    },
+    {
+      "id": "colors_objects-коричневый-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "коричневый",
+      "lemmaEnglish": "brown",
+      "gender": "masculine",
+      "adjective": "коричневый",
+      "noun": "стол",
+      "phraseRu": "коричневый стол",
+      "phraseEn": "brown desk/table",
+      "options": [
+        "коричневый",
+        "коричневая",
+        "коричневое",
+        "коричневые"
+      ],
+      "correct": "коричневый"
+    },
+    {
+      "id": "colors_objects-коричневый-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "коричневый",
+      "lemmaEnglish": "brown",
+      "gender": "plural",
+      "adjective": "коричневые",
+      "noun": "рюкзаки",
+      "phraseRu": "коричневые рюкзаки",
+      "phraseEn": "brown backpacks",
+      "options": [
+        "коричневый",
+        "коричневая",
+        "коричневое",
+        "коричневые"
+      ],
+      "correct": "коричневые"
+    },
+    {
+      "id": "colors_objects-жёлтый-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "жёлтый",
+      "lemmaEnglish": "yellow",
+      "gender": "feminine",
+      "adjective": "жёлтая",
+      "noun": "сумка",
+      "phraseRu": "жёлтая сумка",
+      "phraseEn": "yellow purse",
+      "options": [
+        "жёлтый",
+        "жёлтая",
+        "жёлтое",
+        "жёлтые"
+      ],
+      "correct": "жёлтая"
+    },
+    {
+      "id": "colors_objects-жёлтый-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "жёлтый",
+      "lemmaEnglish": "yellow",
+      "gender": "masculine",
+      "adjective": "жёлтый",
+      "noun": "карандаш",
+      "phraseRu": "жёлтый карандаш",
+      "phraseEn": "yellow pencil",
+      "options": [
+        "жёлтый",
+        "жёлтая",
+        "жёлтое",
+        "жёлтые"
+      ],
+      "correct": "жёлтый"
+    },
+    {
+      "id": "colors_objects-фиолетовый-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "фиолетовый",
+      "lemmaEnglish": "purple",
+      "gender": "feminine",
+      "adjective": "фиолетовая",
+      "noun": "тетрадь",
+      "phraseRu": "фиолетовая тетрадь",
+      "phraseEn": "purple notebook",
+      "options": [
+        "фиолетовый",
+        "фиолетовая",
+        "фиолетовое",
+        "фиолетовые"
+      ],
+      "correct": "фиолетовая"
+    },
+    {
+      "id": "colors_objects-фиолетовый-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "фиолетовый",
+      "lemmaEnglish": "purple",
+      "gender": "masculine",
+      "adjective": "фиолетовый",
+      "noun": "рюкзак",
+      "phraseRu": "фиолетовый рюкзак",
+      "phraseEn": "purple backpack",
+      "options": [
+        "фиолетовый",
+        "фиолетовая",
+        "фиолетовое",
+        "фиолетовые"
+      ],
+      "correct": "фиолетовый"
+    },
+    {
+      "id": "colors_objects-фиолетовый-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "фиолетовый",
+      "lemmaEnglish": "purple",
+      "gender": "plural",
+      "adjective": "фиолетовые",
+      "noun": "тетради",
+      "phraseRu": "фиолетовые тетради",
+      "phraseEn": "purple notebooks",
+      "options": [
+        "фиолетовый",
+        "фиолетовая",
+        "фиолетовое",
+        "фиолетовые"
+      ],
+      "correct": "фиолетовые"
+    },
+    {
+      "id": "colors_objects-серый-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "серый",
+      "lemmaEnglish": "gray",
+      "gender": "feminine",
+      "adjective": "серая",
+      "noun": "сумка",
+      "phraseRu": "серая сумка",
+      "phraseEn": "gray purse",
+      "options": [
+        "серый",
+        "серая",
+        "серое",
+        "серые"
+      ],
+      "correct": "серая"
+    },
+    {
+      "id": "colors_objects-серый-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "серый",
+      "lemmaEnglish": "gray",
+      "gender": "masculine",
+      "adjective": "серый",
+      "noun": "ноутбук",
+      "phraseRu": "серый ноутбук",
+      "phraseEn": "gray pencil",
+      "options": [
+        "серый",
+        "серая",
+        "серое",
+        "серые"
+      ],
+      "correct": "серый"
+    },
+    {
+      "id": "colors_objects-серый-neuter",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "серый",
+      "lemmaEnglish": "gray",
+      "gender": "neuter",
+      "adjective": "серое",
+      "noun": "окно",
+      "phraseRu": "серое окно",
+      "phraseEn": "gray window",
+      "options": [
+        "серый",
+        "серая",
+        "серое",
+        "серые"
+      ],
+      "correct": "серое"
+    },
+    {
+      "id": "colors_objects-серый-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "серый",
+      "lemmaEnglish": "gray",
+      "gender": "plural",
+      "adjective": "серые",
+      "noun": "компьютеры",
+      "phraseRu": "серые компьютеры",
+      "phraseEn": "gray computers",
+      "options": [
+        "серый",
+        "серая",
+        "серое",
+        "серые"
+      ],
+      "correct": "серые"
+    },
+    {
+      "id": "colors_objects-новый-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "новый",
+      "lemmaEnglish": "new",
+      "gender": "feminine",
+      "adjective": "новая",
+      "noun": "зарядка",
+      "phraseRu": "новая зарядка",
+      "phraseEn": "new charger",
+      "options": [
+        "новый",
+        "новая",
+        "новое",
+        "новые"
+      ],
+      "correct": "новая"
+    },
+    {
+      "id": "colors_objects-новый-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "новый",
+      "lemmaEnglish": "new",
+      "gender": "masculine",
+      "adjective": "новый",
+      "noun": "телефон",
+      "phraseRu": "новый телефон",
+      "phraseEn": "new phone",
+      "options": [
+        "новый",
+        "новая",
+        "новое",
+        "новые"
+      ],
+      "correct": "новый"
+    },
+    {
+      "id": "colors_objects-новый-neuter",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "новый",
+      "lemmaEnglish": "new",
+      "gender": "neuter",
+      "adjective": "новое",
+      "noun": "окно",
+      "phraseRu": "новое окно",
+      "phraseEn": "new window",
+      "options": [
+        "новый",
+        "новая",
+        "новое",
+        "новые"
+      ],
+      "correct": "новое"
+    },
+    {
+      "id": "colors_objects-новый-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "новый",
+      "lemmaEnglish": "new",
+      "gender": "plural",
+      "adjective": "новые",
+      "noun": "наушники",
+      "phraseRu": "новые наушники",
+      "phraseEn": "new headphones",
+      "options": [
+        "новый",
+        "новая",
+        "новое",
+        "новые"
+      ],
+      "correct": "новые"
+    },
+    {
+      "id": "colors_objects-старый-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "старый",
+      "lemmaEnglish": "old",
+      "gender": "feminine",
+      "adjective": "старая",
+      "noun": "тетрадь",
+      "phraseRu": "старая тетрадь",
+      "phraseEn": "old notebook",
+      "options": [
+        "старый",
+        "старая",
+        "старое",
+        "старые"
+      ],
+      "correct": "старая"
+    },
+    {
+      "id": "colors_objects-старый-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "старый",
+      "lemmaEnglish": "old",
+      "gender": "masculine",
+      "adjective": "старый",
+      "noun": "компьютер",
+      "phraseRu": "старый компьютер",
+      "phraseEn": "old computer",
+      "options": [
+        "старый",
+        "старая",
+        "старое",
+        "старые"
+      ],
+      "correct": "старый"
+    },
+    {
+      "id": "colors_objects-старый-neuter",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "старый",
+      "lemmaEnglish": "old",
+      "gender": "neuter",
+      "adjective": "старое",
+      "noun": "окно",
+      "phraseRu": "старое окно",
+      "phraseEn": "old window",
+      "options": [
+        "старый",
+        "старая",
+        "старое",
+        "старые"
+      ],
+      "correct": "старое"
+    },
+    {
+      "id": "colors_objects-старый-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "старый",
+      "lemmaEnglish": "old",
+      "gender": "plural",
+      "adjective": "старые",
+      "noun": "ключи",
+      "phraseRu": "старые ключи",
+      "phraseEn": "old keys",
+      "options": [
+        "старый",
+        "старая",
+        "старое",
+        "старые"
+      ],
+      "correct": "старые"
+    },
+    {
+      "id": "colors_objects-хороший-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "хороший",
+      "lemmaEnglish": "good",
+      "gender": "feminine",
+      "adjective": "хорошая",
+      "noun": "тетрадь",
+      "phraseRu": "хорошая тетрадь",
+      "phraseEn": "good notebook",
+      "options": [
+        "хороший",
+        "хорошяя",
+        "хорошее",
+        "хорошие",
+        "хорошая"
+      ],
+      "correct": "хорошая"
+    },
+    {
+      "id": "colors_objects-хороший-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "хороший",
+      "lemmaEnglish": "good",
+      "gender": "masculine",
+      "adjective": "хороший",
+      "noun": "учебник",
+      "phraseRu": "хороший учебник",
+      "phraseEn": "good textbook",
+      "options": [
+        "хороший",
+        "хорошяя",
+        "хорошее",
+        "хорошие"
+      ],
+      "correct": "хороший"
+    },
+    {
+      "id": "colors_objects-хороший-neuter",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "хороший",
+      "lemmaEnglish": "good",
+      "gender": "neuter",
+      "adjective": "хорошее",
+      "noun": "окно",
+      "phraseRu": "хорошее окно",
+      "phraseEn": "good window",
+      "options": [
+        "хороший",
+        "хорошяя",
+        "хорошее",
+        "хорошие"
+      ],
+      "correct": "хорошее"
+    },
+    {
+      "id": "colors_objects-хороший-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "хороший",
+      "lemmaEnglish": "good",
+      "gender": "plural",
+      "adjective": "хорошие",
+      "noun": "деньги",
+      "phraseRu": "хорошие деньги",
+      "phraseEn": "good money",
+      "options": [
+        "хороший",
+        "хорошяя",
+        "хорошее",
+        "хорошие"
+      ],
+      "correct": "хорошие"
+    },
+    {
+      "id": "colors_objects-плохой-feminine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "плохой",
+      "lemmaEnglish": "bad",
+      "gender": "feminine",
+      "adjective": "плохая",
+      "noun": "зарядка",
+      "phraseRu": "плохая зарядка",
+      "phraseEn": "bad charger",
+      "options": [
+        "плохой",
+        "плохая",
+        "плохое",
+        "плохые"
+      ],
+      "correct": "плохая"
+    },
+    {
+      "id": "colors_objects-плохой-masculine",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "плохой",
+      "lemmaEnglish": "bad",
+      "gender": "masculine",
+      "adjective": "плохой",
+      "noun": "стул",
+      "phraseRu": "плохой стул",
+      "phraseEn": "bad chair",
+      "options": [
+        "плохой",
+        "плохая",
+        "плохое",
+        "плохые"
+      ],
+      "correct": "плохой"
+    },
+    {
+      "id": "colors_objects-плохой-neuter",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "плохой",
+      "lemmaEnglish": "bad",
+      "gender": "neuter",
+      "adjective": "плохое",
+      "noun": "окно",
+      "phraseRu": "плохое окно",
+      "phraseEn": "bad window",
+      "options": [
+        "плохой",
+        "плохая",
+        "плохое",
+        "плохые"
+      ],
+      "correct": "плохое"
+    },
+    {
+      "id": "colors_objects-плохой-plural",
+      "setId": "colors_objects",
+      "setTitle": "Colors & Objects",
+      "lemma": "плохой",
+      "lemmaEnglish": "bad",
+      "gender": "plural",
+      "adjective": "плохие",
+      "noun": "наушники",
+      "phraseRu": "плохие наушники",
+      "phraseEn": "bad headphones",
+      "options": [
+        "плохой",
+        "плохая",
+        "плохое",
+        "плохые",
+        "плохие"
+      ],
+      "correct": "плохие"
+    },
+    {
+      "id": "nationality_interests-английский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "английский",
+      "lemmaEnglish": "English",
+      "gender": "feminine",
+      "adjective": "английская",
+      "noun": "поэзия",
+      "phraseRu": "английская поэзия",
+      "phraseEn": "English poetry",
+      "options": [
+        "английский",
+        "английскяя",
+        "английскее",
+        "английские",
+        "английская"
+      ],
+      "correct": "английская"
+    },
+    {
+      "id": "nationality_interests-английский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "английский",
+      "lemmaEnglish": "English",
+      "gender": "masculine",
+      "adjective": "английский",
+      "noun": "фильм",
+      "phraseRu": "английский фильм",
+      "phraseEn": "English film",
+      "options": [
+        "английский",
+        "английскяя",
+        "английскее",
+        "английские"
+      ],
+      "correct": "английский"
+    },
+    {
+      "id": "nationality_interests-английский-neuter",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "английский",
+      "lemmaEnglish": "English",
+      "gender": "neuter",
+      "adjective": "английское",
+      "noun": "кино",
+      "phraseRu": "Английское кино",
+      "phraseEn": "English cinema",
+      "options": [
+        "английский",
+        "английскяя",
+        "английскее",
+        "английские",
+        "английское"
+      ],
+      "correct": "английское"
+    },
+    {
+      "id": "nationality_interests-английский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "английский",
+      "lemmaEnglish": "English",
+      "gender": "plural",
+      "adjective": "английские",
+      "noun": "фильмы",
+      "phraseRu": "английские фильмы",
+      "phraseEn": "English films",
+      "options": [
+        "английский",
+        "английскяя",
+        "английскее",
+        "английские"
+      ],
+      "correct": "английские"
+    },
+    {
+      "id": "nationality_interests-арабский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "арабский",
+      "lemmaEnglish": "Arabic",
+      "gender": "feminine",
+      "adjective": "арабская",
+      "noun": "каллиграфия",
+      "phraseRu": "арабская каллиграфия",
+      "phraseEn": "Arabic calligraphy",
+      "options": [
+        "арабский",
+        "арабскяя",
+        "арабскее",
+        "арабские",
+        "арабская"
+      ],
+      "correct": "арабская"
+    },
+    {
+      "id": "nationality_interests-арабский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "арабский",
+      "lemmaEnglish": "Arabic",
+      "gender": "masculine",
+      "adjective": "арабский",
+      "noun": "певец",
+      "phraseRu": "Арабский певец",
+      "phraseEn": "Arabic singer",
+      "options": [
+        "арабский",
+        "арабскяя",
+        "арабскее",
+        "арабские"
+      ],
+      "correct": "арабский"
+    },
+    {
+      "id": "nationality_interests-арабский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "арабский",
+      "lemmaEnglish": "Arabic",
+      "gender": "plural",
+      "adjective": "арабские",
+      "noun": "фильмы",
+      "phraseRu": "Арабские фильмы",
+      "phraseEn": "Arabic movies",
+      "options": [
+        "арабский",
+        "арабскяя",
+        "арабскее",
+        "арабские"
+      ],
+      "correct": "арабские"
+    },
+    {
+      "id": "nationality_interests-испанский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "испанский",
+      "lemmaEnglish": "Spanish",
+      "gender": "feminine",
+      "adjective": "испанская",
+      "noun": "музыка",
+      "phraseRu": "испанская музыка",
+      "phraseEn": "Spanish music",
+      "options": [
+        "испанский",
+        "испанскяя",
+        "испанскее",
+        "испанские",
+        "испанская"
+      ],
+      "correct": "испанская"
+    },
+    {
+      "id": "nationality_interests-испанский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "испанский",
+      "lemmaEnglish": "Spanish",
+      "gender": "masculine",
+      "adjective": "испанский",
+      "noun": "сериал",
+      "phraseRu": "испанский сериал",
+      "phraseEn": "Spanish series",
+      "options": [
+        "испанский",
+        "испанскяя",
+        "испанскее",
+        "испанские"
+      ],
+      "correct": "испанский"
+    },
+    {
+      "id": "nationality_interests-испанский-neuter",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "испанский",
+      "lemmaEnglish": "Spanish",
+      "gender": "neuter",
+      "adjective": "испанское",
+      "noun": "вино",
+      "phraseRu": "Испанское вино",
+      "phraseEn": "Spanish wine",
+      "options": [
+        "испанский",
+        "испанскяя",
+        "испанскее",
+        "испанские",
+        "испанское"
+      ],
+      "correct": "испанское"
+    },
+    {
+      "id": "nationality_interests-испанский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "испанский",
+      "lemmaEnglish": "Spanish",
+      "gender": "plural",
+      "adjective": "испанские",
+      "noun": "сериалы",
+      "phraseRu": "испанские сериалы",
+      "phraseEn": "Spanish shows",
+      "options": [
+        "испанский",
+        "испанскяя",
+        "испанскее",
+        "испанские"
+      ],
+      "correct": "испанские"
+    },
+    {
+      "id": "nationality_interests-итальянский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "итальянский",
+      "lemmaEnglish": "Italian",
+      "gender": "feminine",
+      "adjective": "итальянская",
+      "noun": "комедия",
+      "phraseRu": "итальянская комедия",
+      "phraseEn": "Italian comedy",
+      "options": [
+        "итальянский",
+        "итальянскяя",
+        "итальянскее",
+        "итальянские",
+        "итальянская"
+      ],
+      "correct": "итальянская"
+    },
+    {
+      "id": "nationality_interests-итальянский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "итальянский",
+      "lemmaEnglish": "Italian",
+      "gender": "masculine",
+      "adjective": "итальянский",
+      "noun": "композитор",
+      "phraseRu": "Итальянский композитор",
+      "phraseEn": "Italian composer",
+      "options": [
+        "итальянский",
+        "итальянскяя",
+        "итальянскее",
+        "итальянские"
+      ],
+      "correct": "итальянский"
+    },
+    {
+      "id": "nationality_interests-итальянский-neuter",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "итальянский",
+      "lemmaEnglish": "Italian",
+      "gender": "neuter",
+      "adjective": "итальянское",
+      "noun": "вино",
+      "phraseRu": "Итальянское вино",
+      "phraseEn": "Italian wine",
+      "options": [
+        "итальянский",
+        "итальянскяя",
+        "итальянскее",
+        "итальянские",
+        "итальянское"
+      ],
+      "correct": "итальянское"
+    },
+    {
+      "id": "nationality_interests-итальянский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "итальянский",
+      "lemmaEnglish": "Italian",
+      "gender": "plural",
+      "adjective": "итальянские",
+      "noun": "комедии",
+      "phraseRu": "итальянские комедии",
+      "phraseEn": "Italian comedies",
+      "options": [
+        "итальянский",
+        "итальянскяя",
+        "итальянскее",
+        "итальянские"
+      ],
+      "correct": "итальянские"
+    },
+    {
+      "id": "nationality_interests-китайский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "китайский",
+      "lemmaEnglish": "Chinese",
+      "gender": "feminine",
+      "adjective": "китайская",
+      "noun": "литература",
+      "phraseRu": "китайская литература",
+      "phraseEn": "Chinese literature",
+      "options": [
+        "китайский",
+        "китайскяя",
+        "китайскее",
+        "китайские",
+        "китайская"
+      ],
+      "correct": "китайская"
+    },
+    {
+      "id": "nationality_interests-китайский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "китайский",
+      "lemmaEnglish": "Chinese",
+      "gender": "masculine",
+      "adjective": "китайский",
+      "noun": "поэт",
+      "phraseRu": "Китайский поэт",
+      "phraseEn": "Chinese poet",
+      "options": [
+        "китайский",
+        "китайскяя",
+        "китайскее",
+        "китайские"
+      ],
+      "correct": "китайский"
+    },
+    {
+      "id": "nationality_interests-китайский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "китайский",
+      "lemmaEnglish": "Chinese",
+      "gender": "plural",
+      "adjective": "китайские",
+      "noun": "книги",
+      "phraseRu": "китайские книги",
+      "phraseEn": "Chinese books",
+      "options": [
+        "китайский",
+        "китайскяя",
+        "китайскее",
+        "китайские"
+      ],
+      "correct": "китайские"
+    },
+    {
+      "id": "nationality_interests-корейский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "корейский",
+      "lemmaEnglish": "Korean",
+      "gender": "feminine",
+      "adjective": "корейская",
+      "noun": "музыка",
+      "phraseRu": "Корейская музыка",
+      "phraseEn": "Korean music",
+      "options": [
+        "корейский",
+        "корейскяя",
+        "корейскее",
+        "корейские",
+        "корейская"
+      ],
+      "correct": "корейская"
+    },
+    {
+      "id": "nationality_interests-корейский-neuter",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "корейский",
+      "lemmaEnglish": "Korean",
+      "gender": "neuter",
+      "adjective": "корейское",
+      "noun": "стихотворение",
+      "phraseRu": "корейское стихотворение",
+      "phraseEn": "Korean poem",
+      "options": [
+        "корейский",
+        "корейскяя",
+        "корейскее",
+        "корейские",
+        "корейское"
+      ],
+      "correct": "корейское"
+    },
+    {
+      "id": "nationality_interests-корейский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "корейский",
+      "lemmaEnglish": "Korean",
+      "gender": "plural",
+      "adjective": "корейские",
+      "noun": "стихи",
+      "phraseRu": "корейские стихи",
+      "phraseEn": "Korean poems",
+      "options": [
+        "корейский",
+        "корейскяя",
+        "корейскее",
+        "корейские"
+      ],
+      "correct": "корейские"
+    },
+    {
+      "id": "nationality_interests-немецкий-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "немецкий",
+      "lemmaEnglish": "German",
+      "gender": "feminine",
+      "adjective": "немецкая",
+      "noun": "актриса",
+      "phraseRu": "Немецкая актриса",
+      "phraseEn": "German actress",
+      "options": [
+        "немецкий",
+        "немецкяя",
+        "немецкее",
+        "немецкие",
+        "немецкая"
+      ],
+      "correct": "немецкая"
+    },
+    {
+      "id": "nationality_interests-немецкий-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "немецкий",
+      "lemmaEnglish": "German",
+      "gender": "masculine",
+      "adjective": "немецкий",
+      "noun": "боевик",
+      "phraseRu": "немецкий боевик",
+      "phraseEn": "a German action movie",
+      "options": [
+        "немецкий",
+        "немецкяя",
+        "немецкее",
+        "немецкие"
+      ],
+      "correct": "немецкий"
+    },
+    {
+      "id": "nationality_interests-немецкий-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "немецкий",
+      "lemmaEnglish": "German",
+      "gender": "plural",
+      "adjective": "немецкие",
+      "noun": "боевики",
+      "phraseRu": "немецкие боевики",
+      "phraseEn": "German action movies",
+      "options": [
+        "немецкий",
+        "немецкяя",
+        "немецкее",
+        "немецкие"
+      ],
+      "correct": "немецкие"
+    },
+    {
+      "id": "nationality_interests-португальский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "португальский",
+      "lemmaEnglish": "Portuguese",
+      "gender": "masculine",
+      "adjective": "португальский",
+      "noun": "сериал",
+      "phraseRu": "португальский сериал",
+      "phraseEn": "Portuguese TV series",
+      "options": [
+        "португальский",
+        "португальскяя",
+        "португальскее",
+        "португальские"
+      ],
+      "correct": "португальский"
+    },
+    {
+      "id": "nationality_interests-португальский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "португальский",
+      "lemmaEnglish": "Portuguese",
+      "gender": "plural",
+      "adjective": "португальские",
+      "noun": "сериалы",
+      "phraseRu": "португальские сериалы",
+      "phraseEn": "Portuguese TV series (plural)",
+      "options": [
+        "португальский",
+        "португальскяя",
+        "португальскее",
+        "португальские"
+      ],
+      "correct": "португальские"
+    },
+    {
+      "id": "nationality_interests-французский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "французский",
+      "lemmaEnglish": "French",
+      "gender": "feminine",
+      "adjective": "французская",
+      "noun": "картина",
+      "phraseRu": "французская картина",
+      "phraseEn": "French painting",
+      "options": [
+        "французский",
+        "французскяя",
+        "французскее",
+        "французские",
+        "французская"
+      ],
+      "correct": "французская"
+    },
+    {
+      "id": "nationality_interests-французский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "французский",
+      "lemmaEnglish": "French",
+      "gender": "masculine",
+      "adjective": "французский",
+      "noun": "художник",
+      "phraseRu": "Французский художник",
+      "phraseEn": "French artist",
+      "options": [
+        "французский",
+        "французскяя",
+        "французскее",
+        "французские"
+      ],
+      "correct": "французский"
+    },
+    {
+      "id": "nationality_interests-французский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "французский",
+      "lemmaEnglish": "French",
+      "gender": "plural",
+      "adjective": "французские",
+      "noun": "картины",
+      "phraseRu": "французские картины",
+      "phraseEn": "French paintings",
+      "options": [
+        "французский",
+        "французскяя",
+        "французскее",
+        "французские"
+      ],
+      "correct": "французские"
+    },
+    {
+      "id": "nationality_interests-японский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "японский",
+      "lemmaEnglish": "Japanese",
+      "gender": "feminine",
+      "adjective": "японская",
+      "noun": "литература",
+      "phraseRu": "Японская литература",
+      "phraseEn": "Japanese literature",
+      "options": [
+        "японский",
+        "японскяя",
+        "японскее",
+        "японские",
+        "японская"
+      ],
+      "correct": "японская"
+    },
+    {
+      "id": "nationality_interests-японский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "японский",
+      "lemmaEnglish": "Japanese",
+      "gender": "masculine",
+      "adjective": "японский",
+      "noun": "мультфильм",
+      "phraseRu": "японский мультфильм",
+      "phraseEn": "Japanese cartoon",
+      "options": [
+        "японский",
+        "японскяя",
+        "японскее",
+        "японские"
+      ],
+      "correct": "японский"
+    },
+    {
+      "id": "nationality_interests-японский-neuter",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "японский",
+      "lemmaEnglish": "Japanese",
+      "gender": "neuter",
+      "adjective": "японское",
+      "noun": "аниме",
+      "phraseRu": "Японское аниме",
+      "phraseEn": "Japanese anime",
+      "options": [
+        "японский",
+        "японскяя",
+        "японскее",
+        "японские",
+        "японское"
+      ],
+      "correct": "японское"
+    },
+    {
+      "id": "nationality_interests-японский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "японский",
+      "lemmaEnglish": "Japanese",
+      "gender": "plural",
+      "adjective": "японские",
+      "noun": "мультфильмы",
+      "phraseRu": "японские мультфильмы",
+      "phraseEn": "Japanese cartoons",
+      "options": [
+        "японский",
+        "японскяя",
+        "японскее",
+        "японские"
+      ],
+      "correct": "японские"
+    },
+    {
+      "id": "nationality_interests-русский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "русский",
+      "lemmaEnglish": "Russian",
+      "gender": "feminine",
+      "adjective": "русская",
+      "noun": "литература",
+      "phraseRu": "Русская литература",
+      "phraseEn": "Russian literature",
+      "options": [
+        "русский",
+        "русскяя",
+        "русскее",
+        "русские",
+        "русская"
+      ],
+      "correct": "русская"
+    },
+    {
+      "id": "nationality_interests-русский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "русский",
+      "lemmaEnglish": "Russian",
+      "gender": "masculine",
+      "adjective": "русский",
+      "noun": "роман",
+      "phraseRu": "русский роман",
+      "phraseEn": "Russian novel",
+      "options": [
+        "русский",
+        "русскяя",
+        "русскее",
+        "русские"
+      ],
+      "correct": "русский"
+    },
+    {
+      "id": "nationality_interests-русский-neuter",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "русский",
+      "lemmaEnglish": "Russian",
+      "gender": "neuter",
+      "adjective": "русское",
+      "noun": "кино",
+      "phraseRu": "Русское кино",
+      "phraseEn": "Russian cinema",
+      "options": [
+        "русский",
+        "русскяя",
+        "русскее",
+        "русские",
+        "русское"
+      ],
+      "correct": "русское"
+    },
+    {
+      "id": "nationality_interests-русский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "русский",
+      "lemmaEnglish": "Russian",
+      "gender": "plural",
+      "adjective": "русские",
+      "noun": "романы",
+      "phraseRu": "русские романы",
+      "phraseEn": "Russian novels",
+      "options": [
+        "русский",
+        "русскяя",
+        "русскее",
+        "русские"
+      ],
+      "correct": "русские"
+    },
+    {
+      "id": "nationality_interests-классический-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "классический",
+      "lemmaEnglish": "classic",
+      "gender": "feminine",
+      "adjective": "классическая",
+      "noun": "музыка",
+      "phraseRu": "классическая музыка",
+      "phraseEn": "German classical music",
+      "options": [
+        "классический",
+        "классическяя",
+        "классическее",
+        "классические",
+        "классическая"
+      ],
+      "correct": "классическая"
+    },
+    {
+      "id": "nationality_interests-классический-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "классический",
+      "lemmaEnglish": "classic",
+      "gender": "masculine",
+      "adjective": "классический",
+      "noun": "писатель",
+      "phraseRu": "Классический писатель",
+      "phraseEn": "a classic writer",
+      "options": [
+        "классический",
+        "классическяя",
+        "классическее",
+        "классические"
+      ],
+      "correct": "классический"
+    },
+    {
+      "id": "nationality_interests-классический-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "классический",
+      "lemmaEnglish": "classic",
+      "gender": "plural",
+      "adjective": "классические",
+      "noun": "романы",
+      "phraseRu": "Классические романы",
+      "phraseEn": "classic novels",
+      "options": [
+        "классический",
+        "классическяя",
+        "классическее",
+        "классические"
+      ],
+      "correct": "классические"
+    },
+    {
+      "id": "nationality_interests-французский-feminine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "французский",
+      "lemmaEnglish": "French",
+      "gender": "feminine",
+      "adjective": "французская",
+      "noun": "литература",
+      "phraseRu": "французская литература",
+      "phraseEn": "French literature",
+      "options": [
+        "французский",
+        "французскяя",
+        "французскее",
+        "французские",
+        "французская"
+      ],
+      "correct": "французская"
+    },
+    {
+      "id": "nationality_interests-французский-masculine",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "французский",
+      "lemmaEnglish": "French",
+      "gender": "masculine",
+      "adjective": "французский",
+      "noun": "поэт",
+      "phraseRu": "Французский поэт",
+      "phraseEn": "French poet",
+      "options": [
+        "французский",
+        "французскяя",
+        "французскее",
+        "французские"
+      ],
+      "correct": "французский"
+    },
+    {
+      "id": "nationality_interests-французский-neuter",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "французский",
+      "lemmaEnglish": "French",
+      "gender": "neuter",
+      "adjective": "французское",
+      "noun": "кино",
+      "phraseRu": "Французское кино",
+      "phraseEn": "French cinema",
+      "options": [
+        "французский",
+        "французскяя",
+        "французскее",
+        "французские",
+        "французское"
+      ],
+      "correct": "французское"
+    },
+    {
+      "id": "nationality_interests-французский-plural",
+      "setId": "nationality_interests",
+      "setTitle": "Nationality & Interests",
+      "lemma": "французский",
+      "lemmaEnglish": "French",
+      "gender": "plural",
+      "adjective": "французские",
+      "noun": "романы",
+      "phraseRu": "французские романы",
+      "phraseEn": "French novels",
+      "options": [
+        "французский",
+        "французскяя",
+        "французскее",
+        "французские"
+      ],
+      "correct": "французские"
+    }
+  ]
+}

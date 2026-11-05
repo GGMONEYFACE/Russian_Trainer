@@ -7,5 +7,5 @@ dist/
 .DS_Store
 data-preview.json
 _parsed_preview.json
-level1.json
+/level1.json
 web/.env*.local
