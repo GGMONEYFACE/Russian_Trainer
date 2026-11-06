@@ -38,3 +38,21 @@ export function genderHint(gender: Gender): string {
       return "";
   }
 }
+
+const adjectiveEndings = ["ая", "яя", "ое", "ее", "ые", "ие", "ый", "ой", "ий"];
+
+export function adjectiveEnding(adjective: string): string {
+  return (
+    adjectiveEndings.find((ending) => adjective.endsWith(ending)) ?? adjective
+  );
+}
+
+export function adjectiveStem(adjective: string): string {
+  const ending = adjectiveEnding(adjective);
+  if (ending === adjective) return adjective;
+  return adjective.slice(0, -ending.length);
+}
+
+export function normalizeEnding(value: string): string {
+  return value.trim().replace(/^[\-‑–—]+|[\-‑–—]+$/g, "");
+}

@@ -10,7 +10,7 @@ export default function PracticePage() {
       <header className="page-hero">
         <h1>Practice · Gender agreement</h1>
         <p>
-          Pick the adjective form that agrees with the noun, or name the noun&apos;s
+          Pick the adjective form, fill in its ending, or name the noun&apos;s
           gender. Feedback shows the full classroom phrase.
         </p>
       </header>

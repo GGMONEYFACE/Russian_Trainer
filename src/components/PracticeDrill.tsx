@@ -1,15 +1,23 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import type { FormEvent } from "react";
 import type { Gender, PracticeItem } from "@/lib/types";
-import { filterPractice, genderHint, shuffle } from "@/lib/practice";
+import {
+  adjectiveEnding,
+  adjectiveStem,
+  filterPractice,
+  genderHint,
+  normalizeEnding,
+  shuffle,
+} from "@/lib/practice";
 import {
   loadProgress,
   recordAnswer,
   type ProgressState,
 } from "@/lib/progress";
 
-type Mode = "agree" | "gender";
+type Mode = "agree" | "ending" | "gender";
 
 type Props = {
   items: PracticeItem[];
@@ -24,6 +32,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   const [queue, setQueue] = useState<PracticeItem[]>([]);
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
+  const [endingAnswer, setEndingAnswer] = useState("");
   const [progress, setProgress] = useState<ProgressState | null>(null);
   const [sessionCorrect, setSessionCorrect] = useState(0);
   const [sessionTotal, setSessionTotal] = useState(0);
@@ -37,6 +46,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
     setQueue(shuffle(pool).slice(0, Math.min(12, pool.length)));
     setIndex(0);
     setSelected(null);
+    setEndingAnswer("");
     setSessionCorrect(0);
     setSessionTotal(0);
   }
@@ -57,6 +67,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   const choices = useMemo(() => {
     if (!current) return [];
     if (mode === "agree") return shuffle(current.options);
+    if (mode === "ending") return [];
     return shuffle(["masculine", "feminine", "neuter", "plural"] as Gender[]);
   }, [current, mode]);
 
@@ -64,12 +75,22 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
     if (!current || selected) return;
     setSelected(value);
     const correct =
-      mode === "agree" ? value === current.correct : value === current.gender;
+      mode === "agree"
+        ? value === current.correct
+        : mode === "ending"
+          ? value === adjectiveEnding(current.adjective)
+          : value === current.gender;
     setSessionTotal((n) => n + 1);
     if (correct) setSessionCorrect((n) => n + 1);
     setProgress((prev) =>
       recordAnswer(prev ?? loadProgress(), current.id, correct),
     );
+  }
+
+  function onEndingSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!endingAnswer.trim()) return;
+    onChoose(normalizeEnding(endingAnswer));
   }
 
   function next() {
@@ -79,6 +100,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
     }
     setIndex((i) => i + 1);
     setSelected(null);
+    setEndingAnswer("");
   }
 
   if (!current) {
@@ -93,7 +115,9 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
     selected !== null &&
     (mode === "agree"
       ? selected === current.correct
-      : selected === current.gender);
+      : mode === "ending"
+        ? selected === adjectiveEnding(current.adjective)
+        : selected === current.gender);
 
   return (
     <div className="drill">
@@ -116,6 +140,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
             onChange={(e) => setMode(e.target.value as Mode)}
           >
             <option value="agree">Choose adjective ending</option>
+            <option value="ending">Fill in adjective ending</option>
             <option value="gender">Identify noun gender</option>
           </select>
         </label>
@@ -159,6 +184,17 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
             </p>
             <p className="prompt__en">{current.phraseEn}</p>
           </>
+        ) : mode === "ending" ? (
+          <>
+            <h2 className="prompt__main">
+              {adjectiveStem(current.adjective)}
+              <span className="prompt__ending">__</span> {current.noun}
+            </h2>
+            <p className="prompt__sub">
+              Type the adjective ending (for example: ой).
+            </p>
+            <p className="prompt__en">{current.phraseEn}</p>
+          </>
         ) : (
           <>
             <h2 className="prompt__main">{current.noun}</h2>
@@ -172,33 +208,57 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
         )}
       </div>
 
-      <div className="choices" role="group" aria-label="Answers">
-        {choices.map((choice) => {
-          const value = choice;
-          const label =
-            mode === "agree"
-              ? choice
-              : `${genderLabels[choice as Gender].en} · ${genderLabels[choice as Gender].ru}`;
-          let state = "";
-          if (selected) {
-            const right =
-              mode === "agree" ? current.correct : current.gender;
-            if (value === right) state = "is-correct";
-            else if (value === selected) state = "is-wrong";
-          }
-          return (
-            <button
-              key={String(value)}
-              type="button"
-              className={`choice ${state}`}
-              onClick={() => onChoose(String(value))}
+      {mode === "ending" ? (
+        <form className="ending-answer" onSubmit={onEndingSubmit}>
+          <label htmlFor="ending-input">Adjective ending</label>
+          <div className="ending-answer__controls">
+            <input
+              id="ending-input"
+              type="text"
+              value={endingAnswer}
+              onChange={(event) => setEndingAnswer(event.target.value)}
+              placeholder="ой"
+              autoComplete="off"
               disabled={Boolean(selected)}
+            />
+            <button
+              type="submit"
+              className="btn btn--primary"
+              disabled={Boolean(selected) || !endingAnswer.trim()}
             >
-              {label}
+              Check
             </button>
-          );
-        })}
-      </div>
+          </div>
+        </form>
+      ) : (
+        <div className="choices" role="group" aria-label="Answers">
+          {choices.map((choice) => {
+            const value = choice;
+            const label =
+              mode === "agree"
+                ? choice
+                : `${genderLabels[choice as Gender].en} · ${genderLabels[choice as Gender].ru}`;
+            let state = "";
+            if (selected) {
+              const right =
+                mode === "agree" ? current.correct : current.gender;
+              if (value === right) state = "is-correct";
+              else if (value === selected) state = "is-wrong";
+            }
+            return (
+              <button
+                key={String(value)}
+                type="button"
+                className={`choice ${state}`}
+                onClick={() => onChoose(String(value))}
+                disabled={Boolean(selected)}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {selected && (
         <div className={`feedback ${isCorrect ? "is-good" : "is-bad"}`}>
