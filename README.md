@@ -1,21 +1,20 @@
-# Russian_Trainer
+# Russian Trainer
 
-A grammar-focused Russian practice website built from Level 1 classroom materials.
+Grammar-first practice site for Russian adjective–noun agreement.
 
-**Live focus:** adjective–noun agreement by gender and number (nominative).
+## Level 1 (live)
 
-The Next.js app lives in [`web/`](./web/). Source phrase lists are the `.docx` files in this folder.
+- Nominative gender/number agreement using classroom phrase sets
+- Modes: choose the adjective ending, or identify noun gender
+- Reference charts for Colors & Objects and Nationality & Interests
 
-## Quick start
+## Develop
 
 ```bash
-cd web
 npm install
 npm run dev
 ```
 
-## Roadmap
+## Deploy
 
-1. **Level 1** — gender agreement (current)
-2. **Level 2** — case endings in context
-3. **Verbs** — conjugation drills
+This app is meant to deploy from the repository root on Vercel.
