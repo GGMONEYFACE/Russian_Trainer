@@ -18,6 +18,13 @@ import {
 
 type Mode = "agree" | "ending" | "gender";
 
+type RoundResult = {
+  item: PracticeItem;
+  mode: Mode;
+  answer: string;
+  correct: boolean;
+};
+
 type Props = {
   items: PracticeItem[];
   setOptions: { id: string; title: string }[];
@@ -34,6 +41,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   const [progress, setProgress] = useState<ProgressState | null>(null);
   const [sessionCorrect, setSessionCorrect] = useState(0);
   const [sessionTotal, setSessionTotal] = useState(0);
+  const [roundResults, setRoundResults] = useState<RoundResult[]>([]);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
   const answerInputRef = useRef<HTMLInputElement>(null);
 
@@ -53,11 +61,13 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
 
   useEffect(() => {
     setProgress(loadProgress());
+    setRoundResults([]);
     startSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
+    setRoundResults([]);
     startSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setId, pool.length]);
@@ -92,6 +102,10 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
         : mode === "ending"
           ? value === adjectiveEnding(current.adjective)
           : value === current.gender;
+    setRoundResults((results) => [
+      ...results,
+      { item: current, mode, answer: value, correct },
+    ]);
     setSessionTotal((n) => n + 1);
     if (correct) setSessionCorrect((n) => n + 1);
     setProgress((prev) =>
@@ -121,6 +135,89 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
     return (
       <div className="drill empty-drill">
         <p>No items match this filter. Try another set.</p>
+      </div>
+    );
+  }
+
+  if (roundResults.length === queue.length && queue.length > 0) {
+    const correctCount = roundResults.filter((result) => result.correct).length;
+    const formsByLemma = new Map<string, PracticeItem[]>();
+    const formsByNoun = new Map<string, PracticeItem[]>();
+    items.forEach((item) => {
+      const forms = formsByLemma.get(item.lemma) ?? [];
+      if (!forms.some((form) => form.adjective === item.adjective)) {
+        forms.push(item);
+      }
+      formsByLemma.set(item.lemma, forms);
+      const nounForms = formsByNoun.get(item.noun) ?? [];
+      if (!nounForms.some((form) => form.adjective === item.adjective)) {
+        nounForms.push(item);
+      }
+      formsByNoun.set(item.noun, nounForms);
+    });
+
+    return (
+      <div className="drill round-review">
+        <div className="round-review__header">
+          <p className="prompt__eyebrow">Round complete</p>
+          <h2 className="section__title">Your results</h2>
+          <p className="section__lede">
+            {correctCount} right · {roundResults.length - correctCount} wrong
+          </p>
+        </div>
+        <div className="round-review__list">
+          {roundResults.map((result, resultIndex) => {
+            const forms = formsByLemma.get(result.item.lemma) ?? [result.item];
+            const nounForms = formsByNoun.get(result.item.noun) ?? [result.item];
+            return (
+              <article className="round-review__item" key={`${result.item.id}-${resultIndex}`}>
+                <div className="round-review__item-header">
+                  <strong>Question {resultIndex + 1}</strong>
+                  <span className={result.correct ? "review-correct" : "review-wrong"}>
+                    {result.correct ? "Right" : "Wrong"}
+                  </span>
+                </div>
+                <p className="round-review__phrase">
+                  {result.item.phraseRu} <span>— {result.item.phraseEn}</span>
+                </p>
+                <dl className="round-review__answers">
+                  <div>
+                    <dt>Your answer</dt>
+                    <dd>{result.answer || "No answer"}</dd>
+                  </div>
+                  <div>
+                    <dt>Correct answer</dt>
+                    <dd>
+                      {result.mode === "gender"
+                        ? result.item.gender
+                        : result.mode === "ending"
+                          ? adjectiveEnding(result.item.adjective)
+                          : result.item.correct}
+                    </dd>
+                  </div>
+                </dl>
+                <p className="round-review__forms">
+                  <strong>Adjective forms:</strong>{" "}
+                  {forms.map((form) => `${form.gender}: ${form.adjective}`).join(" · ")}
+                </p>
+                <p className="round-review__forms">
+                  <strong>Noun forms seen:</strong>{" "}
+                  {nounForms.map((form) => `${form.gender}: ${form.noun}`).join(" · ")}
+                </p>
+              </article>
+            );
+          })}
+        </div>
+        <button
+          type="button"
+          className="btn btn--primary"
+          onClick={() => {
+            setRoundResults([]);
+            startSession();
+          }}
+        >
+          Start new round
+        </button>
       </div>
     );
   }
