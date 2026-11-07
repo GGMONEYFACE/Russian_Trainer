@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { Gender, PracticeItem } from "@/lib/types";
 import {
@@ -36,6 +36,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   const [progress, setProgress] = useState<ProgressState | null>(null);
   const [sessionCorrect, setSessionCorrect] = useState(0);
   const [sessionTotal, setSessionTotal] = useState(0);
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
 
   const pool = useMemo(
     () => filterPractice(items, { setId }),
@@ -63,6 +64,12 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   }, [setId, pool.length]);
 
   const current = queue[index];
+
+  useEffect(() => {
+    if (selected) {
+      nextButtonRef.current?.focus();
+    }
+  }, [selected]);
 
   const choices = useMemo(() => {
     if (!current) return [];
@@ -279,7 +286,12 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
               {current.phraseRu} — {current.phraseEn}
             </span>
           </p>
-          <button type="button" className="btn btn--primary" onClick={next}>
+          <button
+            ref={nextButtonRef}
+            type="button"
+            className="btn btn--primary"
+            onClick={next}
+          >
             {index + 1 >= queue.length ? "New round" : "Next"}
           </button>
         </div>
