@@ -26,7 +26,7 @@ type Props = {
 };
 
 export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
-  const [mode, setMode] = useState<Mode>("agree");
+  const [mode, setMode] = useState<Mode>("ending");
   const [setId, setSetId] = useState("all");
   const [showHint, setShowHint] = useState(true);
   const [queue, setQueue] = useState<PracticeItem[]>([]);
@@ -60,7 +60,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   useEffect(() => {
     startSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setId, mode, pool.length]);
+  }, [setId, pool.length]);
 
   const current = queue[index];
 
@@ -95,10 +95,12 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
 
   function next() {
     if (index + 1 >= queue.length) {
+      setMode("ending");
       startSession();
       return;
     }
     setIndex((i) => i + 1);
+    setMode("ending");
     setSelected(null);
     setEndingAnswer("");
   }
@@ -133,13 +135,22 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
             ))}
           </select>
         </label>
+        <label className="toggle">
+          <input
+            type="checkbox"
+            checked={mode === "agree"}
+            onChange={(event) =>
+              setMode(event.target.checked ? "agree" : "ending")
+            }
+          />
+          <span>Multiple choice for this question</span>
+        </label>
         <label className="field">
-          <span>Mode</span>
+          <span>Other mode</span>
           <select
-            value={mode}
+            value={mode === "agree" || mode === "ending" ? "ending" : mode}
             onChange={(e) => setMode(e.target.value as Mode)}
           >
-            <option value="agree">Choose adjective ending</option>
             <option value="ending">Fill in adjective ending</option>
             <option value="gender">Identify noun gender</option>
           </select>

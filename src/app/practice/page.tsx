@@ -10,8 +10,9 @@ export default function PracticePage() {
       <header className="page-hero">
         <h1>Practice · Gender agreement</h1>
         <p>
-          Pick the adjective form, fill in its ending, or name the noun&apos;s
-          gender. Feedback shows the full classroom phrase.
+          Fill in the adjective ending by default. You can switch one question
+          to multiple choice, or identify the noun&apos;s gender. Feedback shows
+          the full classroom phrase.
         </p>
       </header>
       <PracticeDrill

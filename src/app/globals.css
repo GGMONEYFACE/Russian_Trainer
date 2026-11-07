@@ -756,6 +756,21 @@ input {
   border-color: var(--accent);
 }
 
+.case-chart__table select {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: white;
+  color: var(--ink);
+}
+
+.case-chart__table select:focus {
+  outline: 2px solid rgba(180, 35, 24, 0.28);
+  border-color: var(--accent);
+}
+
 .case-chart__table td {
   width: 35%;
 }

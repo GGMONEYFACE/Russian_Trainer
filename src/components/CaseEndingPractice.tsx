@@ -10,6 +10,37 @@ import {
 } from "@/data/caseEndings";
 type EndingField = "adjective" | "noun";
 
+const endingChoices = [
+  "—",
+  "а",
+  "я",
+  "ы",
+  "и",
+  "у",
+  "ю",
+  "е",
+  "ом",
+  "ем",
+  "ой",
+  "ей",
+  "ого",
+  "его",
+  "ому",
+  "ему",
+  "ым",
+  "им",
+  "ую",
+  "юю",
+  "ое",
+  "ее",
+  "ый",
+  "ой",
+  "ий",
+  "ая",
+  "яя",
+  "ью",
+];
+
 function normalizeAnswer(value: string) {
   return value.trim().toLowerCase().replace(/^-/, "");
 }
@@ -27,10 +58,15 @@ function isCorrect(value: string, answers: string[]) {
   );
 }
 
+function choicesFor(answers: string[]) {
+  return [...new Set([...answers.map((answer) => answer || "—"), ...endingChoices])];
+}
+
 export function CaseEndingPractice() {
   const [selectedCase, setSelectedCase] = useState<CaseKey>("nominative");
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(false);
+  const [multipleChoice, setMultipleChoice] = useState(false);
 
   const definition = cases[selectedCase];
   const answerKey = (gender: Gender, field: EndingField) =>
@@ -48,6 +84,7 @@ export function CaseEndingPractice() {
     setSelectedCase(nextCase);
     setAnswers({});
     setChecked(false);
+    setMultipleChoice(false);
   }
 
   function updateAnswer(gender: Gender, field: EndingField, value: string) {
@@ -60,6 +97,12 @@ export function CaseEndingPractice() {
   }
 
   function resetAnswers() {
+    setAnswers({});
+    setChecked(false);
+  }
+
+  function toggleMultipleChoice(enabled: boolean) {
+    setMultipleChoice(enabled);
     setAnswers({});
     setChecked(false);
   }
@@ -79,6 +122,14 @@ export function CaseEndingPractice() {
               </option>
             ))}
           </select>
+        </label>
+        <label className="toggle">
+          <input
+            type="checkbox"
+            checked={multipleChoice}
+            onChange={(event) => toggleMultipleChoice(event.target.checked)}
+          />
+          <span>Multiple choice for this case</span>
         </label>
         <span className="muted">
           {checked ? `${score}/${total} correct` : "Fill in all six endings"}
@@ -111,17 +162,48 @@ export function CaseEndingPractice() {
                   const correct = isCorrect(value, definition.answers[gender][field]);
                   return (
                     <td key={field}>
-                      <input
-                        className={
-                          checked ? (correct ? "case-answer--correct" : "case-answer--wrong") : ""
-                        }
-                        type="text"
-                        value={value}
-                        onChange={(event) => updateAnswer(gender, field, event.target.value)}
-                        placeholder="enter ending"
-                        aria-label={`${gender} ${field} ending`}
-                        aria-invalid={checked && !correct}
-                      />
+                      {multipleChoice ? (
+                        <select
+                          className={
+                            checked
+                              ? correct
+                                ? "case-answer--correct"
+                                : "case-answer--wrong"
+                              : ""
+                          }
+                          value={value}
+                          onChange={(event) =>
+                            updateAnswer(gender, field, event.target.value)
+                          }
+                          aria-label={`${gender} ${field} ending`}
+                          aria-invalid={checked && !correct}
+                        >
+                          <option value="">Choose an ending</option>
+                          {choicesFor(definition.answers[gender][field]).map((ending) => (
+                            <option key={ending} value={ending}>
+                              {ending}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <input
+                          className={
+                            checked
+                              ? correct
+                                ? "case-answer--correct"
+                                : "case-answer--wrong"
+                              : ""
+                          }
+                          type="text"
+                          value={value}
+                          onChange={(event) =>
+                            updateAnswer(gender, field, event.target.value)
+                          }
+                          placeholder="enter ending"
+                          aria-label={`${gender} ${field} ending`}
+                          aria-invalid={checked && !correct}
+                        />
+                      )}
                       {checked && !correct && (
                         <small className="case-answer__expected">
                           Expected: {definition.answers[gender][field].map((ending) => ending || "—").join(" / ")}
