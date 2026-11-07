@@ -37,6 +37,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   const [sessionCorrect, setSessionCorrect] = useState(0);
   const [sessionTotal, setSessionTotal] = useState(0);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
+  const answerInputRef = useRef<HTMLInputElement>(null);
 
   const pool = useMemo(
     () => filterPractice(items, { setId }),
@@ -70,6 +71,12 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
       nextButtonRef.current?.focus();
     }
   }, [selected]);
+
+  useEffect(() => {
+    if (current && mode === "ending" && !selected) {
+      answerInputRef.current?.focus();
+    }
+  }, [current, mode, selected]);
 
   const choices = useMemo(() => {
     if (!current) return [];
@@ -231,6 +238,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
           <label htmlFor="ending-input">Adjective ending</label>
           <div className="ending-answer__controls">
             <input
+              ref={answerInputRef}
               id="ending-input"
               type="text"
               value={endingAnswer}
