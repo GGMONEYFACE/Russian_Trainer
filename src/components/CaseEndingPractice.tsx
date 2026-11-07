@@ -27,13 +27,36 @@ function createChart(id: number): EndingChart {
   };
 }
 
+function isEndingChart(value: unknown): value is EndingChart {
+  if (!value || typeof value !== "object") return false;
+  const chart = value as Partial<EndingChart>;
+
+  return (
+    Number.isInteger(chart.id) &&
+    typeof chart.title === "string" &&
+    Array.isArray(chart.rows) &&
+    chart.rows.length === genders.length &&
+    chart.rows.every(
+      (row, index) =>
+        row &&
+        typeof row === "object" &&
+        (row as EndingRow).gender === genders[index] &&
+        typeof (row as EndingRow).adjective === "string" &&
+        typeof (row as EndingRow).noun === "string",
+    )
+  );
+}
+
 function loadCharts(): EndingChart[] {
   const saved = window.localStorage.getItem(storageKey);
   if (!saved) return [createChart(1)];
 
   try {
-    const charts = JSON.parse(saved) as EndingChart[];
-    return charts.length > 0 ? charts : [createChart(1)];
+    const parsed: unknown = JSON.parse(saved);
+    if (!Array.isArray(parsed) || !parsed.every(isEndingChart)) {
+      throw new Error("Saved chart data has an invalid format.");
+    }
+    return parsed.length > 0 ? parsed : [createChart(1)];
   } catch (error) {
     console.error("Could not load case-ending charts.", error);
     return [createChart(1)];
