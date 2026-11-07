@@ -639,6 +639,97 @@ input {
   color: var(--ink-soft);
 }
 
+.case-practice {
+  padding-bottom: 4rem;
+}
+
+.case-practice__toolbar,
+.case-chart__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.case-practice__toolbar {
+  margin-bottom: 1.25rem;
+}
+
+.case-practice__toolbar p {
+  margin: 0;
+}
+
+.case-chart {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 12px 30px rgba(16, 32, 51, 0.06);
+}
+
+.case-chart__heading {
+  margin-bottom: 1rem;
+}
+
+.case-chart__title {
+  flex: 1;
+}
+
+.case-chart__title input {
+  width: 100%;
+  max-width: 24rem;
+  padding: 0.5rem 0;
+  border: 0;
+  border-bottom: 2px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-display), serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.case-chart__title input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.case-chart__remove {
+  min-height: 2.4rem;
+  padding: 0.45rem 0.9rem;
+}
+
+.case-chart__table input {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: white;
+  color: var(--ink);
+}
+
+.case-chart__table input:focus {
+  outline: 2px solid rgba(180, 35, 24, 0.28);
+  border-color: var(--accent);
+}
+
+.case-chart__table tbody th {
+  text-transform: capitalize;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 1.5rem 0 2.5rem;

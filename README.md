@@ -6,6 +6,7 @@ Grammar-first practice site for Russian adjective–noun agreement.
 
 - Nominative gender/number agreement using classroom phrase sets
 - Modes: choose the adjective ending, or identify noun gender
+- Case endings practice with editable adjective/noun charts
 - Reference charts for Colors & Objects and Nationality & Interests
 
 ## Develop
