@@ -651,6 +651,20 @@ input {
   gap: 1rem;
 }
 
+.case-practice__toolbar .field {
+  min-width: 13rem;
+}
+
+.case-chart__heading h2 {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display), serif;
+  font-size: 1.8rem;
+}
+
+.case-chart__heading p {
+  margin: 0;
+}
+
 .case-practice__toolbar {
   margin-bottom: 1.25rem;
 }
@@ -712,6 +726,32 @@ input {
 .case-chart__table input:focus {
   outline: 2px solid rgba(180, 35, 24, 0.28);
   border-color: var(--accent);
+}
+
+.case-chart__table td {
+  width: 35%;
+}
+
+.case-answer--correct {
+  border-color: var(--good) !important;
+  background: rgba(31, 107, 74, 0.1) !important;
+}
+
+.case-answer--wrong {
+  border-color: var(--bad) !important;
+  background: rgba(155, 28, 28, 0.08) !important;
+}
+
+.case-answer__expected {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--bad);
+  font-size: 0.78rem;
+}
+
+.case-chart__actions {
+  margin-top: 1rem;
+  animation: none;
 }
 
 .case-chart__table tbody th {

@@ -1,197 +1,220 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Gender = "masculine" | "feminine" | "neuter";
+type CaseKey = "nominative" | "genitive" | "dative" | "accusative" | "instrumental" | "prepositional";
+type EndingField = "adjective" | "noun";
 
-type EndingRow = {
-  gender: Gender;
-  adjective: string;
-  noun: string;
+type CaseAnswer = {
+  adjective: string[];
+  noun: string[];
 };
 
-type EndingChart = {
-  id: number;
-  title: string;
-  rows: EndingRow[];
+type CaseDefinition = {
+  label: string;
+  hint: string;
+  answers: Record<Gender, CaseAnswer>;
 };
 
 const genders: Gender[] = ["masculine", "feminine", "neuter"];
-const storageKey = "russian-trainer-case-ending-charts";
 
-function createChart(id: number): EndingChart {
-  return {
-    id,
-    title: `Chart ${id}`,
-    rows: genders.map((gender) => ({ gender, adjective: "", noun: "" })),
-  };
+const cases: Record<CaseKey, CaseDefinition> = {
+  nominative: {
+    label: "Nominative",
+    hint: "The dictionary or subject form.",
+    answers: {
+      masculine: { adjective: ["ый", "ой", "ий"], noun: ["", "—", "й", "ь"] },
+      feminine: { adjective: ["ая", "яя"], noun: ["а", "я"] },
+      neuter: { adjective: ["ое", "ее"], noun: ["о", "е"] },
+    },
+  },
+  genitive: {
+    label: "Genitive",
+    hint: "Often expresses possession or “of/from”.",
+    answers: {
+      masculine: { adjective: ["ого", "его"], noun: ["а", "я"] },
+      feminine: { adjective: ["ой", "ей"], noun: ["ы", "и"] },
+      neuter: { adjective: ["ого", "его"], noun: ["а", "я"] },
+    },
+  },
+  dative: {
+    label: "Dative",
+    hint: "Often expresses “to/for”.",
+    answers: {
+      masculine: { adjective: ["ому", "ему"], noun: ["у", "ю"] },
+      feminine: { adjective: ["ой", "ей"], noun: ["е"] },
+      neuter: { adjective: ["ому", "ему"], noun: ["у", "ю"] },
+    },
+  },
+  accusative: {
+    label: "Accusative",
+    hint: "Often marks the direct object; masculine endings depend on animacy.",
+    answers: {
+      masculine: {
+        adjective: ["ый", "ой", "ий", "ого", "его"],
+        noun: ["", "—", "а", "я"],
+      },
+      feminine: { adjective: ["ую", "юю"], noun: ["у", "ю"] },
+      neuter: { adjective: ["ое", "ее"], noun: ["о", "е"] },
+    },
+  },
+  instrumental: {
+    label: "Instrumental",
+    hint: "Often expresses “with/by”.",
+    answers: {
+      masculine: { adjective: ["ым", "им"], noun: ["ом", "ем"] },
+      feminine: { adjective: ["ой", "ей"], noun: ["ой", "ей", "ью"] },
+      neuter: { adjective: ["ым", "им"], noun: ["ом", "ем"] },
+    },
+  },
+  prepositional: {
+    label: "Prepositional",
+    hint: "Used after certain prepositions, often for location or topic.",
+    answers: {
+      masculine: { adjective: ["ом", "ем"], noun: ["е"] },
+      feminine: { adjective: ["ой", "ей"], noun: ["е"] },
+      neuter: { adjective: ["ом", "ем"], noun: ["е"] },
+    },
+  },
+};
+
+const caseOrder = Object.keys(cases) as CaseKey[];
+
+function normalizeAnswer(value: string) {
+  return value.trim().toLowerCase().replace(/^-/, "");
 }
 
-function isEndingChart(value: unknown): value is EndingChart {
-  if (!value || typeof value !== "object") return false;
-  const chart = value as Partial<EndingChart>;
-
+function isCorrect(value: string, answers: string[]) {
+  const enteredAnswers = value
+    .split("/")
+    .map(normalizeAnswer)
+    .filter(Boolean);
   return (
-    Number.isInteger(chart.id) &&
-    typeof chart.title === "string" &&
-    Array.isArray(chart.rows) &&
-    chart.rows.length === genders.length &&
-    chart.rows.every(
-      (row, index) =>
-        row &&
-        typeof row === "object" &&
-        (row as EndingRow).gender === genders[index] &&
-        typeof (row as EndingRow).adjective === "string" &&
-        typeof (row as EndingRow).noun === "string",
+    enteredAnswers.length > 0 &&
+    enteredAnswers.every((entered) =>
+      answers.some((answer) => normalizeAnswer(answer) === entered),
     )
   );
 }
 
-function loadCharts(): EndingChart[] {
-  const saved = window.localStorage.getItem(storageKey);
-  if (!saved) return [createChart(1)];
-
-  try {
-    const parsed: unknown = JSON.parse(saved);
-    if (!Array.isArray(parsed) || !parsed.every(isEndingChart)) {
-      throw new Error("Saved chart data has an invalid format.");
-    }
-    return parsed.length > 0 ? parsed : [createChart(1)];
-  } catch (error) {
-    console.error("Could not load case-ending charts.", error);
-    return [createChart(1)];
-  }
-}
-
 export function CaseEndingPractice() {
-  const [charts, setCharts] = useState<EndingChart[]>([]);
+  const [selectedCase, setSelectedCase] = useState<CaseKey>("nominative");
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [checked, setChecked] = useState(false);
 
-  useEffect(() => {
-    setCharts(loadCharts());
-  }, []);
+  const definition = cases[selectedCase];
+  const answerKey = (gender: Gender, field: EndingField) =>
+    `${selectedCase}-${gender}-${field}`;
+  const total = genders.length * 2;
+  const score = genders.reduce(
+    (count, gender) =>
+      count +
+      Number(isCorrect(answers[answerKey(gender, "adjective")] ?? "", definition.answers[gender].adjective)) +
+      Number(isCorrect(answers[answerKey(gender, "noun")] ?? "", definition.answers[gender].noun)),
+    0,
+  );
 
-  useEffect(() => {
-    if (charts.length > 0) {
-      window.localStorage.setItem(storageKey, JSON.stringify(charts));
-    }
-  }, [charts]);
-
-  function updateChart(id: number, update: Partial<EndingChart>) {
-    setCharts((current) =>
-      current.map((chart) => (chart.id === id ? { ...chart, ...update } : chart)),
-    );
+  function changeCase(nextCase: CaseKey) {
+    setSelectedCase(nextCase);
+    setAnswers({});
+    setChecked(false);
   }
 
-  function updateRow(
-    chartId: number,
-    gender: Gender,
-    field: "adjective" | "noun",
-    value: string,
-  ) {
-    setCharts((current) =>
-      current.map((chart) =>
-        chart.id === chartId
-          ? {
-              ...chart,
-              rows: chart.rows.map((row) =>
-                row.gender === gender ? { ...row, [field]: value } : row,
-              ),
-            }
-          : chart,
-      ),
-    );
+  function updateAnswer(gender: Gender, field: EndingField, value: string) {
+    setAnswers((current) => ({ ...current, [answerKey(gender, field)]: value }));
+    setChecked(false);
   }
 
-  function addChart() {
-    setCharts((current) => [
-      ...current,
-      createChart(Math.max(...current.map((chart) => chart.id), 0) + 1),
-    ]);
+  function checkAnswers() {
+    setChecked(true);
   }
 
-  function removeChart(id: number) {
-    setCharts((current) => current.filter((chart) => chart.id !== id));
+  function resetAnswers() {
+    setAnswers({});
+    setChecked(false);
   }
 
   return (
     <div className="case-practice">
       <div className="case-practice__toolbar">
-        <p className="muted">Your charts are saved in this browser.</p>
-        <button type="button" className="btn btn--primary" onClick={addChart}>
-          Add chart
-        </button>
+        <label className="field">
+          <span>Case</span>
+          <select
+            value={selectedCase}
+            onChange={(event) => changeCase(event.target.value as CaseKey)}
+          >
+            {caseOrder.map((caseKey) => (
+              <option key={caseKey} value={caseKey}>
+                {cases[caseKey].label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <span className="muted">
+          {checked ? `${score}/${total} correct` : "Fill in all six endings"}
+        </span>
       </div>
 
-      {charts.map((chart) => (
-        <section className="case-chart" key={chart.id}>
-          <div className="case-chart__heading">
-            <label className="case-chart__title">
-              <span className="sr-only">Chart title</span>
-              <input
-                type="text"
-                value={chart.title}
-                onChange={(event) =>
-                  updateChart(chart.id, { title: event.target.value })
-                }
-                aria-label="Chart title"
-              />
-            </label>
-            {charts.length > 1 && (
-              <button
-                type="button"
-                className="btn btn--ghost-dark case-chart__remove"
-                onClick={() => removeChart(chart.id)}
-              >
-                Remove
-              </button>
-            )}
+      <section className="case-chart">
+        <div className="case-chart__heading">
+          <div>
+            <h2>{definition.label}</h2>
+            <p className="muted">{definition.hint}</p>
           </div>
+        </div>
 
-          <table className="adj-table case-chart__table">
-            <thead>
-              <tr>
-                <th scope="col"> </th>
-                <th scope="col">Adjectives</th>
-                <th scope="col">Nouns</th>
+        <table className="adj-table case-chart__table">
+          <thead>
+            <tr>
+              <th scope="col"> </th>
+              <th scope="col">Adjectives</th>
+              <th scope="col">Nouns</th>
+            </tr>
+          </thead>
+          <tbody>
+            {genders.map((gender) => (
+              <tr key={gender}>
+                <th scope="row">{gender}</th>
+                {(["adjective", "noun"] as EndingField[]).map((field) => {
+                  const key = answerKey(gender, field);
+                  const value = answers[key] ?? "";
+                  const correct = isCorrect(value, definition.answers[gender][field]);
+                  return (
+                    <td key={field}>
+                      <input
+                        className={
+                          checked ? (correct ? "case-answer--correct" : "case-answer--wrong") : ""
+                        }
+                        type="text"
+                        value={value}
+                        onChange={(event) => updateAnswer(gender, field, event.target.value)}
+                        placeholder="enter ending"
+                        aria-label={`${gender} ${field} ending`}
+                        aria-invalid={checked && !correct}
+                      />
+                      {checked && !correct && (
+                        <small className="case-answer__expected">
+                          Expected: {definition.answers[gender][field].map((ending) => ending || "—").join(" / ")}
+                        </small>
+                      )}
+                    </td>
+                  );
+                })}
               </tr>
-            </thead>
-            <tbody>
-              {chart.rows.map((row) => (
-                <tr key={row.gender}>
-                  <th scope="row">{row.gender}</th>
-                  <td>
-                    <input
-                      type="text"
-                      value={row.adjective}
-                      onChange={(event) =>
-                        updateRow(
-                          chart.id,
-                          row.gender,
-                          "adjective",
-                          event.target.value,
-                        )
-                      }
-                      placeholder="enter ending"
-                      aria-label={`${row.gender} adjective ending`}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      value={row.noun}
-                      onChange={(event) =>
-                        updateRow(chart.id, row.gender, "noun", event.target.value)
-                      }
-                      placeholder="enter ending"
-                      aria-label={`${row.gender} noun ending`}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      ))}
+            ))}
+          </tbody>
+        </table>
+
+        <div className="cta-row case-chart__actions">
+          <button type="button" className="btn btn--primary" onClick={checkAnswers}>
+            Check answers
+          </button>
+          <button type="button" className="btn btn--ghost-dark" onClick={resetAnswers}>
+            Reset
+          </button>
+        </div>
+      </section>
     </div>
   );
 }
