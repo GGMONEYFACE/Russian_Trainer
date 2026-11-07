@@ -602,6 +602,34 @@ input {
   font-size: 1.8rem;
 }
 
+.case-reference-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.case-reference-card {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.case-reference-card h3 {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display), serif;
+  font-size: 1.5rem;
+}
+
+.case-reference-card > p {
+  margin: 0 0 0.9rem;
+}
+
+@media (min-width: 760px) {
+  .case-reference-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .adj-table {
   width: 100%;
   border-collapse: collapse;
