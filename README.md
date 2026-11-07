@@ -8,6 +8,7 @@ Grammar-first practice site for Russian adjective–noun agreement.
 - Modes: choose the adjective ending, or identify noun gender
 - Case endings practice quiz for all six grammatical cases
 - Reference charts for Colors & Objects and Nationality & Interests
+- Additional practice sets for family, appearance, character, and daily life
 
 ## Develop
 

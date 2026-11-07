@@ -804,6 +804,602 @@
           }
         }
       ]
+    },
+    {
+      "id": "family_new",
+      "title": "Beginner's Russian: Family",
+      "theme": "family",
+      "nominative": [
+        {
+          "lemma": "двоюродный",
+          "english": "brother/sister",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "двоюродная",
+              "noun": "сестра",
+              "ru": "двоюродная сестра",
+              "en": "cousin sister"
+            },
+            "masculine": {
+              "adjective": "двоюродный",
+              "noun": "брат",
+              "ru": "двоюродный брат",
+              "en": "cousin brother"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "сводный",
+          "english": "step/sibling",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "сводная",
+              "noun": "сестра",
+              "ru": "сводная сестра",
+              "en": "stepsister"
+            },
+            "masculine": {
+              "adjective": "сводный",
+              "noun": "брат",
+              "ru": "сводный брат",
+              "en": "stepbrother"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "младший",
+          "english": "younger",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "младшая",
+              "noun": "сестра",
+              "ru": "младшая сестра",
+              "en": "younger sister"
+            },
+            "masculine": {
+              "adjective": "младший",
+              "noun": "брат",
+              "ru": "младший брат",
+              "en": "younger brother"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "старший",
+          "english": "older",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "старшая",
+              "noun": "сестра",
+              "ru": "старшая сестра",
+              "en": "older sister"
+            },
+            "masculine": {
+              "adjective": "старший",
+              "noun": "брат",
+              "ru": "старший брат",
+              "en": "older brother"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "молодой",
+          "english": "young",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "молодая",
+              "noun": "жена",
+              "ru": "молодая жена",
+              "en": "young wife"
+            },
+            "masculine": {
+              "adjective": "молодой",
+              "noun": "муж",
+              "ru": "молодой муж",
+              "en": "young husband"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "старый",
+          "english": "old",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "старая",
+              "noun": "бабушка",
+              "ru": "старая бабушка",
+              "en": "old grandmother"
+            },
+            "masculine": {
+              "adjective": "старый",
+              "noun": "дедушка",
+              "ru": "старый дедушка",
+              "en": "old grandfather"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "бывший",
+          "english": "former/ex",
+          "stem": "soft",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "бывший",
+              "noun": "муж",
+              "ru": "бывший муж",
+              "en": "former husband"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "appearance_new",
+      "title": "Beginner's Russian: Appearance",
+      "theme": "appearance",
+      "nominative": [
+        {
+          "lemma": "голубой",
+          "english": "light blue",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "голубой",
+              "noun": "глаз",
+              "ru": "голубой глаз",
+              "en": "light blue eye"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "зелёный",
+          "english": "green",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "зелёный",
+              "noun": "глаз",
+              "ru": "зелёный глаз",
+              "en": "green eye"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "серый",
+          "english": "gray",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "серый",
+              "noun": "глаз",
+              "ru": "серый глаз",
+              "en": "gray eye"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "длинный",
+          "english": "long",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": null,
+            "neuter": null,
+            "plural": {
+              "adjective": "длинные",
+              "noun": "волосы",
+              "ru": "длинные волосы",
+              "en": "long hair"
+            }
+          }
+        },
+        {
+          "lemma": "короткий",
+          "english": "short",
+          "stem": "soft",
+          "forms": {
+            "feminine": null,
+            "masculine": null,
+            "neuter": null,
+            "plural": {
+              "adjective": "короткие",
+              "noun": "волосы",
+              "ru": "короткие волосы",
+              "en": "short hair"
+            }
+          }
+        },
+        {
+          "lemma": "светлый",
+          "english": "light/blond",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": null,
+            "neuter": null,
+            "plural": {
+              "adjective": "светлые",
+              "noun": "волосы",
+              "ru": "светлые волосы",
+              "en": "light hair"
+            }
+          }
+        },
+        {
+          "lemma": "тёмный",
+          "english": "dark",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": null,
+            "neuter": null,
+            "plural": {
+              "adjective": "тёмные",
+              "noun": "волосы",
+              "ru": "тёмные волосы",
+              "en": "dark hair"
+            }
+          }
+        },
+        {
+          "lemma": "рыжий",
+          "english": "red-haired",
+          "stem": "soft",
+          "forms": {
+            "feminine": null,
+            "masculine": null,
+            "neuter": null,
+            "plural": {
+              "adjective": "рыжие",
+              "noun": "волосы",
+              "ru": "рыжие волосы",
+              "en": "red hair"
+            }
+          }
+        },
+        {
+          "lemma": "седой",
+          "english": "gray-haired",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": null,
+            "neuter": null,
+            "plural": {
+              "adjective": "седые",
+              "noun": "волосы",
+              "ru": "седые волосы",
+              "en": "gray hair"
+            }
+          }
+        },
+        {
+          "lemma": "высокий",
+          "english": "tall",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "высокая",
+              "noun": "девушка",
+              "ru": "высокая девушка",
+              "en": "tall girl"
+            },
+            "masculine": {
+              "adjective": "высокий",
+              "noun": "мальчик",
+              "ru": "высокий мальчик",
+              "en": "tall boy"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "невысокий",
+          "english": "not tall",
+          "stem": "soft",
+          "forms": {
+            "feminine": {
+              "adjective": "невысокая",
+              "noun": "девушка",
+              "ru": "невысокая девушка",
+              "en": "short girl"
+            },
+            "masculine": {
+              "adjective": "невысокий",
+              "noun": "мальчик",
+              "ru": "невысокий мальчик",
+              "en": "short boy"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "character_new",
+      "title": "Beginner's Russian: Character & Work",
+      "theme": "character",
+      "nominative": [
+        {
+          "lemma": "хороший",
+          "english": "good",
+          "stem": "soft",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "хороший",
+              "noun": "характер",
+              "ru": "хороший характер",
+              "en": "good character"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "плохой",
+          "english": "bad",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "плохой",
+              "noun": "характер",
+              "ru": "плохой характер",
+              "en": "bad character"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "трудный",
+          "english": "difficult",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "трудный",
+              "noun": "характер",
+              "ru": "трудный характер",
+              "en": "difficult character"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "лёгкий",
+          "english": "easy",
+          "stem": "soft",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "лёгкий",
+              "noun": "характер",
+              "ru": "лёгкий характер",
+              "en": "easy character"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "серьёзный",
+          "english": "serious",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "серьёзный",
+              "noun": "юрист",
+              "ru": "серьёзный юрист",
+              "en": "serious lawyer"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "дорогой",
+          "english": "expensive",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "дорогой",
+              "noun": "юрист",
+              "ru": "дорогой юрист",
+              "en": "expensive lawyer"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "талантливый",
+          "english": "talented",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "талантливый",
+              "noun": "программист",
+              "ru": "талантливый программист",
+              "en": "talented programmer"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "умный",
+          "english": "smart",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": {
+              "adjective": "умный",
+              "noun": "программист",
+              "ru": "умный программист",
+              "en": "smart programmer"
+            },
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "добрый",
+          "english": "kind",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "добрая",
+              "noun": "женщина",
+              "ru": "добрая женщина",
+              "en": "kind woman"
+            },
+            "masculine": null,
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "внимательный",
+          "english": "attentive",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "внимательная",
+              "noun": "женщина",
+              "ru": "внимательная женщина",
+              "en": "attentive woman"
+            },
+            "masculine": null,
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "счастливый",
+          "english": "happy",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "счастливая",
+              "noun": "женщина",
+              "ru": "счастливая женщина",
+              "en": "happy woman"
+            },
+            "masculine": null,
+            "neuter": null,
+            "plural": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily_free_time_new",
+      "title": "Beginner's Russian: Daily & Free Time",
+      "theme": "daily-life",
+      "nominative": [
+        {
+          "lemma": "важный",
+          "english": "important",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": null,
+            "neuter": {
+              "adjective": "важное",
+              "noun": "занятие",
+              "ru": "важное занятие",
+              "en": "important activity"
+            },
+            "plural": null
+          }
+        },
+        {
+          "lemma": "свободный",
+          "english": "free",
+          "stem": "hard",
+          "forms": {
+            "feminine": null,
+            "masculine": null,
+            "neuter": {
+              "adjective": "свободное",
+              "noun": "время",
+              "ru": "свободное время",
+              "en": "free time"
+            },
+            "plural": null
+          }
+        },
+        {
+          "lemma": "свободный",
+          "english": "free",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "свободная",
+              "noun": "комната",
+              "ru": "свободная комната",
+              "en": "free room"
+            },
+            "masculine": null,
+            "neuter": null,
+            "plural": null
+          }
+        },
+        {
+          "lemma": "семейный",
+          "english": "family",
+          "stem": "hard",
+          "forms": {
+            "feminine": {
+              "adjective": "семейная",
+              "noun": "школа",
+              "ru": "семейная школа",
+              "en": "family school"
+            },
+            "masculine": null,
+            "neuter": null,
+            "plural": null
+          }
+        }
+      ]
     }
   ],
   "practice": [
@@ -2556,6 +3152,678 @@
         "французские"
       ],
       "correct": "французские"
+    },
+    {
+      "id": "family_new-двоюродный-feminine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "двоюродный",
+      "lemmaEnglish": "brother/sister",
+      "gender": "feminine",
+      "adjective": "двоюродная",
+      "noun": "сестра",
+      "phraseRu": "двоюродная сестра",
+      "phraseEn": "cousin sister",
+      "options": [
+        "двоюродный",
+        "двоюродная"
+      ],
+      "correct": "двоюродная"
+    },
+    {
+      "id": "family_new-двоюродный-masculine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "двоюродный",
+      "lemmaEnglish": "brother/sister",
+      "gender": "masculine",
+      "adjective": "двоюродный",
+      "noun": "брат",
+      "phraseRu": "двоюродный брат",
+      "phraseEn": "cousin brother",
+      "options": [
+        "двоюродный",
+        "двоюродная"
+      ],
+      "correct": "двоюродный"
+    },
+    {
+      "id": "family_new-сводный-feminine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "сводный",
+      "lemmaEnglish": "step/sibling",
+      "gender": "feminine",
+      "adjective": "сводная",
+      "noun": "сестра",
+      "phraseRu": "сводная сестра",
+      "phraseEn": "stepsister",
+      "options": [
+        "сводный",
+        "сводная"
+      ],
+      "correct": "сводная"
+    },
+    {
+      "id": "family_new-сводный-masculine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "сводный",
+      "lemmaEnglish": "step/sibling",
+      "gender": "masculine",
+      "adjective": "сводный",
+      "noun": "брат",
+      "phraseRu": "сводный брат",
+      "phraseEn": "stepbrother",
+      "options": [
+        "сводный",
+        "сводная"
+      ],
+      "correct": "сводный"
+    },
+    {
+      "id": "family_new-младший-feminine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "младший",
+      "lemmaEnglish": "younger",
+      "gender": "feminine",
+      "adjective": "младшая",
+      "noun": "сестра",
+      "phraseRu": "младшая сестра",
+      "phraseEn": "younger sister",
+      "options": [
+        "младший",
+        "младшая"
+      ],
+      "correct": "младшая"
+    },
+    {
+      "id": "family_new-младший-masculine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "младший",
+      "lemmaEnglish": "younger",
+      "gender": "masculine",
+      "adjective": "младший",
+      "noun": "брат",
+      "phraseRu": "младший брат",
+      "phraseEn": "younger brother",
+      "options": [
+        "младший",
+        "младшая"
+      ],
+      "correct": "младший"
+    },
+    {
+      "id": "family_new-старший-feminine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "старший",
+      "lemmaEnglish": "older",
+      "gender": "feminine",
+      "adjective": "старшая",
+      "noun": "сестра",
+      "phraseRu": "старшая сестра",
+      "phraseEn": "older sister",
+      "options": [
+        "старший",
+        "старшая"
+      ],
+      "correct": "старшая"
+    },
+    {
+      "id": "family_new-старший-masculine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "старший",
+      "lemmaEnglish": "older",
+      "gender": "masculine",
+      "adjective": "старший",
+      "noun": "брат",
+      "phraseRu": "старший брат",
+      "phraseEn": "older brother",
+      "options": [
+        "старший",
+        "старшая"
+      ],
+      "correct": "старший"
+    },
+    {
+      "id": "family_new-молодой-feminine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "молодой",
+      "lemmaEnglish": "young",
+      "gender": "feminine",
+      "adjective": "молодая",
+      "noun": "жена",
+      "phraseRu": "молодая жена",
+      "phraseEn": "young wife",
+      "options": [
+        "молодой",
+        "молодая"
+      ],
+      "correct": "молодая"
+    },
+    {
+      "id": "family_new-молодой-masculine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "молодой",
+      "lemmaEnglish": "young",
+      "gender": "masculine",
+      "adjective": "молодой",
+      "noun": "муж",
+      "phraseRu": "молодой муж",
+      "phraseEn": "young husband",
+      "options": [
+        "молодой",
+        "молодая"
+      ],
+      "correct": "молодой"
+    },
+    {
+      "id": "family_new-старый-feminine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "старый",
+      "lemmaEnglish": "old",
+      "gender": "feminine",
+      "adjective": "старая",
+      "noun": "бабушка",
+      "phraseRu": "старая бабушка",
+      "phraseEn": "old grandmother",
+      "options": [
+        "старый",
+        "старая"
+      ],
+      "correct": "старая"
+    },
+    {
+      "id": "family_new-старый-masculine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "старый",
+      "lemmaEnglish": "old",
+      "gender": "masculine",
+      "adjective": "старый",
+      "noun": "дедушка",
+      "phraseRu": "старый дедушка",
+      "phraseEn": "old grandfather",
+      "options": [
+        "старый",
+        "старая"
+      ],
+      "correct": "старый"
+    },
+    {
+      "id": "family_new-бывший-masculine",
+      "setId": "family_new",
+      "setTitle": "Beginner's Russian: Family",
+      "lemma": "бывший",
+      "lemmaEnglish": "former/ex",
+      "gender": "masculine",
+      "adjective": "бывший",
+      "noun": "муж",
+      "phraseRu": "бывший муж",
+      "phraseEn": "former husband",
+      "options": [
+        "бывший"
+      ],
+      "correct": "бывший"
+    },
+    {
+      "id": "appearance_new-голубой-masculine",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "голубой",
+      "lemmaEnglish": "light blue",
+      "gender": "masculine",
+      "adjective": "голубой",
+      "noun": "глаз",
+      "phraseRu": "голубой глаз",
+      "phraseEn": "light blue eye",
+      "options": [
+        "голубой"
+      ],
+      "correct": "голубой"
+    },
+    {
+      "id": "appearance_new-зелёный-masculine",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "зелёный",
+      "lemmaEnglish": "green",
+      "gender": "masculine",
+      "adjective": "зелёный",
+      "noun": "глаз",
+      "phraseRu": "зелёный глаз",
+      "phraseEn": "green eye",
+      "options": [
+        "зелёный"
+      ],
+      "correct": "зелёный"
+    },
+    {
+      "id": "appearance_new-серый-masculine",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "серый",
+      "lemmaEnglish": "gray",
+      "gender": "masculine",
+      "adjective": "серый",
+      "noun": "глаз",
+      "phraseRu": "серый глаз",
+      "phraseEn": "gray eye",
+      "options": [
+        "серый"
+      ],
+      "correct": "серый"
+    },
+    {
+      "id": "appearance_new-длинный-plural",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "длинный",
+      "lemmaEnglish": "long",
+      "gender": "plural",
+      "adjective": "длинные",
+      "noun": "волосы",
+      "phraseRu": "длинные волосы",
+      "phraseEn": "long hair",
+      "options": [
+        "длинные"
+      ],
+      "correct": "длинные"
+    },
+    {
+      "id": "appearance_new-короткий-plural",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "короткий",
+      "lemmaEnglish": "short",
+      "gender": "plural",
+      "adjective": "короткие",
+      "noun": "волосы",
+      "phraseRu": "короткие волосы",
+      "phraseEn": "short hair",
+      "options": [
+        "короткие"
+      ],
+      "correct": "короткие"
+    },
+    {
+      "id": "appearance_new-светлый-plural",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "светлый",
+      "lemmaEnglish": "light/blond",
+      "gender": "plural",
+      "adjective": "светлые",
+      "noun": "волосы",
+      "phraseRu": "светлые волосы",
+      "phraseEn": "light hair",
+      "options": [
+        "светлые"
+      ],
+      "correct": "светлые"
+    },
+    {
+      "id": "appearance_new-тёмный-plural",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "тёмный",
+      "lemmaEnglish": "dark",
+      "gender": "plural",
+      "adjective": "тёмные",
+      "noun": "волосы",
+      "phraseRu": "тёмные волосы",
+      "phraseEn": "dark hair",
+      "options": [
+        "тёмные"
+      ],
+      "correct": "тёмные"
+    },
+    {
+      "id": "appearance_new-рыжий-plural",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "рыжий",
+      "lemmaEnglish": "red-haired",
+      "gender": "plural",
+      "adjective": "рыжие",
+      "noun": "волосы",
+      "phraseRu": "рыжие волосы",
+      "phraseEn": "red hair",
+      "options": [
+        "рыжие"
+      ],
+      "correct": "рыжие"
+    },
+    {
+      "id": "appearance_new-седой-plural",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "седой",
+      "lemmaEnglish": "gray-haired",
+      "gender": "plural",
+      "adjective": "седые",
+      "noun": "волосы",
+      "phraseRu": "седые волосы",
+      "phraseEn": "gray hair",
+      "options": [
+        "седые"
+      ],
+      "correct": "седые"
+    },
+    {
+      "id": "appearance_new-высокий-feminine",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "высокий",
+      "lemmaEnglish": "tall",
+      "gender": "feminine",
+      "adjective": "высокая",
+      "noun": "девушка",
+      "phraseRu": "высокая девушка",
+      "phraseEn": "tall girl",
+      "options": [
+        "высокий",
+        "высокая"
+      ],
+      "correct": "высокая"
+    },
+    {
+      "id": "appearance_new-высокий-masculine",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "высокий",
+      "lemmaEnglish": "tall",
+      "gender": "masculine",
+      "adjective": "высокий",
+      "noun": "мальчик",
+      "phraseRu": "высокий мальчик",
+      "phraseEn": "tall boy",
+      "options": [
+        "высокий",
+        "высокая"
+      ],
+      "correct": "высокий"
+    },
+    {
+      "id": "appearance_new-невысокий-feminine",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "невысокий",
+      "lemmaEnglish": "not tall",
+      "gender": "feminine",
+      "adjective": "невысокая",
+      "noun": "девушка",
+      "phraseRu": "невысокая девушка",
+      "phraseEn": "short girl",
+      "options": [
+        "невысокий",
+        "невысокая"
+      ],
+      "correct": "невысокая"
+    },
+    {
+      "id": "appearance_new-невысокий-masculine",
+      "setId": "appearance_new",
+      "setTitle": "Beginner's Russian: Appearance",
+      "lemma": "невысокий",
+      "lemmaEnglish": "not tall",
+      "gender": "masculine",
+      "adjective": "невысокий",
+      "noun": "мальчик",
+      "phraseRu": "невысокий мальчик",
+      "phraseEn": "short boy",
+      "options": [
+        "невысокий",
+        "невысокая"
+      ],
+      "correct": "невысокий"
+    },
+    {
+      "id": "character_new-хороший-masculine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "хороший",
+      "lemmaEnglish": "good",
+      "gender": "masculine",
+      "adjective": "хороший",
+      "noun": "характер",
+      "phraseRu": "хороший характер",
+      "phraseEn": "good character",
+      "options": [
+        "хороший"
+      ],
+      "correct": "хороший"
+    },
+    {
+      "id": "character_new-плохой-masculine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "плохой",
+      "lemmaEnglish": "bad",
+      "gender": "masculine",
+      "adjective": "плохой",
+      "noun": "характер",
+      "phraseRu": "плохой характер",
+      "phraseEn": "bad character",
+      "options": [
+        "плохой"
+      ],
+      "correct": "плохой"
+    },
+    {
+      "id": "character_new-трудный-masculine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "трудный",
+      "lemmaEnglish": "difficult",
+      "gender": "masculine",
+      "adjective": "трудный",
+      "noun": "характер",
+      "phraseRu": "трудный характер",
+      "phraseEn": "difficult character",
+      "options": [
+        "трудный"
+      ],
+      "correct": "трудный"
+    },
+    {
+      "id": "character_new-лёгкий-masculine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "лёгкий",
+      "lemmaEnglish": "easy",
+      "gender": "masculine",
+      "adjective": "лёгкий",
+      "noun": "характер",
+      "phraseRu": "лёгкий характер",
+      "phraseEn": "easy character",
+      "options": [
+        "лёгкий"
+      ],
+      "correct": "лёгкий"
+    },
+    {
+      "id": "character_new-серьёзный-masculine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "серьёзный",
+      "lemmaEnglish": "serious",
+      "gender": "masculine",
+      "adjective": "серьёзный",
+      "noun": "юрист",
+      "phraseRu": "серьёзный юрист",
+      "phraseEn": "serious lawyer",
+      "options": [
+        "серьёзный"
+      ],
+      "correct": "серьёзный"
+    },
+    {
+      "id": "character_new-дорогой-masculine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "дорогой",
+      "lemmaEnglish": "expensive",
+      "gender": "masculine",
+      "adjective": "дорогой",
+      "noun": "юрист",
+      "phraseRu": "дорогой юрист",
+      "phraseEn": "expensive lawyer",
+      "options": [
+        "дорогой"
+      ],
+      "correct": "дорогой"
+    },
+    {
+      "id": "character_new-талантливый-masculine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "талантливый",
+      "lemmaEnglish": "talented",
+      "gender": "masculine",
+      "adjective": "талантливый",
+      "noun": "программист",
+      "phraseRu": "талантливый программист",
+      "phraseEn": "talented programmer",
+      "options": [
+        "талантливый"
+      ],
+      "correct": "талантливый"
+    },
+    {
+      "id": "character_new-умный-masculine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "умный",
+      "lemmaEnglish": "smart",
+      "gender": "masculine",
+      "adjective": "умный",
+      "noun": "программист",
+      "phraseRu": "умный программист",
+      "phraseEn": "smart programmer",
+      "options": [
+        "умный"
+      ],
+      "correct": "умный"
+    },
+    {
+      "id": "character_new-добрый-feminine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "добрый",
+      "lemmaEnglish": "kind",
+      "gender": "feminine",
+      "adjective": "добрая",
+      "noun": "женщина",
+      "phraseRu": "добрая женщина",
+      "phraseEn": "kind woman",
+      "options": [
+        "добрая"
+      ],
+      "correct": "добрая"
+    },
+    {
+      "id": "character_new-внимательный-feminine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "внимательный",
+      "lemmaEnglish": "attentive",
+      "gender": "feminine",
+      "adjective": "внимательная",
+      "noun": "женщина",
+      "phraseRu": "внимательная женщина",
+      "phraseEn": "attentive woman",
+      "options": [
+        "внимательная"
+      ],
+      "correct": "внимательная"
+    },
+    {
+      "id": "character_new-счастливый-feminine",
+      "setId": "character_new",
+      "setTitle": "Beginner's Russian: Character & Work",
+      "lemma": "счастливый",
+      "lemmaEnglish": "happy",
+      "gender": "feminine",
+      "adjective": "счастливая",
+      "noun": "женщина",
+      "phraseRu": "счастливая женщина",
+      "phraseEn": "happy woman",
+      "options": [
+        "счастливая"
+      ],
+      "correct": "счастливая"
+    },
+    {
+      "id": "daily_free_time_new-важный-neuter",
+      "setId": "daily_free_time_new",
+      "setTitle": "Beginner's Russian: Daily & Free Time",
+      "lemma": "важный",
+      "lemmaEnglish": "important",
+      "gender": "neuter",
+      "adjective": "важное",
+      "noun": "занятие",
+      "phraseRu": "важное занятие",
+      "phraseEn": "important activity",
+      "options": [
+        "важное"
+      ],
+      "correct": "важное"
+    },
+    {
+      "id": "daily_free_time_new-свободный-neuter",
+      "setId": "daily_free_time_new",
+      "setTitle": "Beginner's Russian: Daily & Free Time",
+      "lemma": "свободный",
+      "lemmaEnglish": "free",
+      "gender": "neuter",
+      "adjective": "свободное",
+      "noun": "время",
+      "phraseRu": "свободное время",
+      "phraseEn": "free time",
+      "options": [
+        "свободное"
+      ],
+      "correct": "свободное"
+    },
+    {
+      "id": "daily_free_time_new-свободный-feminine",
+      "setId": "daily_free_time_new",
+      "setTitle": "Beginner's Russian: Daily & Free Time",
+      "lemma": "свободный",
+      "lemmaEnglish": "free",
+      "gender": "feminine",
+      "adjective": "свободная",
+      "noun": "комната",
+      "phraseRu": "свободная комната",
+      "phraseEn": "free room",
+      "options": [
+        "свободная"
+      ],
+      "correct": "свободная"
+    },
+    {
+      "id": "daily_free_time_new-семейный-feminine",
+      "setId": "daily_free_time_new",
+      "setTitle": "Beginner's Russian: Daily & Free Time",
+      "lemma": "семейный",
+      "lemmaEnglish": "family",
+      "gender": "feminine",
+      "adjective": "семейная",
+      "noun": "школа",
+      "phraseRu": "семейная школа",
+      "phraseEn": "family school",
+      "options": [
+        "семейная"
+      ],
+      "correct": "семейная"
     }
   ]
 }

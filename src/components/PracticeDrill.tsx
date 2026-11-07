@@ -7,7 +7,6 @@ import {
   adjectiveEnding,
   adjectiveStem,
   filterPractice,
-  genderHint,
   normalizeEnding,
   shuffle,
 } from "@/lib/practice";
@@ -28,7 +27,6 @@ type Props = {
 export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   const [mode, setMode] = useState<Mode>("ending");
   const [setId, setSetId] = useState("all");
-  const [showHint, setShowHint] = useState(true);
   const [queue, setQueue] = useState<PracticeItem[]>([]);
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -169,14 +167,6 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
             <option value="gender">Identify noun gender</option>
           </select>
         </label>
-        <label className="toggle">
-          <input
-            type="checkbox"
-            checked={showHint}
-            onChange={(e) => setShowHint(e.target.checked)}
-          />
-          <span>Show gender hint</span>
-        </label>
       </div>
 
       <div className="drill__stats">
@@ -196,7 +186,6 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
       <div className="prompt" key={current.id + mode}>
         <p className="prompt__eyebrow">
           {current.setTitle}
-          {showHint && mode === "agree" ? ` · ${genderHint(current.gender)}` : ""}
         </p>
         {mode === "agree" ? (
           <>
