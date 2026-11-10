@@ -1,8 +1,36 @@
 "use client";
 
 import { useActionState } from "react";
-import { updateName, updatePassword } from "@/app/actions/auth";
+import { becomeInstructor, updateName, updatePassword } from "@/app/actions/auth";
 import { emptyFormState } from "@/lib/form-state";
+
+export function InstructorForm() {
+  const [state, action, pending] = useActionState(becomeInstructor, emptyFormState);
+
+  return (
+    <form className="login-form" action={action}>
+      <h3 className="form-heading">Become an instructor</h3>
+      <p className="form-note">Enter your instructor code to open classrooms.</p>
+      <div className={`login-error${state.error ? " visible" : ""}`} role="alert">
+        {state.error}
+      </div>
+      <div className="form-group">
+        <label htmlFor="instructor-code">Instructor code:</label>
+        <input
+          type="text"
+          id="instructor-code"
+          name="code"
+          autoComplete="off"
+          maxLength={80}
+          required
+        />
+      </div>
+      <button type="submit" className="login-button" disabled={pending}>
+        {pending ? "Checking…" : "Become an instructor"}
+      </button>
+    </form>
+  );
+}
 
 export function NameForm({ name }: { name: string }) {
   const [state, action, pending] = useActionState(updateName, emptyFormState);

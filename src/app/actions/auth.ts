@@ -4,7 +4,13 @@ import { redirect } from "next/navigation";
 import type { FormState } from "@/lib/form-state";
 import { safeNext } from "@/lib/paths";
 import { endSession, getCurrentUser, startSession } from "@/lib/session";
-import { authenticate, registerAccount, renameUser, replacePassword } from "@/lib/store";
+import {
+  authenticate,
+  promoteToInstructor,
+  registerAccount,
+  renameUser,
+  replacePassword,
+} from "@/lib/store";
 
 export async function login(_state: FormState, formData: FormData): Promise<FormState> {
   const email = String(formData.get("email") ?? "");
@@ -26,14 +32,19 @@ export async function register(_state: FormState, formData: FormData): Promise<F
     name: String(formData.get("name") ?? ""),
     email: String(formData.get("email") ?? ""),
     password,
-    instructor: formData.get("instructor") === "yes",
-    code: String(formData.get("code") ?? ""),
   });
   if (!result.ok) return { error: result.error, message: "" };
 
   await startSession(result.user.id, true);
-  const nextPath = safeNext(String(formData.get("next") ?? ""));
-  redirect(result.user.role === "instructor" && nextPath === "/profile" ? "/classrooms" : nextPath);
+  redirect(safeNext(String(formData.get("next") ?? "")));
+}
+
+export async function becomeInstructor(_state: FormState, formData: FormData): Promise<FormState> {
+  const user = await getCurrentUser();
+  if (!user) return { error: "Sign in again.", message: "" };
+  const result = await promoteToInstructor(user.id, String(formData.get("code") ?? ""));
+  if (!result.ok) return { error: result.error, message: "" };
+  redirect("/classrooms");
 }
 
 export async function logout() {

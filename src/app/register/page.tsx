@@ -31,7 +31,7 @@ export default function RegisterPage({
   return (
     <div className="auth-page">
       <h2>Create an account</h2>
-      <p>Students practice with this account. Instructors can also open classrooms.</p>
+      <p>Create an account to save your practice.</p>
       <Suspense fallback={<p>Loading…</p>}>
         <RegisterContent searchParams={searchParams} />
       </Suspense>

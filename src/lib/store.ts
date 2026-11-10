@@ -334,8 +334,6 @@ export async function registerAccount(input: {
   name: string;
   email: string;
   password: string;
-  instructor: boolean;
-  code: string;
 }): Promise<{ ok: true; user: PublicUser } | { ok: false; error: string }> {
   const name = cleanName(input.name);
   const email = cleanEmail(input.email);
@@ -344,14 +342,6 @@ export async function registerAccount(input: {
   if (input.password.length < 8 || input.password.length > 72) {
     return { ok: false, error: "Password must be 8 to 72 characters." };
   }
-  if (input.instructor) {
-    if (!process.env.INSTRUCTOR_CODE) {
-      return { ok: false, error: "Instructor signup is not turned on." };
-    }
-    if (!instructorCodeMatches(input.code)) {
-      return { ok: false, error: "That instructor code is not valid." };
-    }
-  }
 
   const salt = randomBytes(16);
   const passwordHash = (await hashPassword(input.password, salt)).toString("hex");
@@ -359,7 +349,7 @@ export async function registerAccount(input: {
     id: crypto.randomUUID(),
     email,
     name,
-    role: input.instructor ? "instructor" : "student",
+    role: "student",
     passwordHash,
     passwordSalt: salt.toString("hex"),
     createdAt: nowIso(),
@@ -413,6 +403,21 @@ export async function deleteSessionToken(token: string) {
   const tokenHash = sha256(token);
   await update((store) => {
     store.sessions = store.sessions.filter((session) => session.tokenHash !== tokenHash);
+  });
+}
+
+export async function promoteToInstructor(userId: string, code: string) {
+  if (!process.env.INSTRUCTOR_CODE) {
+    return { ok: false as const, error: "Instructor signup is not turned on." };
+  }
+  if (!instructorCodeMatches(code.trim())) {
+    return { ok: false as const, error: "That instructor code is not valid." };
+  }
+  return update((store) => {
+    const user = store.users.find((item) => item.id === userId);
+    if (!user) return { ok: false as const, error: "Account not found." };
+    user.role = "instructor";
+    return { ok: true as const };
   });
 }
 

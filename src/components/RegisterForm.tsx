@@ -1,13 +1,12 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 import Link from "next/link";
 import { register } from "@/app/actions/auth";
 import { emptyFormState } from "@/lib/form-state";
 
 export function RegisterForm({ nextPath }: { nextPath: string }) {
   const [state, action, pending] = useActionState(register, emptyFormState);
-  const [instructor, setInstructor] = useState(false);
   const loginHref = nextPath === "/profile" ? "/login" : `/login?next=${encodeURIComponent(nextPath)}`;
 
   return (
@@ -62,32 +61,6 @@ export function RegisterForm({ nextPath }: { nextPath: string }) {
             required
           />
         </div>
-
-        <div className="form-group checkbox">
-          <input
-            type="checkbox"
-            id="instructor"
-            name="instructor"
-            value="yes"
-            checked={instructor}
-            onChange={(event) => setInstructor(event.target.checked)}
-          />
-          <label htmlFor="instructor">I am an instructor</label>
-        </div>
-
-        {instructor ? (
-          <div className="form-group">
-            <label htmlFor="code">Instructor code:</label>
-            <input
-              type="text"
-              id="code"
-              name="code"
-              autoComplete="off"
-              maxLength={80}
-              required
-            />
-          </div>
-        ) : null}
 
         <button type="submit" className="login-button" disabled={pending}>
           {pending ? "Creating account…" : "Create account"}

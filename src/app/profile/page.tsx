@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { NameForm, PasswordForm } from "@/components/ProfileForms";
+import { InstructorForm, NameForm, PasswordForm } from "@/components/ProfileForms";
 import { practicePath } from "@/lib/catalog";
 import { getCurrentUser } from "@/lib/session";
 import { missedQuestions, studentAssignments } from "@/lib/store";
@@ -99,6 +99,11 @@ async function ProfileBody() {
 
       <div className="auth-page auth-page--section">
         <h2>Your account</h2>
+        {user.role === "student" ? (
+          <div className="login-container">
+            <InstructorForm />
+          </div>
+        ) : null}
         <div className="login-container">
           <NameForm name={user.name} />
         </div>
