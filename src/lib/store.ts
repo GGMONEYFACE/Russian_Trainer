@@ -850,3 +850,204 @@ export async function saveCaseRound(
     return { ok: true, message: "Saved to your profile." };
   });
 }
+export type AdminPerson = PublicUser & { createdAt: string };
+
+export type AdminScore = {
+  assignmentId: string;
+  title: string;
+  classroomName: string;
+  userId: string;
+  name: string;
+  email: string;
+  completedAt: string | null;
+  correct: number;
+  total: number;
+};
+
+export type AdminMiss = MissedQuestion & {
+  userId: string;
+  name: string;
+  email: string;
+};
+
+export async function adminPeople(): Promise<AdminPerson[]> {
+  return read((store) =>
+    store.users
+      .map((user) => ({ ...toPublic(user), createdAt: user.createdAt }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  );
+}
+
+export async function adminScores(): Promise<AdminScore[]> {
+  return read((store) => {
+    const rows: AdminScore[] = [];
+    for (const assignment of store.assignments) {
+      const classroom = store.classrooms.find((item) => item.id === assignment.classroomId);
+      for (const member of store.members.filter((item) => item.classroomId === assignment.classroomId)) {
+        const user = store.users.find((item) => item.id === member.userId);
+        if (!user) continue;
+        const completion = store.completions.find(
+          (item) => item.assignmentId === assignment.id && item.userId === user.id,
+        );
+        rows.push({
+          assignmentId: assignment.id,
+          title: assignment.title,
+          classroomName: classroom?.name ?? "Classroom",
+          userId: user.id,
+          name: user.name,
+          email: user.email,
+          completedAt: completion?.completedAt ?? null,
+          correct: completion?.correct ?? 0,
+          total: completion?.total ?? 0,
+        });
+      }
+    }
+    return rows.sort(
+      (a, b) =>
+        a.classroomName.localeCompare(b.classroomName) ||
+        a.title.localeCompare(b.title) ||
+        a.name.localeCompare(b.name),
+    );
+  });
+}
+
+export async function adminMisses(): Promise<AdminMiss[]> {
+  return read((store) => {
+    const grouped = new Map<string, AdminMiss & { lastWrongAt: string }>();
+    for (const attempt of store.attempts) {
+      const user = store.users.find((item) => item.id === attempt.userId);
+      if (!user) continue;
+      const key = attempt.userId + ":" + attempt.questionKey;
+      const current = grouped.get(key) ?? {
+        userId: user.id,
+        name: user.name,
+        email: user.email,
+        questionKey: attempt.questionKey,
+        practiceId: attempt.practiceId,
+        prompt: attempt.prompt,
+        detail: attempt.detail,
+        expected: attempt.expected,
+        lastGiven: attempt.given,
+        misses: 0,
+        hits: 0,
+        lastWrongAt: "",
+      };
+      current.name = user.name;
+      current.email = user.email;
+      current.prompt = attempt.prompt;
+      current.detail = attempt.detail;
+      current.expected = attempt.expected;
+      current.practiceId = attempt.practiceId;
+      if (attempt.correct) current.hits += 1;
+      else {
+        current.misses += 1;
+        if (attempt.createdAt >= current.lastWrongAt) {
+          current.lastWrongAt = attempt.createdAt;
+          current.lastGiven = attempt.given || "No answer";
+        }
+      }
+      grouped.set(key, current);
+    }
+    return [...grouped.values()]
+      .filter((item) => item.misses >= 2 && item.misses > item.hits)
+      .sort((a, b) => b.misses - a.misses || a.name.localeCompare(b.name))
+      .slice(0, 80)
+      .map((item) => ({
+        userId: item.userId,
+        name: item.name,
+        email: item.email,
+        questionKey: item.questionKey,
+        practiceId: item.practiceId,
+        prompt: item.prompt,
+        detail: item.detail,
+        expected: item.expected,
+        lastGiven: item.lastGiven,
+        misses: item.misses,
+        hits: item.hits,
+      }));
+  });
+}
+
+export async function adminRename(userId: string, name: string) {
+  const cleaned = cleanName(name);
+  if (!cleaned) return { ok: false as const, error: "Enter a name." };
+  return update((store) => {
+    const user = store.users.find((item) => item.id === userId);
+    if (!user) return { ok: false as const, error: "Account not found." };
+    user.name = cleaned;
+    return { ok: true as const };
+  });
+}
+
+export async function adminSetRole(userId: string, role: Role) {
+  if (role !== "student" && role !== "instructor") {
+    return { ok: false as const, error: "Choose student or instructor." };
+  }
+  return update((store) => {
+    const user = store.users.find((item) => item.id === userId);
+    if (!user) return { ok: false as const, error: "Account not found." };
+    user.role = role;
+    return { ok: true as const };
+  });
+}
+
+export async function adminSetScore(
+  assignmentId: string,
+  userId: string,
+  correct: number,
+  total: number,
+  done: boolean,
+) {
+  if (!done) {
+    return update((store) => {
+      const assignment = store.assignments.find((item) => item.id === assignmentId);
+      if (!assignment) return { ok: false as const, error: "Assignment not found." };
+      store.completions = store.completions.filter(
+        (item) => !(item.assignmentId === assignmentId && item.userId === userId),
+      );
+      return { ok: true as const, message: "Marked not done." };
+    });
+  }
+  if (!Number.isInteger(correct) || !Number.isInteger(total) || total < 1 || total > 500 || correct < 0 || correct > total) {
+    return { ok: false as const, error: "Enter a score from 0 to the total, up to 500." };
+  }
+  return update((store) => {
+    const assignment = store.assignments.find((item) => item.id === assignmentId);
+    if (!assignment) return { ok: false as const, error: "Assignment not found." };
+    const member = store.members.some(
+      (item) => item.classroomId === assignment.classroomId && item.userId === userId,
+    );
+    if (!member) return { ok: false as const, error: "That person is not in this class." };
+    const existing = store.completions.find(
+      (item) => item.assignmentId === assignmentId && item.userId === userId,
+    );
+    if (existing) {
+      existing.correct = correct;
+      existing.total = total;
+    } else {
+      store.completions.push({
+        assignmentId,
+        userId,
+        completedAt: nowIso(),
+        correct,
+        total,
+      });
+    }
+    return { ok: true as const, message: "Result saved." };
+  });
+}
+
+export async function adminClearQuestion(userId: string, questionKey: string) {
+  const key = questionKey.trim().slice(0, 180);
+  if (!key) return { ok: false as const, error: "Question not found." };
+  return update((store) => {
+    const user = store.users.some((item) => item.id === userId);
+    if (!user) return { ok: false as const, error: "Account not found." };
+    const before = store.attempts.length;
+    store.attempts = store.attempts.filter(
+      (attempt) => !(attempt.userId === userId && attempt.questionKey === key),
+    );
+    if (store.attempts.length === before) return { ok: false as const, error: "Those attempts are already gone." };
+    return { ok: true as const };
+  });
+}

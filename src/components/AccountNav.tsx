@@ -22,6 +22,11 @@ export async function AccountNav() {
           Classrooms
         </Link>
       ) : null}
+      {user.admin ? (
+        <Link href="/admin" className="site-nav__link">
+          Admin
+        </Link>
+      ) : null}
       <form action={logout}>
         <button type="submit" className="site-nav__link site-nav__button">
           Log out
