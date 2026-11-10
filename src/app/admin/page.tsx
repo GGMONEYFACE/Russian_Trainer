@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
-import { ClearQuestionForm, DismissSuggestionForm, PersonForm, ScoreForm } from "@/components/AdminForms";
+import { AdminPasswordForm, ClearQuestionForm, DismissSuggestionForm, PersonForm, ScoreForm } from "@/components/AdminForms";
+import { AdminGateRefresh } from "@/components/AdminGateRefresh";
+import { adminGateValid } from "@/lib/admin-gate";
 import { getCurrentUser } from "@/lib/session";
 import { adminMisses, adminPeople, adminScores, adminSuggestions } from "@/lib/store";
 
@@ -20,6 +22,17 @@ async function AdminBody() {
   const user = await getCurrentUser();
   if (!user) redirect("/login?next=/admin");
   if (!user.admin) redirect("/profile");
+  if (!(await adminGateValid())) {
+    return (
+      <div className="shell profile-page">
+        <header className="page-hero">
+          <h1>Admin</h1>
+          <p>Enter the admin password. This page stays open for 30 minutes, and each action resets that time.</p>
+        </header>
+        <AdminPasswordForm />
+      </div>
+    );
+  }
   const [people, scores, misses, suggestions] = await Promise.all([
     adminPeople(),
     adminScores(),
@@ -29,6 +42,7 @@ async function AdminBody() {
 
   return (
     <div className="shell profile-page">
+      <AdminGateRefresh />
       <header className="page-hero">
         <h1>Admin</h1>
         <p>Edit names, roles, assignment scores, repeated misses, and suggestions. This page is only available to your account.</p>

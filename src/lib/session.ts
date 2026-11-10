@@ -1,32 +1,30 @@
-import { cookies } from "next/headers";
+import { clearAdminGate } from "@/lib/admin-gate";
 import { isAdminEmail } from "@/lib/admin";
-import { deleteSessionToken, openSession, userForToken } from "@/lib/store";
+import { createClient } from "@/lib/supabase/server";
+import type { PublicUser } from "@/lib/store";
 
-const COOKIE = "rt_session";
-
-export async function getCurrentUser() {
-  const token = (await cookies()).get(COOKIE)?.value;
-  if (!token) return null;
-  const user = await userForToken(token);
-  if (!user) return null;
-  return { ...user, admin: isAdminEmail(user.email) };
-}
-
-export async function startSession(userId: string, remember: boolean) {
-  const { token, expiresAt } = await openSession(userId, remember);
-  const jar = await cookies();
-  jar.set(COOKIE, token, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    ...(remember ? { expires: new Date(expiresAt) } : {}),
-  });
+export async function getCurrentUser(): Promise<(PublicUser & { admin: boolean }) | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getClaims();
+  const id = data?.claims.sub;
+  if (error || !id) return null;
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("id, email, name, role")
+    .eq("id", id)
+    .maybeSingle();
+  if (!profile) return null;
+  return {
+    id: profile.id,
+    email: profile.email,
+    name: profile.name,
+    role: profile.role === "instructor" ? "instructor" : "student",
+    admin: isAdminEmail(profile.email),
+  };
 }
 
 export async function endSession() {
-  const jar = await cookies();
-  const token = jar.get(COOKIE)?.value;
-  if (token) await deleteSessionToken(token);
-  jar.delete(COOKIE);
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  await clearAdminGate();
 }

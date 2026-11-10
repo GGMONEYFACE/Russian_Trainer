@@ -7,6 +7,7 @@ import {
   adminRoleAction,
   adminDismissSuggestionAction,
   adminScoreAction,
+  unlockAdminAction,
 } from "@/app/actions/admin";
 import { emptyFormState } from "@/lib/form-state";
 
@@ -123,6 +124,23 @@ export function DismissSuggestionForm({ suggestionId }: { suggestionId: string }
         {pending ? "Removing…" : "Remove"}
       </button>
       <Notice error={state.error} message={state.message} />
+    </form>
+  );
+}
+
+export function AdminPasswordForm() {
+  const [state, action, pending] = useActionState(unlockAdminAction, emptyFormState);
+
+  return (
+    <form className="stack-form" action={action}>
+      <Notice error={state.error} message={state.message} />
+      <label className="field">
+        <span>Admin password</span>
+        <input type="password" name="password" autoComplete="current-password" maxLength={200} required />
+      </label>
+      <button type="submit" className="btn btn--primary" disabled={pending}>
+        {pending ? "Checking…" : "Continue"}
+      </button>
     </form>
   );
 }

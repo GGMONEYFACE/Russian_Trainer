@@ -1,7 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import type { FormState } from "@/lib/form-state";
+import { adminGateValid, adminPasswordConfigured, adminPasswordMatches, refreshAdminGate } from "@/lib/admin-gate";
 import { getCurrentUser } from "@/lib/session";
 import {
   adminClearQuestion,
@@ -16,10 +18,12 @@ function isId(value: string) {
   return /^[0-9a-f-]{36}$/i.test(value);
 }
 
-async function admin() {
+async function admin(): Promise<{ ok: true } | { ok: false; error: string }> {
   const user = await getCurrentUser();
-  if (!user?.admin) return null;
-  return user;
+  if (!user?.admin) return { ok: false, error: "That page is not available." };
+  if (!(await adminGateValid())) return { ok: false, error: "Enter the admin password again." };
+  await refreshAdminGate();
+  return { ok: true };
 }
 
 function refresh() {
@@ -29,7 +33,8 @@ function refresh() {
 }
 
 export async function adminRenameAction(_state: FormState, formData: FormData): Promise<FormState> {
-  if (!(await admin())) return { error: "That page is not available.", message: "" };
+  const gate = await admin();
+  if (!gate.ok) return { error: gate.error, message: "" };
   const userId = String(formData.get("userId") ?? "");
   if (!isId(userId)) return { error: "Account not found.", message: "" };
   const result = await adminRename(userId, String(formData.get("name") ?? ""));
@@ -39,7 +44,8 @@ export async function adminRenameAction(_state: FormState, formData: FormData): 
 }
 
 export async function adminRoleAction(_state: FormState, formData: FormData): Promise<FormState> {
-  if (!(await admin())) return { error: "That page is not available.", message: "" };
+  const gate = await admin();
+  if (!gate.ok) return { error: gate.error, message: "" };
   const userId = String(formData.get("userId") ?? "");
   const role = String(formData.get("role") ?? "");
   if (!isId(userId)) return { error: "Account not found.", message: "" };
@@ -53,7 +59,8 @@ export async function adminRoleAction(_state: FormState, formData: FormData): Pr
 }
 
 export async function adminScoreAction(_state: FormState, formData: FormData): Promise<FormState> {
-  if (!(await admin())) return { error: "That page is not available.", message: "" };
+  const gate = await admin();
+  if (!gate.ok) return { error: gate.error, message: "" };
   const assignmentId = String(formData.get("assignmentId") ?? "");
   const userId = String(formData.get("userId") ?? "");
   if (!isId(assignmentId) || !isId(userId)) return { error: "Result not found.", message: "" };
@@ -73,7 +80,8 @@ export async function adminClearQuestionAction(
   _state: FormState,
   formData: FormData,
 ): Promise<FormState> {
-  if (!(await admin())) return { error: "That page is not available.", message: "" };
+  const gate = await admin();
+  if (!gate.ok) return { error: gate.error, message: "" };
   const userId = String(formData.get("userId") ?? "");
   if (!isId(userId)) return { error: "Account not found.", message: "" };
   const result = await adminClearQuestion(userId, String(formData.get("questionKey") ?? ""));
@@ -86,11 +94,23 @@ export async function adminDismissSuggestionAction(
   _state: FormState,
   formData: FormData,
 ): Promise<FormState> {
-  if (!(await admin())) return { error: "That page is not available.", message: "" };
+  const gate = await admin();
+  if (!gate.ok) return { error: gate.error, message: "" };
   const suggestionId = String(formData.get("suggestionId") ?? "");
   if (!isId(suggestionId)) return { error: "Suggestion not found.", message: "" };
   const result = await adminDeleteSuggestion(suggestionId);
   if (!result.ok) return { error: result.error, message: "" };
   refresh();
   return { error: "", message: "Suggestion removed." };
+}
+
+export async function unlockAdminAction(_state: FormState, formData: FormData): Promise<FormState> {
+  const user = await getCurrentUser();
+  if (!user?.admin) return { error: "That page is not available.", message: "" };
+  if (!adminPasswordConfigured()) return { error: "Admin password is not turned on.", message: "" };
+  if (!adminPasswordMatches(String(formData.get("password") ?? ""))) {
+    return { error: "That admin password is not valid.", message: "" };
+  }
+  await refreshAdminGate();
+  redirect("/admin");
 }
