@@ -5,6 +5,7 @@ import type { FormState } from "@/lib/form-state";
 import { getCurrentUser } from "@/lib/session";
 import {
   adminClearQuestion,
+  adminDeleteSuggestion,
   adminRename,
   adminSetRole,
   adminSetScore,
@@ -79,4 +80,17 @@ export async function adminClearQuestionAction(
   if (!result.ok) return { error: result.error, message: "" };
   refresh();
   return { error: "", message: "Removed those attempts." };
+}
+
+export async function adminDismissSuggestionAction(
+  _state: FormState,
+  formData: FormData,
+): Promise<FormState> {
+  if (!(await admin())) return { error: "That page is not available.", message: "" };
+  const suggestionId = String(formData.get("suggestionId") ?? "");
+  if (!isId(suggestionId)) return { error: "Suggestion not found.", message: "" };
+  const result = await adminDeleteSuggestion(suggestionId);
+  if (!result.ok) return { error: result.error, message: "" };
+  refresh();
+  return { error: "", message: "Suggestion removed." };
 }

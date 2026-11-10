@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
-import { ClearQuestionForm, PersonForm, ScoreForm } from "@/components/AdminForms";
+import { ClearQuestionForm, DismissSuggestionForm, PersonForm, ScoreForm } from "@/components/AdminForms";
 import { getCurrentUser } from "@/lib/session";
-import { adminMisses, adminPeople, adminScores } from "@/lib/store";
+import { adminMisses, adminPeople, adminScores, adminSuggestions } from "@/lib/store";
 
 export const metadata = {
   title: "Admin · Russian Trainer",
@@ -20,14 +20,40 @@ async function AdminBody() {
   const user = await getCurrentUser();
   if (!user) redirect("/login?next=/admin");
   if (!user.admin) redirect("/profile");
-  const [people, scores, misses] = await Promise.all([adminPeople(), adminScores(), adminMisses()]);
+  const [people, scores, misses, suggestions] = await Promise.all([
+    adminPeople(),
+    adminScores(),
+    adminMisses(),
+    adminSuggestions(),
+  ]);
 
   return (
     <div className="shell profile-page">
       <header className="page-hero">
         <h1>Admin</h1>
-        <p>Edit names, roles, assignment scores, and repeated misses. This page is only available to your account.</p>
+        <p>Edit names, roles, assignment scores, repeated misses, and suggestions. This page is only available to your account.</p>
       </header>
+
+      <section className="profile-section">
+        <h2 className="section__title">Suggestions</h2>
+        {suggestions.length === 0 ? (
+          <p className="muted">No suggestions yet.</p>
+        ) : (
+          <div className="miss-list">
+            {suggestions.map((suggestion) => (
+              <article className="miss-card" key={suggestion.id}>
+                <div className="miss-card__top">
+                  <strong>{suggestion.name}</strong>
+                  <span className="muted">{formatWhen(suggestion.createdAt)}</span>
+                </div>
+                {suggestion.email ? <p className="muted">{suggestion.email}</p> : null}
+                <p className="suggestion-body">{suggestion.body}</p>
+                <DismissSuggestionForm suggestionId={suggestion.id} />
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
 
       <section className="profile-section">
         <h2 className="section__title">People</h2>

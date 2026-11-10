@@ -8,26 +8,27 @@ export const metadata = {
   title: "Sign in · Russian Trainer",
 };
 
-async function LoginGate({ nextPath }: { nextPath: string }) {
+async function LoginGate({ nextPath, notice }: { nextPath: string; notice: string }) {
   const user = await getCurrentUser();
   if (user) redirect(nextPath);
-  return <LoginForm nextPath={nextPath} />;
+  return <LoginForm nextPath={nextPath} notice={notice} />;
 }
 
 async function LoginContent({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string }>;
+  searchParams: Promise<{ next?: string; verify?: string }>;
 }) {
   const params = await searchParams;
   const nextPath = safeNext(params.next);
-  return <LoginGate nextPath={nextPath} />;
+  const notice = params.verify === "invalid" ? "That confirmation link is invalid or expired." : "";
+  return <LoginGate nextPath={nextPath} notice={notice} />;
 }
 
 export default function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string }>;
+  searchParams: Promise<{ next?: string; verify?: string }>;
 }) {
   return (
     <div className="auth-page">

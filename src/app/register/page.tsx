@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { RegisterForm } from "@/components/RegisterForm";
+import { emailVerificationEnabled } from "@/lib/mail";
 import { safeNext } from "@/lib/paths";
 import { getCurrentUser } from "@/lib/session";
 
@@ -31,7 +32,11 @@ export default function RegisterPage({
   return (
     <div className="auth-page">
       <h2>Create an account</h2>
-      <p>Create an account to save your practice.</p>
+      <p>
+        {emailVerificationEnabled()
+          ? "We'll email you a link to confirm the account."
+          : "Create an account to save your practice."}
+      </p>
       <Suspense fallback={<p>Loading…</p>}>
         <RegisterContent searchParams={searchParams} />
       </Suspense>

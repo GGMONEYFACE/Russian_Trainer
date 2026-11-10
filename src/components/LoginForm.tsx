@@ -5,19 +5,22 @@ import Link from "next/link";
 import { login } from "@/app/actions/auth";
 import { emptyFormState } from "@/lib/form-state";
 
-export function LoginForm({ nextPath }: { nextPath: string }) {
+export function LoginForm({ nextPath, notice = "" }: { nextPath: string; notice?: string }) {
   const [state, action, pending] = useActionState(login, emptyFormState);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const text = state.error || state.message || notice;
+  const success = Boolean(state.message) && !state.error;
+  const needsConfirmation = state.error === "Confirm your email before signing in.";
 
   useEffect(() => {
-    if (state.error && passwordRef.current) passwordRef.current.value = "";
+    if (state.error === "Invalid email or password." && passwordRef.current) passwordRef.current.value = "";
   }, [state.error]);
 
   return (
     <div className="login-container">
       <form className="login-form" action={action}>
-        <div className={`login-error${state.error ? " visible" : ""}`} role="alert">
-          {state.error}
+        <div className={`login-error${text ? " visible" : ""}${success ? " success" : ""}`} role="alert">
+          {text}
         </div>
         <input type="hidden" name="next" value={nextPath} />
 
@@ -53,9 +56,14 @@ export function LoginForm({ nextPath }: { nextPath: string }) {
           <label htmlFor="remember">Remember me for 7 days</label>
         </div>
 
-        <button type="submit" className="login-button" disabled={pending}>
+        <button type="submit" name="intent" value="login" className="login-button" disabled={pending}>
           {pending ? "Signing in…" : "Sign In"}
         </button>
+        {needsConfirmation ? (
+          <button type="submit" name="intent" value="resend" className="login-button secondary" disabled={pending}>
+            Resend confirmation email
+          </button>
+        ) : null}
       </form>
       <p className="login-links">
         <Link href={nextPath === "/profile" ? "/register" : `/register?next=${encodeURIComponent(nextPath)}`}>

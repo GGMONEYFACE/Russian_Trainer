@@ -84,6 +84,7 @@ type UserRecord = PublicUser & {
   passwordHash: string;
   passwordSalt: string;
   createdAt: string;
+  emailVerifiedAt?: string | null;
 };
 
 type SessionRecord = {
@@ -135,6 +136,22 @@ type CaseCheckRecord = {
   createdAt: string;
 };
 
+type EmailTokenRecord = {
+  tokenHash: string;
+  userId: string;
+  expiresAt: string;
+  sentAt: string;
+};
+
+type SuggestionRecord = {
+  id: string;
+  userId: string | null;
+  name: string;
+  email: string;
+  body: string;
+  createdAt: string;
+};
+
 type StoreData = {
   users: UserRecord[];
   sessions: SessionRecord[];
@@ -144,6 +161,8 @@ type StoreData = {
   assignments: AssignmentRecord[];
   completions: CompletionRecord[];
   caseChecks: CaseCheckRecord[];
+  emailTokens: EmailTokenRecord[];
+  suggestions: SuggestionRecord[];
 };
 
 function asArray<T>(value: unknown): T[] {
@@ -175,6 +194,8 @@ function emptyStore(): StoreData {
     assignments: [],
     completions: [],
     caseChecks: [],
+    emailTokens: [],
+    suggestions: [],
   };
 }
 
@@ -188,6 +209,8 @@ function normalizeStore(value: Partial<StoreData> | null | undefined): StoreData
     assignments: asArray<AssignmentRecord>(value?.assignments),
     completions: asArray<CompletionRecord>(value?.completions),
     caseChecks: asArray<CaseCheckRecord>(value?.caseChecks),
+    emailTokens: asArray<EmailTokenRecord>(value?.emailTokens),
+    suggestions: asArray<SuggestionRecord>(value?.suggestions),
   };
 }
 
@@ -356,7 +379,8 @@ export async function registerAccount(input: {
   name: string;
   email: string;
   password: string;
-}): Promise<{ ok: true; user: PublicUser } | { ok: false; error: string }> {
+  verify: boolean;
+}): Promise<{ ok: true; user: PublicUser; verifyToken: string } | { ok: false; error: string }> {
   const name = cleanName(input.name);
   const email = cleanEmail(input.email);
   if (!name) return { ok: false, error: "Enter your name." };
@@ -367,6 +391,7 @@ export async function registerAccount(input: {
 
   const salt = randomBytes(16);
   const passwordHash = (await hashPassword(input.password, salt)).toString("hex");
+  const verifyToken = input.verify ? randomBytes(32).toString("hex") : "";
   const user: UserRecord = {
     id: crypto.randomUUID(),
     email,
@@ -375,6 +400,7 @@ export async function registerAccount(input: {
     passwordHash,
     passwordSalt: salt.toString("hex"),
     createdAt: nowIso(),
+    emailVerifiedAt: input.verify ? null : nowIso(),
   };
 
   return update((store) => {
@@ -382,8 +408,18 @@ export async function registerAccount(input: {
       return { ok: false as const, error: "An account with that email already exists." };
     }
     store.users.push(user);
-    return { ok: true as const, user: toPublic(user) };
+    if (verifyToken) store.emailTokens.push(makeEmailToken(user.id, verifyToken));
+    return { ok: true as const, user: toPublic(user), verifyToken };
   });
+}
+
+function makeEmailToken(userId: string, rawToken: string): EmailTokenRecord {
+  return {
+    tokenHash: sha256(rawToken),
+    userId,
+    expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+    sentAt: nowIso(),
+  };
 }
 
 export async function authenticate(email: string, password: string) {
@@ -391,12 +427,15 @@ export async function authenticate(email: string, password: string) {
   const user = await read((store) => store.users.find((item) => item.email === normalized));
   if (!user || password.length < 1 || password.length > 72) {
     await hashPassword(password || "invalid", Buffer.alloc(16, 1));
-    return null;
+    return { status: "invalid" as const };
   }
   const actual = Buffer.from(user.passwordHash, "hex");
   const expected = await hashPassword(password, Buffer.from(user.passwordSalt, "hex"));
-  if (actual.length !== expected.length || !timingSafeEqual(actual, expected)) return null;
-  return toPublic(user);
+  if (actual.length !== expected.length || !timingSafeEqual(actual, expected)) {
+    return { status: "invalid" as const };
+  }
+  if (user.emailVerifiedAt === null) return { status: "unverified" as const, userId: user.id };
+  return { status: "ok" as const, user: toPublic(user) };
 }
 
 export async function openSession(userId: string, remember: boolean) {
@@ -1048,6 +1087,120 @@ export async function adminClearQuestion(userId: string, questionKey: string) {
       (attempt) => !(attempt.userId === userId && attempt.questionKey === key),
     );
     if (store.attempts.length === before) return { ok: false as const, error: "Those attempts are already gone." };
+    return { ok: true as const };
+  });
+}
+
+export async function deleteUnverifiedAccount(userId: string) {
+  await update((store) => {
+    const user = store.users.find((item) => item.id === userId);
+    if (!user || user.emailVerifiedAt) return;
+    store.users = store.users.filter((item) => item.id !== userId);
+    store.emailTokens = store.emailTokens.filter((item) => item.userId !== userId);
+  });
+}
+
+export async function issueVerification(userId: string) {
+  const raw = randomBytes(32).toString("hex");
+  return update((store) => {
+    const user = store.users.find((item) => item.id === userId);
+    if (!user) return { ok: false as const, error: "Account not found." };
+    if (user.emailVerifiedAt) return { ok: false as const, error: "That email is already confirmed." };
+    const recent = store.emailTokens.find((item) => item.userId === userId);
+    if (recent && Date.now() - Date.parse(recent.sentAt) < 60_000) {
+      return { ok: false as const, error: "Wait a minute before sending another email." };
+    }
+    store.emailTokens = store.emailTokens.filter((item) => item.userId !== userId);
+    store.emailTokens.push(makeEmailToken(userId, raw));
+    return { ok: true as const, token: raw, email: user.email };
+  });
+}
+
+export async function consumeVerification(token: string) {
+  if (!/^[a-f0-9]{64}$/.test(token)) return null;
+  const tokenHash = sha256(token);
+  const found = await read((store) => store.emailTokens.some((item) => item.tokenHash === tokenHash));
+  if (!found) return null;
+  return update((store) => {
+    const record = store.emailTokens.find((item) => item.tokenHash === tokenHash);
+    store.emailTokens = store.emailTokens.filter((item) => item.tokenHash !== tokenHash);
+    if (!record || record.expiresAt <= nowIso()) return null;
+    const user = store.users.find((item) => item.id === record.userId);
+    if (!user) return null;
+    user.emailVerifiedAt = nowIso();
+    store.emailTokens = store.emailTokens.filter((item) => item.userId !== user.id);
+    return user.id;
+  });
+}
+
+export type SuggestionItem = {
+  id: string;
+  name: string;
+  email: string;
+  body: string;
+  createdAt: string;
+};
+
+export async function addSuggestion(input: {
+  userId: string | null;
+  name: string;
+  email: string;
+  body: string;
+}) {
+  const body = input.body.trim().slice(0, 2000);
+  if (body.length < 8) return { ok: false as const, error: "Write a suggestion of at least a few words." };
+  const name = cleanName(input.name) || "Anonymous";
+  const email = cleanEmail(input.email);
+  const hour = 60 * 60 * 1000;
+  return update((store) => {
+    if (store.suggestions.length >= 300) {
+      return { ok: false as const, error: "The suggestion list is full. Try again later." };
+    }
+    const duplicate = store.suggestions.some(
+      (item) => item.body === body && Date.now() - Date.parse(item.createdAt) < 24 * hour,
+    );
+    if (duplicate) return { ok: false as const, error: "That suggestion was already sent." };
+    if (input.userId) {
+      const recent = store.suggestions.filter(
+        (item) => item.userId === input.userId && Date.now() - Date.parse(item.createdAt) < hour,
+      );
+      if (recent.length >= 5) {
+        return { ok: false as const, error: "Wait a bit before sending another suggestion." };
+      }
+    } else if (
+      store.suggestions.filter((item) => !item.userId && Date.now() - Date.parse(item.createdAt) < hour).length >= 30
+    ) {
+      return { ok: false as const, error: "Too many suggestions just came in. Try again later." };
+    }
+    store.suggestions.push({
+      id: crypto.randomUUID(),
+      userId: input.userId,
+      name,
+      email,
+      body,
+      createdAt: nowIso(),
+    });
+    return { ok: true as const };
+  });
+}
+
+export async function adminSuggestions(): Promise<SuggestionItem[]> {
+  return read((store) =>
+    store.suggestions
+      .slice()
+      .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
+      .slice(0, 100)
+      .map(({ id, name, email, body, createdAt }) => ({ id, name, email, body, createdAt })),
+  );
+}
+
+export async function adminDeleteSuggestion(id: string) {
+  return update((store) => {
+    const before = store.suggestions.length;
+    store.suggestions = store.suggestions.filter((item) => item.id !== id);
+    if (store.suggestions.length === before) {
+      return { ok: false as const, error: "That suggestion is already gone." };
+    }
     return { ok: true as const };
   });
 }

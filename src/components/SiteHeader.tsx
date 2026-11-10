@@ -7,6 +7,7 @@ const links = [
   { href: "/practice", label: "Practice" },
   { href: "/practice/case-endings", label: "Case endings" },
   { href: "/reference", label: "Reference" },
+  { href: "/suggestions", label: "Suggestions" },
 ];
 
 export function SiteHeader() {

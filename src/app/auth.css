@@ -144,6 +144,18 @@
   cursor: wait;
   transform: none;
 }
+.login-button.secondary {
+  margin-top: 10px;
+  background: transparent;
+  color: #d9534f;
+  border: 1px solid #d9534f;
+}
+
+.login-button.secondary:hover {
+  background: #d9534f;
+  color: #fff;
+}
+
 
 .login-links {
   margin-top: 20px;
@@ -258,7 +270,8 @@
 }
 
 .stack-form input,
-.stack-form select {
+.stack-form select,
+.stack-form textarea {
   width: 100%;
   min-height: 2.75rem;
   padding: 0.55rem 0.75rem;
@@ -338,4 +351,18 @@
   gap: 0.4rem;
   min-height: 2.4rem;
   margin-bottom: 0.15rem;
+}
+
+.stack-form textarea {
+  min-height: 9rem;
+  resize: vertical;
+  font: inherit;
+}
+
+.suggestion-form {
+  max-width: 40rem;
+}
+
+.suggestion-body {
+  white-space: pre-wrap;
 }

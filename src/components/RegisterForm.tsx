@@ -8,12 +8,14 @@ import { emptyFormState } from "@/lib/form-state";
 export function RegisterForm({ nextPath }: { nextPath: string }) {
   const [state, action, pending] = useActionState(register, emptyFormState);
   const loginHref = nextPath === "/profile" ? "/login" : `/login?next=${encodeURIComponent(nextPath)}`;
+  const text = state.error || state.message;
+  const success = Boolean(state.message) && !state.error;
 
   return (
     <div className="login-container">
       <form className="login-form" action={action}>
-        <div className={`login-error${state.error ? " visible" : ""}`} role="alert">
-          {state.error}
+        <div className={`login-error${text ? " visible" : ""}${success ? " success" : ""}`} role="alert">
+          {text}
         </div>
         <input type="hidden" name="next" value={nextPath} />
 

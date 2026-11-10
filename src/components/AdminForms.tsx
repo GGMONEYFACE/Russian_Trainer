@@ -5,6 +5,7 @@ import {
   adminClearQuestionAction,
   adminRenameAction,
   adminRoleAction,
+  adminDismissSuggestionAction,
   adminScoreAction,
 } from "@/app/actions/admin";
 import { emptyFormState } from "@/lib/form-state";
@@ -106,6 +107,20 @@ export function ClearQuestionForm({ userId, questionKey }: { userId: string; que
       <input type="hidden" name="questionKey" value={questionKey} />
       <button type="submit" className="btn btn--ghost-dark btn--small" disabled={pending}>
         {pending ? "Removing…" : "Remove attempts"}
+      </button>
+      <Notice error={state.error} message={state.message} />
+    </form>
+  );
+}
+
+export function DismissSuggestionForm({ suggestionId }: { suggestionId: string }) {
+  const [state, action, pending] = useActionState(adminDismissSuggestionAction, emptyFormState);
+
+  return (
+    <form className="admin-form" action={action}>
+      <input type="hidden" name="suggestionId" value={suggestionId} />
+      <button type="submit" className="btn btn--ghost-dark btn--small" disabled={pending}>
+        {pending ? "Removing…" : "Remove"}
       </button>
       <Notice error={state.error} message={state.message} />
     </form>
