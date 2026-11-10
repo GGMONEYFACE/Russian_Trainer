@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { recordCaseRound } from "@/app/actions/progress";
 import {
   cases,
   caseOrder,
@@ -62,11 +63,22 @@ function choicesFor(answers: string[]) {
   return [...new Set([...answers.map((answer) => answer || "—"), ...endingChoices])];
 }
 
-export function CaseEndingPractice() {
-  const [selectedCase, setSelectedCase] = useState<CaseKey>("nominative");
+export function CaseEndingPractice({
+  initialCase = "nominative",
+  lockCase = false,
+  signedIn = false,
+  assignmentTitle,
+}: {
+  initialCase?: CaseKey;
+  lockCase?: boolean;
+  signedIn?: boolean;
+  assignmentTitle?: string;
+}) {
+  const [selectedCase, setSelectedCase] = useState<CaseKey>(initialCase);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(false);
   const [multipleChoice, setMultipleChoice] = useState(false);
+  const [note, setNote] = useState("");
 
   const definition = cases[selectedCase];
   const answerKey = (gender: Gender, field: EndingField) =>
@@ -85,6 +97,7 @@ export function CaseEndingPractice() {
     setAnswers({});
     setChecked(false);
     setMultipleChoice(false);
+    setNote("");
   }
 
   function updateAnswer(gender: Gender, field: EndingField, value: string) {
@@ -92,19 +105,43 @@ export function CaseEndingPractice() {
     setChecked(false);
   }
 
-  function checkAnswers() {
+  async function checkAnswers() {
     setChecked(true);
+    if (!signedIn) return;
+    const cells = genders.flatMap((gender) =>
+      (["adjective", "noun"] as EndingField[]).map((field) => {
+        const value = answers[answerKey(gender, field)] ?? "";
+        const expected = definition.answers[gender][field];
+        return {
+          questionKey: `case:${selectedCase}:${gender}:${field}`,
+          practiceId: `case-endings:${selectedCase}`,
+          prompt: `${definition.label}: ${gender} ${field}`,
+          detail: `${gender} ${field}`,
+          expected: expected.map((ending) => ending || "—").join(" / "),
+          given: value,
+          correct: isCorrect(value, expected),
+        };
+      }),
+    );
+    try {
+      const result = await recordCaseRound({ caseKey: selectedCase, cells });
+      if (result.message) setNote(result.message);
+    } catch {
+      setNote("This chart could not be saved.");
+    }
   }
 
   function resetAnswers() {
     setAnswers({});
     setChecked(false);
+    setNote("");
   }
 
   function toggleMultipleChoice(enabled: boolean) {
     setMultipleChoice(enabled);
     setAnswers({});
     setChecked(false);
+    setNote("");
   }
 
   return (
@@ -114,6 +151,7 @@ export function CaseEndingPractice() {
           <span>Case</span>
           <select
             value={selectedCase}
+            disabled={lockCase}
             onChange={(event) => changeCase(event.target.value as CaseKey)}
           >
             {caseOrder.map((caseKey) => (
@@ -135,6 +173,11 @@ export function CaseEndingPractice() {
           {checked ? `${score}/${total} correct` : "Fill in all six endings"}
         </span>
       </div>
+      {assignmentTitle ? <p className="prompt__eyebrow">Assigned · {assignmentTitle}</p> : null}
+      {!signedIn ? (
+        <p className="muted">Sign in to keep missed endings on your profile.</p>
+      ) : null}
+      {note ? <p className="form-success">{note}</p> : null}
 
       <section className="case-chart">
         <div className="case-chart__heading">

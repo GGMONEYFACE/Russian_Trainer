@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import { AccountNav } from "@/components/AccountNav";
 
 const links = [
   { href: "/learn", label: "Learn" },
@@ -21,6 +23,9 @@ export function SiteHeader() {
               {link.label}
             </Link>
           ))}
+          <Suspense fallback={<Link href="/login" className="site-nav__link">Login</Link>}>
+            <AccountNav />
+          </Suspense>
         </nav>
       </div>
     </header>

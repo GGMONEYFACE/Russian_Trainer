@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Spectral } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
+import "./auth.css";
 
 const spectral = Spectral({
   variable: "--font-display",

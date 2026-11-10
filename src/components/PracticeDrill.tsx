@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent } from "react";
+import Link from "next/link";
+import { finishLevelRound, recordAttempt } from "@/app/actions/progress";
 import type { Gender, PracticeItem } from "@/lib/types";
 import {
   adjectiveEnding,
@@ -29,11 +31,21 @@ type Props = {
   items: PracticeItem[];
   setOptions: { id: string; title: string }[];
   genderLabels: Record<Gender, { ru: string; en: string }>;
+  initialSetId?: string;
+  lockSet?: boolean;
+  signedIn?: boolean;
 };
 
-export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
+export function PracticeDrill({
+  items,
+  setOptions,
+  genderLabels,
+  initialSetId = "all",
+  lockSet = false,
+  signedIn = false,
+}: Props) {
   const [mode, setMode] = useState<Mode>("ending");
-  const [setId, setSetId] = useState("all");
+  const [setId, setSetId] = useState(initialSetId);
   const [queue, setQueue] = useState<PracticeItem[]>([]);
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -42,8 +54,10 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   const [sessionCorrect, setSessionCorrect] = useState(0);
   const [sessionTotal, setSessionTotal] = useState(0);
   const [roundResults, setRoundResults] = useState<RoundResult[]>([]);
+  const [assignmentNote, setAssignmentNote] = useState("");
   const nextButtonRef = useRef<HTMLButtonElement>(null);
   const answerInputRef = useRef<HTMLInputElement>(null);
+  const roundGeneration = useRef(0);
 
   const pool = useMemo(
     () => filterPractice(items, { setId }),
@@ -51,6 +65,8 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   );
 
   function startSession() {
+    roundGeneration.current += 1;
+    setAssignmentNote("");
     setQueue(shuffle(pool).slice(0, Math.min(12, pool.length)));
     setIndex(0);
     setSelected(null);
@@ -59,6 +75,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
     setSessionTotal(0);
   }
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     setProgress(loadProgress());
     setRoundResults([]);
@@ -71,8 +88,29 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
     startSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setId, pool.length]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const current = queue[index];
+
+  useEffect(() => {
+    if (!signedIn || queue.length === 0 || roundResults.length !== queue.length) return;
+    const sameRound = roundResults.every(
+      (result, resultIndex) => result.item.id === queue[resultIndex]?.id,
+    );
+    if (!sameRound) return;
+    const generation = roundGeneration.current;
+    const setForRound = lockSet ? initialSetId : setId;
+    void finishLevelRound({ setId: setForRound, total: queue.length })
+      .then((result) => {
+        if (generation !== roundGeneration.current) return;
+        if (result.message) setAssignmentNote(result.message);
+      })
+      .catch(() => {
+        if (generation === roundGeneration.current) {
+          setAssignmentNote("This round could not be saved.");
+        }
+      });
+  }, [signedIn, queue, roundResults, setId, lockSet, initialSetId]);
 
   useEffect(() => {
     if (selected) {
@@ -93,15 +131,41 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
     return shuffle(["masculine", "feminine", "neuter", "plural"] as Gender[]);
   }, [current, mode]);
 
-  function onChoose(value: string) {
+  async function onChoose(value: string) {
     if (!current || selected) return;
-    setSelected(value);
     const correct =
       mode === "agree"
         ? value === current.correct
         : mode === "ending"
           ? value === adjectiveEnding(current.adjective)
           : value === current.gender;
+    const expected =
+      mode === "gender"
+        ? current.gender
+        : mode === "ending"
+          ? adjectiveEnding(current.adjective)
+          : current.correct;
+    if (signedIn) {
+      try {
+        await recordAttempt({
+          questionKey: `level1:${current.id}:${mode}`,
+          practiceId: `level1:${current.setId}`,
+          prompt: `${current.phraseRu} — ${current.phraseEn}`,
+          detail:
+            mode === "gender"
+              ? "Identify the noun gender"
+              : mode === "ending"
+                ? "Adjective ending"
+                : "Choose the adjective",
+          expected,
+          given: value,
+          correct,
+        });
+      } catch {
+        // The question still counts locally if saving fails.
+      }
+    }
+    setSelected(value);
     setRoundResults((results) => [
       ...results,
       { item: current, mode, answer: value, correct },
@@ -164,6 +228,7 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
           <p className="section__lede">
             {correctCount} right · {roundResults.length - correctCount} wrong
           </p>
+          {assignmentNote ? <p className="section__lede">{assignmentNote}</p> : null}
         </div>
         <div className="round-review__list">
           {roundResults.map((result, resultIndex) => {
@@ -233,17 +298,28 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
   return (
     <div className="drill">
       <div className="drill__controls">
-        <label className="field">
-          <span>Set</span>
-          <select value={setId} onChange={(e) => setSetId(e.target.value)}>
-            <option value="all">All Level 1 sets</option>
-            {setOptions.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.title}
-              </option>
-            ))}
-          </select>
-        </label>
+        {lockSet ? (
+          <p className="field">
+            <span>Set</span>
+            <strong>
+              {setId === "all"
+                ? "All Level 1 sets"
+                : (setOptions.find((set) => set.id === setId)?.title ?? "Assigned set")}
+            </strong>
+          </p>
+        ) : (
+          <label className="field">
+            <span>Set</span>
+            <select value={setId} onChange={(e) => setSetId(e.target.value)}>
+              <option value="all">All Level 1 sets</option>
+              {setOptions.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.title}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         <label className="toggle">
           <input
             type="checkbox"
@@ -276,6 +352,11 @@ export function PracticeDrill({ items, setOptions, genderLabels }: Props) {
         {progress && (
           <span>
             Streak {progress.streak} · Best {progress.bestStreak}
+          </span>
+        )}
+        {!signedIn && (
+          <span>
+            <Link href="/login?next=/practice">Sign in</Link> to keep missed questions on your profile.
           </span>
         )}
       </div>
