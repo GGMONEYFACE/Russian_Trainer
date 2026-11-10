@@ -4,8 +4,7 @@ import {
   scrypt as scryptCb,
   timingSafeEqual,
 } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
+import { createClient } from "@supabase/supabase-js";
 import { caseKeys, isCaseKey, isLevel1Set, practiceTitle } from "@/lib/catalog";
 
 export type Role = "student" | "instructor";
@@ -147,11 +146,23 @@ type StoreData = {
   caseChecks: CaseCheckRecord[];
 };
 
-const dataDir = path.join(process.cwd(), "data");
-const dataFile = path.join(dataDir, "store.json");
-
 function asArray<T>(value: unknown): T[] {
   return Array.isArray(value) ? (value as T[]) : [];
+}
+
+function database() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY;
+  if (!url || !key || !process.env.TRAINER_DB_SECRET) {
+    throw new Error("Database is not configured.");
+  }
+  return createClient(url, key, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+}
+
+function databaseSecret() {
+  return process.env.TRAINER_DB_SECRET ?? "";
 }
 
 function emptyStore(): StoreData {
@@ -167,29 +178,37 @@ function emptyStore(): StoreData {
   };
 }
 
-async function readStore(): Promise<StoreData> {
-  try {
-    const raw = await readFile(dataFile, "utf8");
-    const parsed = JSON.parse(raw) as Partial<StoreData>;
-    return {
-      users: asArray<UserRecord>(parsed.users),
-      sessions: asArray<SessionRecord>(parsed.sessions),
-      classrooms: asArray<ClassroomRecord>(parsed.classrooms),
-      members: asArray<MemberRecord>(parsed.members),
-      attempts: asArray<AttemptRecord>(parsed.attempts),
-      assignments: asArray<AssignmentRecord>(parsed.assignments),
-      completions: asArray<CompletionRecord>(parsed.completions),
-      caseChecks: asArray<CaseCheckRecord>(parsed.caseChecks),
-    };
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") return emptyStore();
-    throw error;
-  }
+function normalizeStore(value: Partial<StoreData> | null | undefined): StoreData {
+  return {
+    users: asArray<UserRecord>(value?.users),
+    sessions: asArray<SessionRecord>(value?.sessions),
+    classrooms: asArray<ClassroomRecord>(value?.classrooms),
+    members: asArray<MemberRecord>(value?.members),
+    attempts: asArray<AttemptRecord>(value?.attempts),
+    assignments: asArray<AssignmentRecord>(value?.assignments),
+    completions: asArray<CompletionRecord>(value?.completions),
+    caseChecks: asArray<CaseCheckRecord>(value?.caseChecks),
+  };
 }
 
-async function writeStore(store: StoreData) {
-  await mkdir(dataDir, { recursive: true });
-  await writeFile(dataFile, JSON.stringify(store, null, 2));
+async function readStore(): Promise<{ version: number; data: StoreData }> {
+  const { data, error } = await database().rpc("load_app_state", {
+    app_secret: databaseSecret(),
+  });
+  if (error) throw new Error("Could not read accounts.");
+  const row = Array.isArray(data) ? data[0] : data;
+  if (!row || typeof row.version !== "number") throw new Error("Could not read accounts.");
+  return { version: row.version, data: normalizeStore(row.data) };
+}
+
+async function writeStore(version: number, store: StoreData) {
+  const { data, error } = await database().rpc("save_app_state", {
+    app_secret: databaseSecret(),
+    expected_version: version,
+    payload: store,
+  });
+  if (error) throw new Error("Could not save accounts.");
+  return data === true;
 }
 
 let queue: Promise<unknown> = Promise.resolve();
@@ -205,15 +224,18 @@ function enqueue<T>(job: () => Promise<T>): Promise<T> {
 
 function update<T>(mutator: (store: StoreData) => Promise<T> | T): Promise<T> {
   return enqueue(async () => {
-    const store = await readStore();
-    const result = await mutator(store);
-    await writeStore(store);
-    return result;
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      const current = await readStore();
+      const store = structuredClone(current.data);
+      const result = await mutator(store);
+      if (await writeStore(current.version, store)) return result;
+    }
+    throw new Error("Could not save accounts. Try again.");
   });
 }
 
 function read<T>(reader: (store: StoreData) => T): Promise<T> {
-  return enqueue(async () => reader(await readStore()));
+  return enqueue(async () => reader((await readStore()).data));
 }
 
 function hashPassword(password: string, salt: Buffer) {
