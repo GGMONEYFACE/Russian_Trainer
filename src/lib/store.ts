@@ -167,20 +167,22 @@ function sanitizeAttempt(input: AttemptInput): AttemptInput | null {
   const levelKey = /^level1:(.+):(agree|ending|gender)$/.exec(questionKey);
   const casePractice = /^case-endings:([a-z]+)$/.exec(practiceId);
   const caseQuestion = /^case:([a-z]+):(masculine|feminine|neuter):(adjective|noun)$/.exec(questionKey);
+  const genitiveOk =
+    practiceId === "genitive-case" && /^genitive-case:[a-z0-9_+:\-]+$/i.test(questionKey);
   const levelOk = Boolean(
     setMatch && levelKey && isLevel1Set(setMatch[1]) && levelKey[1].startsWith(`${setMatch[1]}-`),
   );
   const caseOk = Boolean(
     casePractice && caseQuestion && casePractice[1] === caseQuestion[1] && isCaseKey(casePractice[1]),
   );
-  if (!levelOk && !caseOk) return null;
+  if (!levelOk && !caseOk && !genitiveOk) return null;
   return {
     questionKey,
     practiceId,
     prompt: clip(input.prompt, 400),
     detail: clip(input.detail, 80),
     expected: clip(input.expected, 200),
-    given: clip(input.given, 80),
+    given: clip(input.given, 200),
     correct: Boolean(input.correct),
   };
 }
@@ -519,6 +521,55 @@ export async function saveAttempt(userId: string, input: AttemptInput): Promise<
   if (error) return { ok: false, message: "" };
   await trimAttempts(userId);
   return { ok: true, message: "" };
+}
+
+export async function finishGenitiveRound(userId: string, total: number): Promise<ProgressResult> {
+  if (!Number.isInteger(total) || total < 1 || total > 24) return { ok: false, message: "" };
+  const supabase = await asUser(userId);
+  if (!supabase) return { ok: false, message: "" };
+  const recentSince = new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString();
+  const { data: recent } = await supabase
+    .from("attempts")
+    .select("practice_id, created_at")
+    .eq("user_id", userId)
+    .gte("created_at", recentSince)
+    .limit(2500);
+  const recentCount = (recent ?? []).filter((attempt) => attempt.practice_id === "genitive-case").length;
+  if (recentCount < total) return { ok: true, message: "Saved to your profile." };
+
+  const assignments = await studentAssignments(userId);
+  let created = 0;
+  let updated = 0;
+  let pending = 0;
+  for (const assignment of assignments) {
+    if (assignment.practiceId !== "genitive-case") continue;
+    const { data: assignmentRow } = await supabase
+      .from("assignments")
+      .select("created_at")
+      .eq("id", assignment.id)
+      .maybeSingle();
+    const since = assignmentRow?.created_at ?? new Date().toISOString();
+    const { data: rows } = await supabase
+      .from("attempts")
+      .select("correct, created_at, practice_id")
+      .eq("user_id", userId)
+      .eq("practice_id", "genitive-case")
+      .gte("created_at", since)
+      .limit(2500);
+    const matching = rows ?? [];
+    if (matching.length < total) {
+      pending += 1;
+      continue;
+    }
+    const correct = matching.slice(-total).filter((attempt) => attempt.correct).length;
+    const status = await saveCompletion(assignment.id, userId, correct, total);
+    if (status === "created") created += 1;
+    else updated += 1;
+  }
+  if (created) return { ok: true, message: "Marked done for your instructor." };
+  if (pending) return { ok: true, message: "Saved. Finish a full round after it was assigned and it will show as done." };
+  if (updated) return { ok: true, message: "Updated the score your instructor can see." };
+  return { ok: true, message: "Saved to your profile." };
 }
 
 export async function finishLevelRound(userId: string, setId: string, total: number): Promise<ProgressResult> {

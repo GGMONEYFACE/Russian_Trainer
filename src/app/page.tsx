@@ -43,6 +43,14 @@ export default function Home() {
                 plural — using the classroom phrase charts.
               </p>
             </article>
+            <article className="path-item path-item--active">
+              <span className="path-item__tag">Live now</span>
+              <h3>Genitive · Quantity phrases</h3>
+              <p>
+                Practice 1, 2–4, 5+, много, and нет with full adjective–noun phrases
+                typed out in the fixed form.
+              </p>
+            </article>
             <article className="path-item">
               <span className="path-item__tag">Next</span>
               <h3>Level 2 · Cases in context</h3>
