@@ -33,6 +33,7 @@ export function practiceOptions(): PracticeOption[] {
       id: `case-endings:${caseKey}`,
       title: `Case endings · ${cases[caseKey].label}`,
     })),
+    { id: "genitive-case", title: "Genitive case endings · Quantities" },
   ];
 }
 
@@ -62,6 +63,11 @@ export function practicePath(practiceId: string, assignmentId?: string) {
   if (practiceId.startsWith("case-endings:")) {
     params.set("case", practiceId.slice("case-endings:".length));
     return `/practice/case-endings?${params.toString()}`;
+  }
+
+  if (practiceId === "genitive-case") {
+    const query = params.toString();
+    return query ? `/practice/genitive?${query}` : "/practice/genitive";
   }
 
   return "/practice";

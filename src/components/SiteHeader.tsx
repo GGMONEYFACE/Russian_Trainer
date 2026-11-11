@@ -6,7 +6,8 @@ const links = [
   { href: "/learn", label: "Learn" },
   { href: "/practice", label: "Practice" },
   { href: "/practice/case-endings", label: "Case endings" },
-  { href: "/reference", label: "Reference" },
+  { href: "/practice/genitive", label: "Genitive" },
+  { href: "/reference", label: "Resources" },
   { href: "/suggestions", label: "Suggestions" },
 ];
 

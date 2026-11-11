@@ -1,5 +1,10 @@
+import Link from "next/link";
 import level1 from "@/data/level1.json";
 import { cases, caseOrder, genders } from "@/data/caseEndings";
+import {
+  genitiveEndingCharts,
+  quantityRules,
+} from "@/data/genitiveQuantities";
 import type { Gender, Level1Data } from "@/lib/types";
 
 const data = level1 as Level1Data;
@@ -9,10 +14,10 @@ export default function ReferencePage() {
   return (
     <div className="shell">
       <header className="page-hero">
-        <h1>Reference · Nominative charts</h1>
+        <h1>Resources · Charts &amp; endings</h1>
         <p>
-          Phrase tables from your Level 1 materials. Use these while drilling, or
-          skim before a quiz.
+          Phrase tables from your Level 1 materials, plus how quantity words pick
+          nominative vs genitive. Use these while drilling, or skim before a quiz.
         </p>
       </header>
 
@@ -95,6 +100,107 @@ export default function ReferencePage() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="reference-block" id="genitive-quantities">
+        <h2>Genitive with quantities</h2>
+        <p className="section__lede">
+          After numbers and quantity words, Russian picks nominative or genitive
+          for the adjective–noun pair. Memorize the cue first, then the endings.
+        </p>
+
+        <div className="quantity-rule-grid">
+          {quantityRules.map((rule) => (
+            <article className="case-reference-card" key={rule.kind}>
+              <h3>{rule.title}</h3>
+              <p className="muted">{rule.when}</p>
+              <dl className="quantity-rule">
+                <div>
+                  <dt>Adjective</dt>
+                  <dd>{rule.caseForAdj}</dd>
+                </div>
+                <div>
+                  <dt>Noun</dt>
+                  <dd>{rule.caseForNoun}</dd>
+                </div>
+              </dl>
+              <p className="quantity-rule__example">
+                <span className="muted">Example</span> {rule.example}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        <div className="case-reference-grid" style={{ marginTop: "1.5rem" }}>
+          <article className="case-reference-card">
+            <h3>Adjective endings</h3>
+            <p className="muted">Hard / soft pairs shown with a slash.</p>
+            <table className="adj-table">
+              <thead>
+                <tr>
+                  <th scope="col"> </th>
+                  <th scope="col">Genitive singular</th>
+                  <th scope="col">Genitive plural</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">masculine</th>
+                  <td>{genitiveEndingCharts.adjectives.singular.masculine}</td>
+                  <td rowSpan={3}>{genitiveEndingCharts.adjectives.plural.all}</td>
+                </tr>
+                <tr>
+                  <th scope="row">feminine</th>
+                  <td>{genitiveEndingCharts.adjectives.singular.feminine}</td>
+                </tr>
+                <tr>
+                  <th scope="row">neuter</th>
+                  <td>{genitiveEndingCharts.adjectives.singular.neuter}</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article className="case-reference-card">
+            <h3>Noun endings</h3>
+            <p className="muted">
+              Genitive plural has several patterns; learn common classroom nouns with
+              the phrase charts.
+            </p>
+            <table className="adj-table">
+              <thead>
+                <tr>
+                  <th scope="col"> </th>
+                  <th scope="col">Genitive singular</th>
+                  <th scope="col">Genitive plural</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">masculine</th>
+                  <td>{genitiveEndingCharts.nouns.singular.masculine}</td>
+                  <td>{genitiveEndingCharts.nouns.plural.masculine}</td>
+                </tr>
+                <tr>
+                  <th scope="row">feminine</th>
+                  <td>{genitiveEndingCharts.nouns.singular.feminine}</td>
+                  <td>{genitiveEndingCharts.nouns.plural.feminine}</td>
+                </tr>
+                <tr>
+                  <th scope="row">neuter</th>
+                  <td>{genitiveEndingCharts.nouns.singular.neuter}</td>
+                  <td>{genitiveEndingCharts.nouns.plural.neuter}</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+
+        <div className="cta-row" style={{ marginTop: "1.5rem" }}>
+          <Link href="/practice/genitive" className="btn btn--primary">
+            Practice genitive phrases
+          </Link>
         </div>
       </section>
     </div>

@@ -2,6 +2,7 @@
 
 import { getCurrentUser } from "@/lib/session";
 import {
+  finishGenitiveRound as finishStoredGenitiveRound,
   finishLevelRound as finishStoredRound,
   saveAttempt,
   saveCaseRound,
@@ -24,6 +25,14 @@ export async function finishLevelRound(input: {
   const user = await getCurrentUser();
   if (!user) return quiet;
   return finishStoredRound(user.id, input.setId, input.total);
+}
+
+export async function finishGenitiveRound(input: {
+  total: number;
+}): Promise<ProgressResult> {
+  const user = await getCurrentUser();
+  if (!user) return quiet;
+  return finishStoredGenitiveRound(user.id, input.total);
 }
 
 export async function recordCaseRound(input: {

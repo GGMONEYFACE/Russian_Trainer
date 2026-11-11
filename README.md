@@ -7,7 +7,8 @@ Grammar-first practice site for Russian adjective–noun agreement.
 - Nominative gender/number agreement using classroom phrase sets
 - Modes: choose the adjective ending, or identify noun gender
 - Case endings practice quiz for all six grammatical cases
-- Reference charts for Colors & Objects and Nationality & Interests
+- Genitive quantity drills (1, 2–4, 5+, много, нет) with full-phrase answers
+- Resources charts for phrase tables and genitive ending breakdowns
 - Additional practice sets for family, appearance, character, and daily life
 
 ## Develop

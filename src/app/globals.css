@@ -507,6 +507,75 @@ input {
   max-width: 24rem;
 }
 
+.ending-answer--phrase {
+  max-width: 40rem;
+}
+
+.genitive-prompt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem 0.75rem;
+}
+
+.genitive-prompt__cue {
+  color: var(--accent);
+}
+
+.genitive-prompt__plus {
+  color: var(--ink-soft);
+  font-size: 0.7em;
+}
+
+.quantity-rule-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 760px) {
+  .quantity-rule-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  .quantity-rule-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.quantity-rule {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0 0 0.85rem;
+}
+
+.quantity-rule dt {
+  margin: 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.quantity-rule dd {
+  margin: 0.15rem 0 0;
+  font-weight: 600;
+}
+
+.quantity-rule__example {
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+}
+
+.quantity-rule__example .muted {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+}
+
 .ending-answer label {
   color: var(--ink-soft);
   font-size: 0.85rem;

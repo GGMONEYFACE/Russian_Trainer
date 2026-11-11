@@ -46,7 +46,10 @@ export default function LearnPage() {
             Practice these endings
           </Link>
           <Link href="/reference" className="btn btn--ghost-dark">
-            Browse the phrase charts
+            Browse the Resources charts
+          </Link>
+          <Link href="/practice/genitive" className="btn btn--ghost-dark">
+            Genitive with quantities
           </Link>
         </div>
       </section>
