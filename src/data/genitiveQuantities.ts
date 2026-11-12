@@ -65,7 +65,7 @@ export const quantityRules: {
   {
     kind: "1",
     title: "1",
-    when: "After один / одна / одно (or the digit 1).",
+    when: "After один / одна / одно / одни(or the digit 1).",
     caseForAdj: "Nominative singular",
     caseForNoun: "Nominative singular",
     example: "одна красная тетрадь",
@@ -97,7 +97,7 @@ export const quantityRules: {
   {
     kind: "net",
     title: "нет",
-    when: "After нет when you mean “there aren’t any / no …” (plural sense in this drill).",
+    when: "After нет when you mean “there aren’t any / no …”.",
     caseForAdj: "Genitive plural (−ых / −их)",
     caseForNoun: "Genitive plural",
     example: "нет красных тетрадей",
@@ -112,7 +112,9 @@ export const genitiveEndingCharts = {
       neuter: "−ого / −его",
     },
     plural: {
-      all: "−ых / −их",
+      masculine: "−ых / −их",
+      feminine: "−ых / −их",
+      neuter: "−ых / −их",
     },
   },
   nouns: {
@@ -121,10 +123,35 @@ export const genitiveEndingCharts = {
       feminine: "−ы / −и",
       neuter: "−а / −я",
     },
-    plural: {
-      masculine: "−ов / −ев / −ей / —",
-      feminine: "— / −ей / −ь",
-      neuter: "— / −ей",
+    consonants: {
+      masculine: "−ов",
+      feminine: "—",
+      neuter: "—",
+    },
+    й: {
+      masculine: "−ев",
+      feminine: "−",
+      neuter: "−",
+    },
+    ь: {
+      masculine: "−ей",
+      feminine: "−ей",
+      neuter: "−ей",
+    },
+    ж: {
+      masculine: "−ей",
+      feminine: "—",
+      neuter: "—",
+    },
+    а: {
+      masculine: "−",
+      feminine: "∅",
+      neuter: "∅",
+    },
+    я: {
+      masculine: "−",
+      feminine: "—ь / ∅",
+      neuter: "—",
     },
   },
 };

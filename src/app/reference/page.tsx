@@ -148,15 +148,17 @@ export default function ReferencePage() {
                 <tr>
                   <th scope="row">masculine</th>
                   <td>{genitiveEndingCharts.adjectives.singular.masculine}</td>
-                  <td rowSpan={3}>{genitiveEndingCharts.adjectives.plural.all}</td>
+                  <td>{genitiveEndingCharts.adjectives.plural.masculine}</td>
                 </tr>
                 <tr>
                   <th scope="row">feminine</th>
                   <td>{genitiveEndingCharts.adjectives.singular.feminine}</td>
+                  <td>{genitiveEndingCharts.adjectives.plural.feminine}</td>
                 </tr>
                 <tr>
                   <th scope="row">neuter</th>
                   <td>{genitiveEndingCharts.adjectives.singular.neuter}</td>
+                  <td>{genitiveEndingCharts.adjectives.plural.neuter}</td>
                 </tr>
               </tbody>
             </table>
@@ -173,24 +175,44 @@ export default function ReferencePage() {
                 <tr>
                   <th scope="col"> </th>
                   <th scope="col">Genitive singular</th>
-                  <th scope="col">Genitive plural</th>
+                  <th scope="col">consonants</th>
+                  <th scope="col">-й</th>
+                  <th scope="col">-ь / -е</th>
+                  <th scope="col">ж / ш / ч / щ / ц</th>
+                  <th scope="col">-а / -о</th>
+                  <th scope="col">-я</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row">masculine</th>
                   <td>{genitiveEndingCharts.nouns.singular.masculine}</td>
-                  <td>{genitiveEndingCharts.nouns.plural.masculine}</td>
+                  <td>{genitiveEndingCharts.nouns.consonants.masculine}</td>
+                  <td>{genitiveEndingCharts.nouns.й.masculine}</td>
+                  <td>{genitiveEndingCharts.nouns.ь.masculine}</td>
+                  <td>{genitiveEndingCharts.nouns.ж.masculine}</td>
+                  <td>{genitiveEndingCharts.nouns.а.masculine}</td>
+                  <td>{genitiveEndingCharts.nouns.я.masculine}</td>
                 </tr>
                 <tr>
                   <th scope="row">feminine</th>
                   <td>{genitiveEndingCharts.nouns.singular.feminine}</td>
-                  <td>{genitiveEndingCharts.nouns.plural.feminine}</td>
+                  <td>{genitiveEndingCharts.nouns.consonants.feminine}</td>
+                  <td>{genitiveEndingCharts.nouns.й.feminine}</td>
+                  <td>{genitiveEndingCharts.nouns.ь.feminine}</td>
+                  <td>{genitiveEndingCharts.nouns.ж.feminine}</td>
+                  <td>{genitiveEndingCharts.nouns.а.feminine}</td>
+                  <td>{genitiveEndingCharts.nouns.я.feminine}</td>
                 </tr>
                 <tr>
                   <th scope="row">neuter</th>
                   <td>{genitiveEndingCharts.nouns.singular.neuter}</td>
-                  <td>{genitiveEndingCharts.nouns.plural.neuter}</td>
+                  <td>{genitiveEndingCharts.nouns.consonants.neuter}</td>
+                  <td>{genitiveEndingCharts.nouns.й.neuter}</td>
+                  <td>{genitiveEndingCharts.nouns.ь.neuter}</td>
+                  <td>{genitiveEndingCharts.nouns.ж.neuter}</td>
+                  <td>{genitiveEndingCharts.nouns.а.neuter}</td>
+                  <td>{genitiveEndingCharts.nouns.я.neuter}</td>
                 </tr>
               </tbody>
             </table>
