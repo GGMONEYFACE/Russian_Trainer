@@ -773,6 +773,20 @@ input {
   margin: 0 0 0.9rem;
 }
 
+.noun-endings-table-wrap {
+  overflow-x: auto;
+}
+
+.noun-endings-table {
+  min-width: 900px;
+}
+
+@media (min-width: 760px) {
+  .case-reference-card--wide {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (min-width: 760px) {
   .case-reference-grid {
     grid-template-columns: 1fr 1fr;
