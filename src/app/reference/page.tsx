@@ -164,7 +164,7 @@ export default function ReferencePage() {
             </table>
           </article>
 
-          <article className="case-reference-card">
+          <article className="case-reference-card case-reference-card--wide">
             <h3>Noun endings</h3>
             <p className="muted">
               Genitive plural has several patterns; learn common classroom nouns with
