@@ -170,52 +170,54 @@ export default function ReferencePage() {
               Genitive plural has several patterns; learn common classroom nouns with
               the phrase charts.
             </p>
-            <table className="adj-table">
-              <thead>
-                <tr>
-                  <th scope="col"> </th>
-                  <th scope="col">Genitive singular</th>
-                  <th scope="col">consonants</th>
-                  <th scope="col">-й</th>
-                  <th scope="col">-ь / -е</th>
-                  <th scope="col">ж / ш / ч / щ / ц</th>
-                  <th scope="col">-а / -о</th>
-                  <th scope="col">-я</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">masculine</th>
-                  <td>{genitiveEndingCharts.nouns.singular.masculine}</td>
-                  <td>{genitiveEndingCharts.nouns.consonants.masculine}</td>
-                  <td>{genitiveEndingCharts.nouns.й.masculine}</td>
-                  <td>{genitiveEndingCharts.nouns.ь.masculine}</td>
-                  <td>{genitiveEndingCharts.nouns.ж.masculine}</td>
-                  <td>{genitiveEndingCharts.nouns.а.masculine}</td>
-                  <td>{genitiveEndingCharts.nouns.я.masculine}</td>
-                </tr>
-                <tr>
-                  <th scope="row">feminine</th>
-                  <td>{genitiveEndingCharts.nouns.singular.feminine}</td>
-                  <td>{genitiveEndingCharts.nouns.consonants.feminine}</td>
-                  <td>{genitiveEndingCharts.nouns.й.feminine}</td>
-                  <td>{genitiveEndingCharts.nouns.ь.feminine}</td>
-                  <td>{genitiveEndingCharts.nouns.ж.feminine}</td>
-                  <td>{genitiveEndingCharts.nouns.а.feminine}</td>
-                  <td>{genitiveEndingCharts.nouns.я.feminine}</td>
-                </tr>
-                <tr>
-                  <th scope="row">neuter</th>
-                  <td>{genitiveEndingCharts.nouns.singular.neuter}</td>
-                  <td>{genitiveEndingCharts.nouns.consonants.neuter}</td>
-                  <td>{genitiveEndingCharts.nouns.й.neuter}</td>
-                  <td>{genitiveEndingCharts.nouns.ь.neuter}</td>
-                  <td>{genitiveEndingCharts.nouns.ж.neuter}</td>
-                  <td>{genitiveEndingCharts.nouns.а.neuter}</td>
-                  <td>{genitiveEndingCharts.nouns.я.neuter}</td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="noun-endings-table-wrap">
+              <table className="adj-table noun-endings-table">
+                <thead>
+                  <tr>
+                    <th scope="col"> </th>
+                    <th scope="col">Genitive singular</th>
+                    <th scope="col">consonants</th>
+                    <th scope="col">-й</th>
+                    <th scope="col">-ь / -е</th>
+                    <th scope="col">ж / ш / ч / щ / ц</th>
+                    <th scope="col">-а / -о</th>
+                    <th scope="col">-я</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">masculine</th>
+                    <td>{genitiveEndingCharts.nouns.singular.masculine}</td>
+                    <td>{genitiveEndingCharts.nouns.consonants.masculine}</td>
+                    <td>{genitiveEndingCharts.nouns.й.masculine}</td>
+                    <td>{genitiveEndingCharts.nouns.ь.masculine}</td>
+                    <td>{genitiveEndingCharts.nouns.ж.masculine}</td>
+                    <td>{genitiveEndingCharts.nouns.а.masculine}</td>
+                    <td>{genitiveEndingCharts.nouns.я.masculine}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">feminine</th>
+                    <td>{genitiveEndingCharts.nouns.singular.feminine}</td>
+                    <td>{genitiveEndingCharts.nouns.consonants.feminine}</td>
+                    <td>{genitiveEndingCharts.nouns.й.feminine}</td>
+                    <td>{genitiveEndingCharts.nouns.ь.feminine}</td>
+                    <td>{genitiveEndingCharts.nouns.ж.feminine}</td>
+                    <td>{genitiveEndingCharts.nouns.а.feminine}</td>
+                    <td>{genitiveEndingCharts.nouns.я.feminine}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">neuter</th>
+                    <td>{genitiveEndingCharts.nouns.singular.neuter}</td>
+                    <td>{genitiveEndingCharts.nouns.consonants.neuter}</td>
+                    <td>{genitiveEndingCharts.nouns.й.neuter}</td>
+                    <td>{genitiveEndingCharts.nouns.ь.neuter}</td>
+                    <td>{genitiveEndingCharts.nouns.ж.neuter}</td>
+                    <td>{genitiveEndingCharts.nouns.а.neuter}</td>
+                    <td>{genitiveEndingCharts.nouns.я.neuter}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </article>
         </div>
 
