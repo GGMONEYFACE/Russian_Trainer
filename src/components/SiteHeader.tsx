@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { AccountNav } from "@/components/AccountNav";
+import { MobileNav } from "@/components/MobileNav";
 
 const links = [
   { href: "/learn", label: "Learn" },
@@ -19,16 +20,22 @@ export function SiteHeader() {
           <span className="brand-mark__ru">Русский</span>
           <span className="brand-mark__en">Trainer</span>
         </Link>
-        <nav className="site-nav" aria-label="Main">
+        <MobileNav>
           {links.map((link) => (
             <Link key={link.href} href={link.href} className="site-nav__link">
               {link.label}
             </Link>
           ))}
-          <Suspense fallback={<Link href="/login" className="site-nav__link">Login</Link>}>
+          <Suspense
+            fallback={
+              <Link href="/login" className="site-nav__link">
+                Login
+              </Link>
+            }
+          >
             <AccountNav />
           </Suspense>
-        </nav>
+        </MobileNav>
       </div>
     </header>
   );

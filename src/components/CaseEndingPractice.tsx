@@ -187,6 +187,7 @@ export function CaseEndingPractice({
           </div>
         </div>
 
+        <div className="table-scroll">
         <table className="adj-table case-chart__table">
           <thead>
             <tr>
@@ -259,6 +260,7 @@ export function CaseEndingPractice({
             ))}
           </tbody>
         </table>
+        </div>
 
         <div className="cta-row case-chart__actions">
           <button type="button" className="btn btn--primary" onClick={checkAnswers}>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Spectral } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
@@ -20,6 +20,21 @@ export const metadata: Metadata = {
   title: "Russian Trainer · Grammar Lab",
   description:
     "Practice Russian adjective–noun agreement, gender, and case endings — grammar-first drills from classroom materials.",
+  appleWebApp: {
+    capable: true,
+    title: "Russian Trainer",
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#f3f6f8",
 };
 
 export default function RootLayout({

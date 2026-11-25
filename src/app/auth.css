@@ -192,25 +192,6 @@
   color: #0f5132;
 }
 
-.site-nav {
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.site-header__inner {
-  flex-wrap: wrap;
-}
-
-.site-nav form {
-  display: flex;
-}
-
-.site-nav__button {
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-}
-
 .profile-page {
   padding-bottom: 2rem;
 }

@@ -11,6 +11,12 @@ Grammar-first practice site for Russian adjective–noun agreement.
 - Resources charts for phrase tables and genitive ending breakdowns
 - Additional practice sets for family, appearance, character, and daily life
 
+## Mobile
+
+The layout is phone-first: collapsible nav, safe-area padding, 16px form
+controls (avoids iOS zoom), and horizontally scrollable tables. Aimed at
+mobile Firefox, Safari, Chrome, Google App, and DuckDuckGo.
+
 ## Develop
 
 ```bash

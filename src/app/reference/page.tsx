@@ -24,41 +24,43 @@ export default function ReferencePage() {
       {data.sets.map((set) => (
         <section key={set.id} className="reference-block">
           <h2>{set.title}</h2>
-          <table className="adj-table">
-            <thead>
-              <tr>
-                <th>Adjective</th>
-                {cols.map((g) => (
-                  <th key={g}>{data.genderLabels[g].en}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {set.nominative.map((group) => (
-                <tr key={group.lemma}>
-                  <td className="lemma">
-                    {group.lemma}
-                    <div className="muted">{group.english}</div>
-                  </td>
-                  {cols.map((g) => {
-                    const form = group.forms[g];
-                    return (
-                      <td key={g}>
-                        {form ? (
-                          <>
-                            <div>{form.ru}</div>
-                            <div className="muted">{form.en}</div>
-                          </>
-                        ) : (
-                          <span className="muted">—</span>
-                        )}
-                      </td>
-                    );
-                  })}
+          <div className="table-scroll">
+            <table className="adj-table">
+              <thead>
+                <tr>
+                  <th>Adjective</th>
+                  {cols.map((g) => (
+                    <th key={g}>{data.genderLabels[g].en}</th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {set.nominative.map((group) => (
+                  <tr key={group.lemma}>
+                    <td className="lemma">
+                      {group.lemma}
+                      <div className="muted">{group.english}</div>
+                    </td>
+                    {cols.map((g) => {
+                      const form = group.forms[g];
+                      return (
+                        <td key={g}>
+                          {form ? (
+                            <>
+                              <div>{form.ru}</div>
+                              <div className="muted">{form.en}</div>
+                            </>
+                          ) : (
+                            <span className="muted">—</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       ))}
 
@@ -75,28 +77,30 @@ export default function ReferencePage() {
               <article className="case-reference-card" key={caseKey}>
                 <h3>{definition.label}</h3>
                 <p className="muted">{definition.hint}</p>
-                <table className="adj-table">
-                  <thead>
-                    <tr>
-                      <th scope="col"> </th>
-                      <th scope="col">Adjectives</th>
-                      <th scope="col">Nouns</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {genders.map((gender) => (
-                      <tr key={gender}>
-                        <th scope="row">{gender}</th>
-                        <td>{definition.answers[gender].adjective.join(" / ")}</td>
-                        <td>
-                          {definition.answers[gender].noun
-                            .map((ending) => ending || "—")
-                            .join(" / ")}
-                        </td>
+                <div className="table-scroll">
+                  <table className="adj-table">
+                    <thead>
+                      <tr>
+                        <th scope="col"> </th>
+                        <th scope="col">Adjectives</th>
+                        <th scope="col">Nouns</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {genders.map((gender) => (
+                        <tr key={gender}>
+                          <th scope="row">{gender}</th>
+                          <td>{definition.answers[gender].adjective.join(" / ")}</td>
+                          <td>
+                            {definition.answers[gender].noun
+                              .map((ending) => ending || "—")
+                              .join(" / ")}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </article>
             );
           })}
@@ -136,32 +140,34 @@ export default function ReferencePage() {
           <article className="case-reference-card">
             <h3>Adjective endings</h3>
             <p className="muted">Hard / soft pairs shown with a slash.</p>
-            <table className="adj-table">
-              <thead>
-                <tr>
-                  <th scope="col"> </th>
-                  <th scope="col">Genitive singular</th>
-                  <th scope="col">Genitive plural</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">masculine</th>
-                  <td>{genitiveEndingCharts.adjectives.singular.masculine}</td>
-                  <td>{genitiveEndingCharts.adjectives.plural.masculine}</td>
-                </tr>
-                <tr>
-                  <th scope="row">feminine</th>
-                  <td>{genitiveEndingCharts.adjectives.singular.feminine}</td>
-                  <td>{genitiveEndingCharts.adjectives.plural.feminine}</td>
-                </tr>
-                <tr>
-                  <th scope="row">neuter</th>
-                  <td>{genitiveEndingCharts.adjectives.singular.neuter}</td>
-                  <td>{genitiveEndingCharts.adjectives.plural.neuter}</td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="table-scroll">
+              <table className="adj-table">
+                <thead>
+                  <tr>
+                    <th scope="col"> </th>
+                    <th scope="col">Genitive singular</th>
+                    <th scope="col">Genitive plural</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">masculine</th>
+                    <td>{genitiveEndingCharts.adjectives.singular.masculine}</td>
+                    <td>{genitiveEndingCharts.adjectives.plural.masculine}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">feminine</th>
+                    <td>{genitiveEndingCharts.adjectives.singular.feminine}</td>
+                    <td>{genitiveEndingCharts.adjectives.plural.feminine}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">neuter</th>
+                    <td>{genitiveEndingCharts.adjectives.singular.neuter}</td>
+                    <td>{genitiveEndingCharts.adjectives.plural.neuter}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </article>
 
           <article className="case-reference-card case-reference-card--wide">
